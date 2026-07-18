@@ -1,6 +1,6 @@
 # Tokenminning
 
-![tokenmaxxing vs tokenminning](Gemini_Generated_Image_fd7xt7fd7xt7fd7x.png)
+![tokenmaxxing vs tokenminning](TokenmaxxingVsTokenminning)
 
 ## Maximizing intelligence per token
 
