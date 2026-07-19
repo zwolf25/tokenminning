@@ -2,15 +2,15 @@
 
 Memory allows AI systems to maintain continuity across conversations.
 
-However, memory can easily become a storage problem instead of an intelligence advantage.
+However, memory can become less useful when information accumulates without prioritization.
 
-Tokenminning treats memory as a curated knowledge system, not a complete historical record.
+Tokenminning treats memory as a curated knowledge system, not an unfiltered historical record.
 
 ---
 
 ## Problem
 
-A naive memory system attempts to preserve everything:
+A naive memory system may attempt to preserve everything:
 
 - Every conversation
 - Every experiment
@@ -25,20 +25,20 @@ It can create noise.
 
 ## tokenmaxxing approach
 
-Store everything:
+Store everything without prioritization:
 
 - Full conversation transcripts
 - Temporary debugging information
 - Exploratory thinking
 - Resolved problems
 
-The system accumulates information over time.
+The system accumulates information without distinguishing durable knowledge from temporary context.
 
 ---
 
 ## tokenminning approach
 
-Preserve high-value information:
+Preserve information that improves future decisions:
 
 Keep:
 
@@ -48,7 +48,7 @@ Keep:
 - Important outcomes
 - Long-term goals
 
-Discard:
+Avoid permanently storing:
 
 - Temporary exploration
 - Repeated information
@@ -80,9 +80,9 @@ Constraint:
 Must support enterprise approval workflows.
 ```
 
-The second contains less information.
+The goal of memory is not maximum recall.
 
-It contains more useful information.
+The goal is maximum future usefulness.
 
 ---
 
