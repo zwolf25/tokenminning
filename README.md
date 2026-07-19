@@ -79,31 +79,16 @@ The question is:
 
 > "What does the model need right now?"
 
-## Example
+## Examples
 
-### tokenmaxxing
+**Pattern examples:**
+- **CLAUDE.md**: Focused operating guidance, separate docs retrieved as needed
+- **Memory architecture**: Compress decisions, summarize volatile state
+- **RAG systems**: Rank and filter before retrieval, don't dump everything
+- **Tool design**: Every capability introduces context tradeoffs
 
-A developer creates a 700-line `CLAUDE.md` containing:
-
-- coding standards
-- architecture decisions
-- debugging history
-- project documentation
-- deployment instructions
-
-Everything is loaded into every session.
-
-### tokenminning
-
-The developer keeps `CLAUDE.md` focused on durable operating guidance.
-
-Architecture documents, design decisions, and historical information are stored separately and retrieved only when needed.
-
-Both approaches provide context.
-
-A larger system is not automatically tokenmaxxing. The difference is whether information is continuously exposed to the model or selectively retrieved when useful.
-
-The difference is whether optimization comes from **more context** or **better context**.
+**Deep case study:**
+- **[Second Brain System](examples/second-brain-system.md)** — How a team knowledge vault went from 211K words of duplication to 28K words reference-only (87% reduction).
 
 ## Why this matters
 
@@ -114,6 +99,17 @@ Larger context windows do not eliminate the need for good information architectu
 The future is not unlimited context.
 
 The future is intelligent context selection.
+
+## Real-World Results
+
+| System | Before | After | Savings |
+|--------|--------|-------|---------|
+| Second Brain (wikis) | 211K words duplication | 28K words | 87% ↓ |
+| AI session cost | $15-25/session | $2-4/session | 75-85% ↓ |
+| Stale sync clones | 45/68 (66%) | 0 | 100% ↓ |
+
+See the [Second Brain case study](examples/second-brain-system.md) for the full breakdown.
+
 
 ## Status
 
@@ -128,6 +124,15 @@ Feedback, counterexamples, and alternative viewpoints are encouraged.
 The term "tokenminning" was introduced in July 2026 as a way to describe an emerging optimization philosophy centered on maximizing intelligence per token.
 
 Inspired by the emerging concept of tokenmaxxing: intentionally using larger context windows and more tokens to improve AI performance.
+
+## Core Techniques
+
+- **[Stub Pattern](examples/second-brain-system.md#the-stub-pattern)** — Replace full-body clones with reference-only pointers (summary + source-path)
+- **Grep-before-read** — Never read a folder wholesale; search for relevance first
+- **Escalation ladder** — Level 1: local cache, Level 2: stub lookup, Level 3: on-demand read
+- **Compaction** — Compress conversation history; keep active context under 15K tokens
+
+Placement: After the "Origin" section, before "Contributing"
 
 ## More
 
