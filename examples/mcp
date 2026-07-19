@@ -1,0 +1,97 @@
+# tokenminning with MCP and Tools
+
+Model Context Protocol (MCP) and tool ecosystems make AI systems more capable.
+
+However, every capability has a cost.
+
+Tools introduce:
+
+- Tool descriptions
+- Available actions
+- Parameters
+- Instructions
+- Potential decision paths
+
+Tokenminning recognizes that more available capability does not always produce better outcomes.
+
+The goal is not maximum capability.
+
+The goal is **the right capability at the right time**.
+
+---
+
+## Problem
+
+As AI systems become more extensible, it becomes easy to accumulate:
+
+- Too many MCP servers
+- Duplicate capabilities
+- Tools that are rarely used
+- Unclear tool selection
+
+A model may have access to everything, but spend attention deciding among unnecessary options.
+
+---
+
+## tokenmaxxing approach
+
+Enable every available tool:
+
+- Every MCP server is always active
+- Every integration is available
+- Every capability is loaded by default
+- More tools are assumed to be better
+
+The system maximizes available options.
+
+---
+
+## tokenminning approach
+
+Design tool access intentionally:
+
+- Enable only frequently used tools
+- Scope tools to specific workflows
+- Load specialized capabilities only when needed
+- Remove redundant integrations
+
+Examples:
+
+Instead of:
+
+```
+20 MCP servers available for every task
+```
+
+Use:
+
+```
+Coding task → coding tools
+
+Research task → research tools
+
+Documentation task → documentation tools
+```
+
+---
+
+## Tool selection principle
+
+A tool should justify its context cost.
+
+Ask:
+
+- Does this tool improve outcomes?
+- Is it used frequently enough to remain active?
+- Is there overlap with another capability?
+- Could this capability be loaded only when needed?
+
+---
+
+## Principle
+
+Capabilities are not free.
+
+The best AI systems do not expose every possible action.
+
+They expose the actions most likely to create value.
