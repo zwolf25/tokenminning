@@ -4,11 +4,19 @@
 
 ## Maximizing intelligence per token
 
-Tokenminning is a context engineering philosophy focused on maximizing the value of every token used by AI systems.
+Tokenminning is an optimization philosophy within **context engineering** that seeks to maximize **intelligence per token**.
+
+Rather than asking:
+
+> "How do I give the model more context?"
+
+Tokenminning asks:
+
+> "How do I give the model the *right* context?"
 
 The goal is not to minimize tokens.
 
-The goal is to eliminate unnecessary tokens while preserving or improving model performance.
+The goal is to maximize the value of every token while preserving or improving model performance.
 
 ## Tokenmaxxing vs Tokenminning
 
