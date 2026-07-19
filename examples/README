@@ -1,0 +1,139 @@
+# Tokenminning Examples
+
+Tokenminning is best understood through practical examples.
+
+The goal is not to use fewer tokens.
+
+The goal is to maximize **intelligence per token** by improving context quality, retrieval, and information architecture.
+
+---
+
+## Example 1: AI Coding Assistant Context
+
+### tokenmaxxing
+
+- Load the entire repository
+- Include a 500-line `CLAUDE.md`
+- Enable every MCP server
+- Preserve complete chat history
+
+### tokenminning
+
+- Retrieve only relevant files
+- Keep `CLAUDE.md` focused on durable guidance
+- Enable only task-relevant MCP tools
+- Preserve decisions rather than transcripts
+
+Both aim to improve model performance.
+
+The difference is whether optimization comes from **more context** or **better context**.
+
+---
+
+## Example 2: Knowledge Management
+
+### tokenmaxxing
+
+- Store every conversation
+- Duplicate documentation everywhere
+- Keep complete historical records in context
+- Load entire knowledge bases upfront
+
+### tokenminning
+
+- Separate durable knowledge from temporary information
+- Store decisions, constraints, and outcomes
+- Use references and retrieval instead of duplication
+- Load information only when relevant
+
+**Principle:** Preserve knowledge, not noise.
+
+---
+
+## Example 3: RAG Systems
+
+### tokenmaxxing
+
+- Retrieve dozens of documents
+- Send all results to the model
+- Assume more context produces better answers
+
+### tokenminning
+
+- Retrieve broadly
+- Rank for relevance
+- Provide only the highest-value information
+- Preserve diversity when needed
+
+**Principle:** Better retrieval beats larger retrieval.
+
+---
+
+## Example 4: Agent Workflows
+
+### tokenmaxxing
+
+A planner, coder, reviewer, and tester all receive:
+
+- Entire repository
+- Full conversation history
+- All available tools
+
+### tokenminning
+
+Each agent receives only what it needs:
+
+- Planner → requirements and constraints
+- Coder → relevant files and implementation details
+- Reviewer → code changes and acceptance criteria
+- Tester → expected behavior
+
+**Principle:** Context should match the task.
+
+---
+
+## Example 5: Memory Systems
+
+### tokenmaxxing
+
+Remember everything:
+
+- Full conversations
+- Temporary experiments
+- Debugging history
+- Intermediate thoughts
+
+### tokenminning
+
+Remember:
+
+- Decisions
+- Preferences
+- Constraints
+- Important outcomes
+
+Discard:
+
+- Temporary work
+- Repeated information
+- Resolved problems
+
+**Principle:** Memory should preserve signal, not accumulate history.
+
+---
+
+## Example 6: MCP and Tool Usage
+
+### tokenmaxxing
+
+- Install every available integration
+- Keep every tool enabled
+- Provide maximum capability by default
+
+### tokenminning
+
+- Enable tools intentionally
+- Load capabilities when needed
+- Remove unused integrations
+
+**Principle:** Every capability has a context cost.
