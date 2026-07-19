@@ -12,11 +12,13 @@ Rather than asking:
 
 Tokenminning asks:
 
-> "How do I give the model the *right* context?"
+> "How do I give the model the *right* context at the right time?"
 
 The goal is not to minimize tokens.
 
-The goal is to maximize the value of every token while preserving or improving model performance.
+The goal is to maximize the value of the information presented to the model while preserving or improving performance.
+
+Tokenminning optimizes the **model's context surface**, not the size or complexity of the underlying system.
 
 ## Tokenmaxxing vs Tokenminning
 
@@ -63,6 +65,20 @@ Allocate context and inference budget to areas where additional reasoning create
 
 The best token optimization comes from architecture: retrieval, tools, memory, and workflows.
 
+### 6. Optimize context, not complexity
+
+Tokenminning is not about making systems smaller.
+
+A complex system can still be tokenminning if it controls what information reaches the model.
+
+The question is not:
+
+> "How much exists?"
+
+The question is:
+
+> "What does the model need right now?"
+
 ## Example
 
 ### tokenmaxxing
@@ -85,11 +101,15 @@ Architecture documents, design decisions, and historical information are stored 
 
 Both approaches provide context.
 
+A larger system is not automatically tokenmaxxing. The difference is whether information is continuously exposed to the model or selectively retrieved when useful.
+
 The difference is whether optimization comes from **more context** or **better context**.
 
 ## Why this matters
 
 As AI systems become more capable, the bottleneck shifts from context availability to context quality.
+
+Larger context windows do not eliminate the need for good information architecture.
 
 The future is not unlimited context.
 
@@ -105,7 +125,7 @@ Feedback, counterexamples, and alternative viewpoints are encouraged.
 
 ## Origin
 
-The term "tokenminning" was introduced in July 2026 as a way to describe an optimization philosophy centered on maximizing intelligence per token.
+The term "tokenminning" was introduced in July 2026 as a way to describe an emerging optimization philosophy centered on maximizing intelligence per token.
 
 Inspired by the emerging concept of tokenmaxxing: intentionally using larger context windows and more tokens to improve AI performance.
 
