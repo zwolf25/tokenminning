@@ -28,6 +28,19 @@ The goal is to maximize the value of every token while preserving or improving m
 | More memory | Better memory architecture |
 | More tokens | More intelligence per token |
 
+## What Tokenminning Is Not
+
+Tokenminning is **not**:
+
+- Using fewer tokens simply to reduce API costs
+- Aggressively shortening every prompt
+- Removing useful context
+- Avoiding large context windows
+
+Instead, tokenminning is about improving **information density**.
+
+Sometimes the correct tokenminning solution uses **more** tokens—if those additional tokens significantly improve reasoning quality.
+
 ## Principles
 
 ### 1. Retrieve, don't preload
@@ -50,6 +63,30 @@ Allocate context and inference budget to areas where additional reasoning create
 
 The best token optimization comes from architecture: retrieval, tools, memory, and workflows.
 
+## Example
+
+### tokenmaxxing
+
+A developer creates a 700-line `CLAUDE.md` containing:
+
+- coding standards
+- architecture decisions
+- debugging history
+- project documentation
+- deployment instructions
+
+Everything is loaded into every session.
+
+### tokenminning
+
+The developer keeps `CLAUDE.md` focused on durable operating guidance.
+
+Architecture documents, design decisions, and historical information are stored separately and retrieved only when needed.
+
+Both approaches provide context.
+
+The difference is whether optimization comes from **more context** or **better context**.
+
 ## Why this matters
 
 As AI systems become more capable, the bottleneck shifts from context availability to context quality.
@@ -58,9 +95,17 @@ The future is not unlimited context.
 
 The future is intelligent context selection.
 
+## Status
+
+Tokenminning is an emerging concept.
+
+This repository is intended to refine the philosophy through discussion, examples, and real-world engineering experience.
+
+Feedback, counterexamples, and alternative viewpoints are encouraged.
+
 ## Origin
 
-Coined July 2026.
+The term "tokenminning" was introduced in July 2026 as a way to describe an optimization philosophy centered on maximizing intelligence per token.
 
 Inspired by the emerging concept of tokenmaxxing: intentionally using larger context windows and more tokens to improve AI performance.
 
@@ -68,3 +113,18 @@ Inspired by the emerging concept of tokenmaxxing: intentionally using larger con
 
 Article:
 [Token Maxxing is Dead. Long Live Token Minning.](https://medium.com/@zwolf25/token-maxxing-is-dead-long-live-token-minning-707fffbf2b95)
+
+## Contributing
+
+Have you encountered an example of tokenminning?
+
+Open an Issue or Pull Request with:
+
+- Real-world examples
+- Counterexamples
+- Benchmarks
+- Alternative definitions
+- Related research
+- Tool-specific patterns (Claude Code, Codex, Continue, Cursor, etc.)
+
+The goal is to evolve the concept through practical experience rather than theory alone.
