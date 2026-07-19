@@ -1,6 +1,6 @@
 # tokenminning with RAG Systems
 
-Retrieval-Augmented Generation (RAG) systems exist because models cannot and should not receive every possible piece of information.
+Retrieval-Augmented Generation (RAG) systems exist because models need access to relevant external information without requiring all available information to be included in every request.
 
 The challenge is not retrieving more information.
 
@@ -12,22 +12,22 @@ The challenge is retrieving the right information.
 
 A common failure mode in RAG systems is assuming:
 
-> More retrieved documents create better answers.
+> More retrieved information creates better answers.
 
-However, irrelevant information creates noise and can reduce answer quality.
+However, irrelevant or low-value information can create noise and reduce the model's ability to identify what matters.
 
 ---
 
 ## tokenmaxxing approach
 
-Retrieve large amounts of context:
+Retrieve large amounts of context without sufficient prioritization:
 
-- More documents
-- More chunks
-- Larger context windows
-- More retrieved passages
+- More documents regardless of relevance
+- More chunks without quality filtering
+- Larger context windows without information selection
+- More retrieved passages without ranking
 
-The system prioritizes quantity.
+The system prioritizes quantity over information value.
 
 ---
 
@@ -49,7 +49,7 @@ Provide focused context
 Generate answer
 ```
 
-The model receives the information most likely to improve reasoning.
+The amount of retrieved information should match the complexity of the task.
 
 ---
 
@@ -64,7 +64,7 @@ Retrieve:
 10,000 tokens
 ```
 
-Send everything to the model.
+Send everything directly to the model without ranking or filtering.
 
 ---
 
@@ -81,7 +81,7 @@ Rerank
 
 ↓
 
-5 most relevant passages
+5 highest-value passages
 
 ↓
 
@@ -100,6 +100,7 @@ Tokenminning considers:
 - Ranking
 - Context placement
 - Information freshness
+- Context compression
 
 ---
 
