@@ -1,0 +1,93 @@
+# tokenminning with AI Memory
+
+Memory allows AI systems to maintain continuity across conversations.
+
+However, memory can easily become a storage problem instead of an intelligence advantage.
+
+Tokenminning treats memory as a curated knowledge system, not a complete historical record.
+
+---
+
+## Problem
+
+A naive memory system attempts to preserve everything:
+
+- Every conversation
+- Every experiment
+- Every intermediate decision
+- Every temporary detail
+
+More history does not necessarily create better intelligence.
+
+It can create noise.
+
+---
+
+## tokenmaxxing approach
+
+Store everything:
+
+- Full conversation transcripts
+- Temporary debugging information
+- Exploratory thinking
+- Resolved problems
+
+The system accumulates information over time.
+
+---
+
+## tokenminning approach
+
+Preserve high-value information:
+
+Keep:
+
+- Decisions
+- Preferences
+- Constraints
+- Important outcomes
+- Long-term goals
+
+Discard:
+
+- Temporary exploration
+- Repeated information
+- Completed troubleshooting
+- Information that no longer affects decisions
+
+---
+
+## Example
+
+A product decision conversation:
+
+### tokenmaxxing memory
+
+```
+The entire two-hour discussion
+```
+
+### tokenminning memory
+
+```
+Decision:
+Prioritize workflow automation over reporting improvements.
+
+Reason:
+Customers consistently value reduced manual effort.
+
+Constraint:
+Must support enterprise approval workflows.
+```
+
+The second contains less information.
+
+It contains more useful information.
+
+---
+
+## Memory principle
+
+Good memory is not remembering everything.
+
+Good memory is preserving what changes future decisions.
