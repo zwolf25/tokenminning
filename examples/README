@@ -2,9 +2,11 @@
 
 Tokenminning is best understood through practical examples.
 
-The goal is not to use fewer tokens.
+The goal is not to use fewer tokens or build smaller systems.
 
-The goal is to maximize **intelligence per token** by improving context quality, retrieval, and information architecture.
+The goal is to maximize **intelligence per token** by improving the quality, timing, and structure of information presented to AI systems.
+
+Tokenminning focuses on the model's context surface: what information reaches the model, when it reaches the model, and how it is organized.
 
 ---
 
@@ -12,10 +14,10 @@ The goal is to maximize **intelligence per token** by improving context quality,
 
 ### tokenmaxxing
 
-- Load the entire repository
-- Include a 500-line `CLAUDE.md`
-- Enable every MCP server
-- Preserve complete chat history
+- Provide the entire repository as context regardless of task relevance
+- Include a 500-line `CLAUDE.md` containing every project detail
+- Enable every MCP server without considering task requirements
+- Preserve complete chat history instead of extracting decisions
 
 ### tokenminning
 
@@ -60,7 +62,7 @@ The difference is whether optimization comes from **more context** or **better c
 
 ### tokenminning
 
-- Retrieve broadly
+- Retrieve candidate information
 - Rank for relevance
 - Provide only the highest-value information
 - Preserve diversity when needed
@@ -75,9 +77,9 @@ The difference is whether optimization comes from **more context** or **better c
 
 A planner, coder, reviewer, and tester all receive:
 
-- Entire repository
+- Entire repository regardless of task relevance
 - Full conversation history
-- All available tools
+- All available tools regardless of task needs
 
 ### tokenminning
 
@@ -136,4 +138,41 @@ Discard:
 - Load capabilities when needed
 - Remove unused integrations
 
-**Principle:** Every capability has a context cost.
+**Principle:** Every capability introduces cognitive and contextual tradeoffs.
+
+The goal is not fewer tools.
+
+The goal is making the right capabilities available for the task.
+
+---
+
+## Example 7: System Complexity vs Context Complexity
+
+### tokenmaxxing mistake
+
+Assume:
+
+Then remove useful capabilities simply to reduce complexity.
+
+### tokenminning
+
+Recognize that a sophisticated system can still be tokenminning if:
+
+- Information is retrieved selectively
+- Tools are scoped appropriately
+- Documentation is modular
+- The model receives only relevant context
+
+The question is not:
+
+> "How large is the system?"
+
+The question is:
+
+> "What information reaches the model for this task?"
+
+**Principle:** Optimize the context surface, not the size of the system.
+
+Tokenminning is not about making AI systems smaller.
+
+It is about making them smarter about what they expose to the model.
