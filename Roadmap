@@ -1,7 +1,13 @@
 ## Roadmap
 
-- [ ] Additional examples
-- [ ] Benchmarks
-- [ ] Claude Code patterns
-- [ ] Continue.dev examples
-- [ ] MCP design guidance
+The goal of this project is to refine tokenminning through practical examples, experiments, and community feedback.
+
+- [x] Define the tokenminning philosophy
+- [x] Document core principles
+- [x] Add practical examples
+- [ ] Collect real-world tokenminning patterns
+- [ ] Add tool-specific examples (Claude Code, Codex, Continue, Cursor, etc.)
+- [ ] Develop benchmarks for measuring intelligence per token
+- [ ] Explore context quality metrics
+- [ ] Document anti-patterns and failure modes
+- [ ] Build a community-driven catalog of tokenminning techniques
