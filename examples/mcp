@@ -2,7 +2,7 @@
 
 Model Context Protocol (MCP) and tool ecosystems make AI systems more capable.
 
-However, every capability has a cost.
+However, every capability introduces tradeoffs.
 
 Tools introduce:
 
@@ -10,13 +10,17 @@ Tools introduce:
 - Available actions
 - Parameters
 - Instructions
-- Potential decision paths
+- Additional decisions the model must evaluate
 
 Tokenminning recognizes that more available capability does not always produce better outcomes.
 
 The goal is not maximum capability.
 
 The goal is **the right capability at the right time**.
+
+Tokenminning is not about having fewer tools.
+
+A sophisticated AI system can have many capabilities while still being tokenminning if those capabilities are intentionally exposed and used.
 
 ---
 
@@ -35,12 +39,12 @@ A model may have access to everything, but spend attention deciding among unnece
 
 ## tokenmaxxing approach
 
-Enable every available tool:
+Enable every available tool without considering context:
 
-- Every MCP server is always active
-- Every integration is available
-- Every capability is loaded by default
-- More tools are assumed to be better
+- Every MCP server is available for every task
+- Every integration is exposed by default
+- Every capability is treated as equally valuable
+- More options are assumed to improve performance
 
 The system maximizes available options.
 
@@ -50,10 +54,10 @@ The system maximizes available options.
 
 Design tool access intentionally:
 
-- Enable only frequently used tools
+- Enable tools intentionally
 - Scope tools to specific workflows
-- Load specialized capabilities only when needed
-- Remove redundant integrations
+- Load specialized capabilities when useful
+- Remove redundant or unused integrations
 
 Examples:
 
@@ -77,12 +81,12 @@ Documentation task → documentation tools
 
 ## Tool selection principle
 
-A tool should justify its context cost.
+A tool should justify its complexity and context tradeoffs.
 
 Ask:
 
 - Does this tool improve outcomes?
-- Is it used frequently enough to remain active?
+- Is its ongoing availability justified by the value it provides?
 - Is there overlap with another capability?
 - Could this capability be loaded only when needed?
 
@@ -90,8 +94,8 @@ Ask:
 
 ## Principle
 
-Capabilities are not free.
+Capabilities are not automatically valuable.
 
-The best AI systems do not expose every possible action.
+The best AI systems do not expose every possible action for every task.
 
-They expose the actions most likely to create value.
+They expose the capabilities most likely to create value in the current context.
