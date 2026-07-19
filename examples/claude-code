@@ -1,0 +1,128 @@
+# tokenminning with Claude Code
+
+Claude Code is a strong example of where tokenminning principles apply because agent workflows are heavily influenced by context architecture.
+
+## Problem
+
+AI coding agents often improve initially by adding:
+
+- More instructions
+- More tools
+- More memory
+- More project context
+
+However, additional context also creates noise, increases cost, and can reduce the model's ability to focus.
+
+---
+
+## tokenmaxxing approach
+
+A project may evolve into:
+
+- A large `CLAUDE.md` containing every project detail
+- All MCP servers enabled
+- Complete conversation history preserved
+- Every skill available at all times
+- Documentation copied into multiple locations
+
+The system has more information, but not necessarily better information.
+
+---
+
+## tokenminning approach
+
+A tokenminning workflow:
+
+### Keep always-loaded context small
+
+`CLAUDE.md` should contain:
+
+- Project purpose
+- Critical rules
+- Development workflow
+- Important constraints
+
+Detailed information should live elsewhere.
+
+---
+
+### Retrieve information when needed
+
+Instead of:
+
+> "Load everything about this project"
+
+Use:
+
+> "Find the relevant information for this task"
+
+Examples:
+
+- Search documentation
+- Retrieve architecture decisions
+- Load relevant files
+- Query knowledge bases
+
+---
+
+### Make tools intentional
+
+Every tool adds capability, but also adds complexity.
+
+Prefer:
+
+- Task-specific MCP servers
+- Scoped tools
+- On-demand capabilities
+
+---
+
+### Preserve decisions, not history
+
+The valuable output of an AI session is usually:
+
+- Decisions made
+- Code changes
+- Lessons learned
+- Updated requirements
+
+Not:
+
+- Entire conversation transcripts
+- Debugging attempts
+- Temporary exploration
+
+---
+
+## Practical checklist
+
+A Claude Code workflow is moving toward tokenminning when:
+
+✅ `CLAUDE.md` gets smaller over time  
+✅ Documentation is retrieved instead of copied  
+✅ Skills are modular  
+✅ MCP servers are intentional  
+✅ Decisions are captured separately from conversations  
+✅ Context is loaded based on the task
+
+---
+
+## Example from a real workflow
+
+A large knowledge base was reduced from duplicated documents into lightweight pointers.
+
+Instead of loading every source document:
+
+```
+Pointer → Source → Retrieve when needed
+```
+
+The system preserves access to information without paying the context cost continuously.
+
+---
+
+## Principle
+
+The best Claude Code workflows are not the ones with the most context.
+
+They are the ones that provide the right context at the right time.
