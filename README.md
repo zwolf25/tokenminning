@@ -83,6 +83,8 @@ The question is:
 
 > "What does the model need right now?"
 
+![Context Surface](/resources/ContextSurface.png)
+
 ## Examples
 
 **Pattern examples:**
