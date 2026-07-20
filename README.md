@@ -1,6 +1,6 @@
 # Tokenminning
 
-![tokenmaxxing vs tokenminning](TokenmaxxingVsTokenminning)
+![tokenmaxxing vs tokenminning](resources/TokenmaxxingVsTokenminning)
 
 ## Maximizing intelligence per token
 
