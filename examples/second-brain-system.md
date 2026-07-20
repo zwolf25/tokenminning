@@ -38,7 +38,7 @@ Collaborator A edits shared wiki
 
 This wasn't a one-time bug. It was a **systemic design flaw**. The system assumed fresh clones meant fresh data. It didn't.
 
-![Knowledge Bloat Cascade](resources/KnowledgeBloatCascade.png)
+![Knowledge Bloat Cascade](/resources/KnowledgeBloatCascade.png)
 
 ---
 
@@ -97,6 +97,8 @@ for stub in shared_clones:  # 68 iterations
 ```
 **Cost**: 28K words read. 87% reduction.
 
+![Before vs After Architecture](/resources/BeforevsAfterArchitecture.png)
+
 **When content IS needed**:
 ```python
 # Only when the stub's topic matches the current task:
@@ -132,9 +134,13 @@ for path in unprocessed:
 - `$1.20 saved per run`
 - Same correctness, 92% fewer I/O operations
 
+![Grep Before Read](/resources/GrepBeforeRead.png)
+
 ---
 
 ## Escalation Ladder: How Lookups Work
+
+![Retrieval Escalation Pyramid](/resources/RetrievalEscalationPyramid.png)
 
 When a collaborator asks "where is this info?":
 
