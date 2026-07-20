@@ -38,6 +38,8 @@ Collaborator A edits shared wiki
 
 This wasn't a one-time bug. It was a **systemic design flaw**. The system assumed fresh clones meant fresh data. It didn't.
 
+![Knowledge Bloat Cascade](resources/KnowledgeBloatCascade.png)
+
 ---
 
 ## The Fix: Reference-Only Architecture
