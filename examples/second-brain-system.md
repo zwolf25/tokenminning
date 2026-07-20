@@ -1,5 +1,7 @@
 # Case Study: Second Brain Token Optimization
 
+![Second Brain Cover Image](/resources/SecondBrainCoverImage.png)
+
 ## The System
 
 **What**: A shared AI-powered knowledge infrastructure for a product management team of 8-12 people.
