@@ -2,7 +2,7 @@
 
 ![tokenmaxxing vs tokenminning](/resources/TokenmaxxingVsTokenminning)
 
-## Maximizing ihttps://github.com/zwolf25/tokenminning/blob/main/README.mdntelligence per token
+## Maximizing intelligence per token
 
 Tokenminning is an optimization philosophy within **context engineering** that seeks to maximize **intelligence per token**.
 
