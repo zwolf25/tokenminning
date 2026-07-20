@@ -47,6 +47,8 @@ Sometimes the correct tokenminning solution uses **more** tokens—if those addi
 
 ## Principles
 
+![Tokenminning Decision Tree](/resources/TokenminningDecisionTree.png)
+
 ### 1. Retrieve, don't preload
 
 Provide the model with relevant information when needed rather than loading everything upfront.
