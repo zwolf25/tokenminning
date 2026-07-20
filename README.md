@@ -1,8 +1,8 @@
 # Tokenminning
 
-![tokenmaxxing vs tokenminning](resources/TokenmaxxingVsTokenminning)
+![tokenmaxxing vs tokenminning](/resources/TokenmaxxingVsTokenminning)
 
-## Maximizing intelligence per token
+## Maximizing ihttps://github.com/zwolf25/tokenminning/blob/main/README.mdntelligence per token
 
 Tokenminning is an optimization philosophy within **context engineering** that seeks to maximize **intelligence per token**.
 
@@ -21,6 +21,8 @@ The goal is to maximize the value of the information presented to the model whil
 Tokenminning optimizes the **model's context surface**, not the size or complexity of the underlying system.
 
 ## Tokenmaxxing vs Tokenminning
+
+![Before vs After Architecture](/resources/BeforevsAfterArchitecture.png)
 
 | Tokenmaxxing | Tokenminning |
 |---|---|
@@ -126,6 +128,8 @@ The term "tokenminning" was introduced in July 2026 as a way to describe an emer
 Inspired by the emerging concept of tokenmaxxing: intentionally using larger context windows and more tokens to improve AI performance.
 
 ## Core Techniques
+
+![Retrieval Escalation Pyramid](/resources/RetrievalEscalationPyramid.png)
 
 - **[Stub Pattern](examples/second-brain-system.md#the-stub-pattern)** — Replace full-body clones with reference-only pointers (summary + source-path)
 - **Grep-before-read** — Never read a folder wholesale; search for relevance first
