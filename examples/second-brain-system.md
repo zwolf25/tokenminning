@@ -140,6 +140,36 @@ for path in unprocessed:
 
 ---
 
+## Sync Discovery: One Index Beats N Reads
+
+**The gap**: the stub pattern above solves the *read* cost. It doesn't solve the *sync* cost — the recurring job that keeps every stub's timestamp honest still had to open every source file just to check if anything changed:
+
+\`\`\`python
+# Before, every sync run:
+for source in shared_sources:  # one iteration per source file
+    header = Read(source, limit=20)  # partial read, but still N reads
+    if header.updated > stub[source].last_indexed:
+        refresh_stub(source)
+\`\`\`
+
+**Cost**: N reads every run, even on a run where nothing changed anywhere.
+
+**The fix**: the job that writes the sources also maintains a single manifest — one row per source, `name | updated | description` — updated in the same pass it already writes the source. The sync job reads the manifest once instead of opening every source:
+
+\`\`\`python
+# After, every sync run:
+manifest = Read(manifest_path)  # ONE read, all sources' metadata
+for source, meta in manifest.items():
+    if meta.updated > stub[source].last_indexed:
+        refresh_stub(source, meta.description)  # no per-source read needed
+\`\`\`
+
+**Fallback discipline matters**: if a source is missing from the manifest (new, or manifest drifted), fall back to reading that one source directly — never let an optimization become a hard dependency.
+
+**Result**: sync discovery dropped from one read per source to one read total — roughly 80% reduction on that phase alone. Different bottleneck from the grep-before-read fix above: that one cuts *processing* reads, this one cuts *discovery* reads. Same underlying rule both times: don't open a file to answer a question an index could answer instead.
+
+---
+
 ## Escalation Ladder: How Lookups Work
 
 ![Retrieval Escalation Pyramid](/resources/RetrievalEscalationPyramid.png)
@@ -177,7 +207,8 @@ LEVEL 3: On-demand Read (slowest, most expensive)
 | Stale clones | 45/68 (66%) | 0 | 100% ↓ |
 | Files read per wiki-builder run | 402 | 31 | 92% ↓ |
 | Cost per AI session | $15-25 | $2-4 | 75-85% ↓ |
-| Freshness guarantee | Stale clones common | mtime-checked |直接的解决了 |
+| Freshness guarantee | Stale clones common | mtime-checked | Solved |
+| Sync discovery reads per run *(2026-07-24)* | 1 read per source | 1 read total | ~80% ↓ |
 
 **Velocity impact**:
 
@@ -239,6 +270,15 @@ Never Read a folder's contents wholesale. Always:
 2. Read only the matches
 3. If grep returns nothing, ask a human (or fail fast)
 
+### 5. Index the Discovery Step, Not Just the Content
+
+**Pattern**: when N producers/consumers all need to answer "what changed since I last checked," don't make every consumer scan every producer. One shared index — updated once, by whoever's already writing the content — turns an O(N) discovery cost into O(1).
+
+**Examples**:
+- Build systems: a manifest of file hashes beats re-hashing every file on every build.
+- Feed readers: a single feed index beats polling every article's metadata individually.
+- This case study: a single manifest file (name/updated/description) beats opening every source wiki to check its timestamp.
+
 ---
 
 ## Anti-Patterns (What To Avoid)
@@ -263,9 +303,19 @@ Never Read a folder's contents wholesale. Always:
 
 > "Let me just update the changed sections."
 
-**Problem**: Transformations that require human judgment (synthesis, conflict resolution) can't be partial. One wrong edit corrupts the whole file.
+**Where this still holds**: in-place synthesis — reconciling two contradicting notes, resolving a conflict, rewriting a section's meaning. That requires the surrounding context to get right. A blind partial edit there can corrupt the file's logic even if the diff looks clean.
 
-**Fix**: Full-file Write for synthesis. Accept the cost. It's cheaper than the bug cost of drift.
+**Where it doesn't**: appending a new, self-contained dated section to a file already structured as a chronological log. No existing content changes — only a new heading and body land at a known anchor point. Verified in production across 7 large files (60-85KB) with zero corruption: grep the file's headers for the anchor, `Edit` in the new section, done. No full Read, no full Write.
+
+**Fix**: Match the edit strategy to the transformation. Synthesis/conflict-resolution → full-file Read + Write, accept the cost. Append-only additions to an already-structured log → surgical `Edit`, skip the cost entirely.
+
+### ❌ Unbounded Per-Item Metadata
+
+> "Just keep appending to the source-tracking field, it's just metadata."
+
+**Failure**: a single frontmatter field (e.g. tracking every contributing source by name) grows without a cap. Individually invisible, it compounds the same way full-body clones did — just slower. One file's tracking line went from a handful of names to around fifty, adding hundreds of tokens to every load of that file, for a field almost never read in full.
+
+**Fix**: cap display to the most recent N plus a total count. Full history stays reconstructable via the reverse link (each contributor already points back to what it updated) — nothing is lost, only the unbounded growth.
 
 ---
 
@@ -277,6 +327,8 @@ Never Read a folder's contents wholesale. Always:
 [ ] Replace each clone with a stub (summary + source-path)
 [ ] Add targeted Grep before bulk Read in sync routines
 [ ] Build mtime-tracking for drift detection
+[ ] Replace per-source discovery reads with one shared index (name/updated/description)
+[ ] Cap any unbounded per-item metadata field to recent-N + count
 [ ] Test fallback:simulate a missing source, verify stub handles it
 [ ] Measure: cost/session, iteration velocity, accuracy
 ```
@@ -314,6 +366,8 @@ That's the practice. That's the habit.
 **Token costs**: Actual spend from Claude Code billing, not estimates.
 
 **The fix**: Deployed to personal setup first, then propagated to shared skills-repo (live-synced to all collaborators).
+
+**Follow-up (2026-07-24)**: same system, sync-discovery layer (see above) plus two smaller fixes — surgical edits on large files instead of full-file rewrites, and a cap on the previously-unbounded source-tracking metadata. Verified against real file timestamps and two collaborators' actual before/after run costs post-deploy.
 
 ---
 
