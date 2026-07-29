@@ -41,9 +41,11 @@ Tokenminning is **not**:
 - Removing useful context
 - Avoiding large context windows
 
-Instead, tokenminning is about improving **information density**.
+Instead, tokenminning is about improving information density and reducing unnecessary context.
 
 Sometimes the correct tokenminning solution uses **more** tokens—if those additional tokens significantly improve reasoning quality.
+
+Likewise, many of the biggest improvements come from deleting duplicated, obsolete, or permanently loaded information rather than making existing prompts shorter.
 
 ## Principles
 
@@ -83,6 +85,18 @@ The question is:
 
 > "What does the model need right now?"
 
+### 7. Eliminate context debt continuously
+
+Context naturally accumulates over time.
+
+Instructions are copied instead of referenced. Memories outlive their usefulness. Routing tables drift. Configuration becomes duplicated. Dead references remain.
+
+Tokenminning treats context like production code: it should be audited, refactored, and simplified continuously.
+
+The largest token savings often come not from compressing prompts, but from removing information that never needed to be loaded in the first place.
+
+A token-efficient system is not one that was optimized once—it is one that stays optimized.
+
 ![Context Surface](/resources/ContextSurface.png)
 
 ## Examples
@@ -98,6 +112,12 @@ The question is:
 
 ## Why this matters
 
+AI systems accumulate **context debt** in the same way software accumulates technical debt.
+
+Without ongoing maintenance, memories grow indefinitely, instructions become duplicated, routing drifts, and obsolete information continues consuming context long after it has stopped providing value.
+
+Tokenminning is the practice of continuously paying down that debt.
+
 As AI systems become more capable, the bottleneck shifts from context availability to context quality.
 
 Larger context windows do not eliminate the need for good information architecture.
@@ -107,6 +127,20 @@ The future is not unlimited context.
 The future is intelligent context selection.
 
 ## Real-World Results
+
+### Context maintenance can outperform prompt optimization
+
+Many token optimization discussions focus on summarization or prompt compression.
+
+In practice, some of the largest recurring savings come from improving the architecture itself:
+
+- Removing duplicated instructions
+- Eliminating stale configuration
+- Keeping startup context intentionally small
+- Moving durable knowledge into retrievable sources
+- Treating routing as a first-class design problem
+
+These changes reduce token usage before a conversation even begins.
 
 | System | Before | After | Savings |
 |--------|--------|-------|---------|
@@ -139,8 +173,9 @@ Inspired by the emerging concept of tokenmaxxing: intentionally using larger con
 - **Grep-before-read** — Never read a folder wholesale; search for relevance first
 - **Escalation ladder** — Level 1: local cache, Level 2: stub lookup, Level 3: on-demand read
 - **Compaction** — Compress conversation history; keep active context under 15K tokens
-
-Placement: After the "Origin" section, before "Contributing"
+- **Context hygiene** — Regularly audit memories, instructions, and routing for duplication, stale content, and obsolete references
+- **Thin routers** — Keep startup instructions focused on behavior and routing; retrieve implementation details on demand
+- **Single source of truth** — Store durable knowledge once and reference it instead of copying it into multiple always-loaded locations
 
 ## More
 
