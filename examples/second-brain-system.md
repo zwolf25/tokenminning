@@ -6,7 +6,7 @@
 
 **What**: A shared AI-powered knowledge infrastructure for a product management team of 8-12 people.
 
-**Scale**:
+**Original scale (July 2026)**:
 - 72 interlinked wikis (211K words total)
 - OneDrive-synced across multiple collaborators
 - Daily AI sessions using shared content
@@ -219,6 +219,51 @@ LEVEL 3: On-demand Read (slowest, most expensive)
 
 ---
 
+## Phase 2: Paying Down Context Debt
+
+The original refactor solved the largest source of waste: duplicated knowledge.
+
+Several months later, a second optimization pass focused on a different problem.
+
+Although the knowledge architecture had become highly efficient, the surrounding AI infrastructure had gradually accumulated **context debt**:
+
+- duplicated routing instructions
+- permanently loaded implementation details
+- stale configuration
+- obsolete references
+- behavioral knowledge stored indefinitely in memory
+- duplicated routing tables already present elsewhere
+
+None of these problems affected correctness individually.
+
+Collectively, they increased the amount of context loaded into every AI session before any real work even began.
+
+Rather than redesigning the Second Brain again, the focus shifted toward continuous maintenance of the context architecture itself.
+
+---
+
+## Context Maintenance
+
+The maintenance work followed the same philosophy as the original migration:
+
+> Don't remove knowledge.
+>
+> Remove unnecessary context.
+
+Several architectural improvements were made:
+
+- Converted `CLAUDE.md` files into thin routing layers instead of knowledge repositories.
+- Removed duplicated routing tables already provided by skill descriptions.
+- Migrated durable behavioral knowledge from `MEMORY.md` into permanent wiki documentation.
+- Eliminated stale configuration references and obsolete paths.
+- Added automated audits that continuously detect duplicated instructions, configuration drift, and dead references.
+
+The result was not a smaller knowledge base.
+
+The result was a smaller **always-loaded context surface**.
+
+---
+
 ## The Pattern (Generalizable)
 
 This isn't specific to wikis or Obsidian. Works anywhere:
@@ -331,6 +376,10 @@ Never Read a folder's contents wholesale. Always:
 [ ] Cap any unbounded per-item metadata field to recent-N + count
 [ ] Test fallback:simulate a missing source, verify stub handles it
 [ ] Measure: cost/session, iteration velocity, accuracy
+[ ] Audit duplicated instructions and routing tables
+[ ] Migrate durable memory into permanent documentation
+[ ] Remove obsolete configuration and dead references
+[ ] Keep startup context intentionally small
 ```
 
 ---
@@ -344,6 +393,16 @@ The Second Brain didn't bloat through one bad decision. It crept there through d
 - "Just clone the whole thing, easier than pointing"
 - "We'll fix sync drift later"
 - "The cost per run is small, it'll add up eventually"
+
+The original migration focused on **what knowledge should exist**.
+
+The maintenance work focused on **what context should be loaded**.
+
+Those are related but different optimization problems.
+
+One reduces duplication in storage.
+
+The other reduces duplication in runtime context.
 
 Tokenminning forces the question: **Do you need this *right now*?**
 
@@ -369,6 +428,24 @@ That's the practice. That's the habit.
 
 **Follow-up (2026-07-24)**: same system, sync-discovery layer (see above) plus two smaller fixes — surgical edits on large files instead of full-file rewrites, and a cap on the previously-unbounded source-tracking metadata. Verified against real file timestamps and two collaborators' actual before/after run costs post-deploy.
 
+**Second follow-up (2026-07-29)**: the optimization focus shifted from knowledge architecture to context maintenance. Startup configuration was refactored into thin routing layers, durable memory was migrated into retrievable documentation, and automated audits were introduced to continuously detect context debt. The result removed approximately 3,500 recurring tokens from every AI session without changing the underlying capabilities of the system.
+
 ---
 
-*This is documented as a reference architecture, not a consultant's report. The code, the hooks, the skills — all exist and are running. If you copy this pattern, you'll get the same savings.*
+## Final Observation
+
+The original Second Brain project demonstrated that **retrieval beats duplication**.
+
+The maintenance work demonstrated something equally important:
+
+**Architecture alone is not enough.**
+
+Without ongoing maintenance, even a well-designed AI system gradually accumulates duplicated instructions, stale memory, obsolete configuration, and routing drift.
+
+Tokenminning is therefore not a one-time optimization project.
+
+It is a continuous engineering discipline focused on maximizing intelligence per token throughout the entire lifecycle of an AI system.
+
+---
+
+*This is documented as a reference architecture, not a consultant's report. The code, the hooks, the skills, and the maintenance workflows all exist and are running. The architecture evolves through continuous measurement, auditing, and refinement—the same principles described throughout this repository.*
