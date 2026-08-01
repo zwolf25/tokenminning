@@ -1,4 +1,4 @@
-# Case Study 3: Wiki Pipeline — sc-wiki-builder → sc-wiki-cleanup
+# Case Study: Wiki Pipeline — sc-wiki-builder → sc-wiki-cleanup
 
 **Before:** $50+/run, 11 subagents, full-vault audit by default  
 **After:** ~$15-25/run, 2-3 subagents, recently-touched scope by default
