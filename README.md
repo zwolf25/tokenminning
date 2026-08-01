@@ -179,8 +179,14 @@ Inspired by the emerging concept of tokenmaxxing: intentionally using larger con
 
 ## More
 
-Article:
-[Token Maxxing is Dead. Long Live Token Minning.](https://medium.com/@zwolf25/token-maxxing-is-dead-long-live-token-minning-707fffbf2b95)
+Articles:
+- [Token Maxxing is Dead. Long Live Token Minning](https://medium.com/@zwolf25/token-maxxing-is-dead-long-live-token-minning-707fffbf2b95)
+- [Tokenminning Is Not About Tokens](https://medium.com/@zwolf25/tokenminning-is-not-about-tokens-d7e08673589a?sharedUserId=zwolf25)
+- [The 80% That Was Noise](https://medium.com/@zwolf25/the-80-that-was-noise-8984698ae4ea?sharedUserId=zwolf25)
+- [The Context Window Is a Distraction](https://medium.com/@zwolf25/the-context-window-is-a-distraction-e6e86ac9f2a1?sharedUserId=zwolf25)
+- [AI Tokenomics Measures. Tokenminning Builds](https://medium.com/@zwolf25/the-context-window-is-a-distraction-e6e86ac9f2a1?sharedUserId=zwolf25)
+- [Context Debt: The Hidden Tax](https://medium.com/@zwolf25/context-debt-the-hidden-tax-making-your-ai-less-intelligent-12cb00c2895f?sharedUserId=zwolf25)
+- [Your Prompt Isn’t the Problem. Your Workflow Is.](https://medium.com/@zwolf25/your-prompt-isnt-the-problem-your-workflow-is-9dd29ca90a3c?sharedUserId=zwolf25)
 
 ## Contributing
 
