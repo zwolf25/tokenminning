@@ -107,8 +107,9 @@ A token-efficient system is not one that was optimized once—it is one that sta
 - **RAG systems**: Rank and filter before retrieval, don't dump everything
 - **Tool design**: Every capability introduces context tradeoffs
 
-**Deep case study:**
+**Deep case studies:**
 - **[Second Brain System](examples/second-brain-system.md)** — How a team knowledge vault went from 211K words of duplication to 28K words reference-only (87% reduction).
+- **[Wiki Pipeline](examples/wiki-pipeline.md)** — How sc-wiki-builder → sc-wiki-cleanup went from $50+/run (11 agents, full-vault default) to $15-25/run (2-3 agents, recently-touched scope) by fixing default scope architecture.
 
 ## Why this matters
 
@@ -147,6 +148,7 @@ These changes reduce token usage before a conversation even begins.
 | Second Brain (wikis) | 211K words duplication | 28K words | 87% ↓ |
 | AI session cost | $15-25/session | $2-4/session | 75-85% ↓ |
 | Stale sync clones | 45/68 (66%) | 0 | 100% ↓ |
+| Wiki pipeline | $50+/run, 11 agents | $15-25/run, 2-3 agents | ~60-70% cost, 80% agents |
 
 See the [Second Brain case study](examples/second-brain-system.md) for the full breakdown.
 
