@@ -156,6 +156,22 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 
 ---
 
+## Technique Guides
+
+Practical applications of tokenminning to specific systems:
+
+| Guide | Focus |
+|-------|-------|
+| [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
+| [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
+| [Memory Systems](examples/memory.md) | Preserve decisions/constraints, not transcripts |
+| [RAG Pipelines](examples/rag.md) | Rank → filter → focus; quality over quantity |
+| [All Examples Index](examples/index.md) | Quick reference for all 7 patterns |
+
+> These are *technique guides* — not measured case studies. Case studies in `examples/` (`second-brain-system.md`, etc.) show before/after metrics.
+
+---
+
 ## How It Works
 
 Tokenminning operates on a simple **escalation ladder** — the model only sees what it needs, when it needs it:
