@@ -92,7 +92,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Grep-before-read** | Never read a folder wholesale; search first | [Config Audit](#case-study-2-config-audit) |
 | **Escalation Ladder** | Level 1: local cache → Level 2: stub lookup → Level 3: on-demand read | [All] |
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](#case-study-3-wiki-pipeline) |
-| **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit] |
+| **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](#case-study-2-config-audit) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
 
 ---
