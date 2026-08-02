@@ -1,208 +1,249 @@
 # Tokenminning
 
-![tokenmaxxing vs tokenminning](/resources/TokenmaxxingVsTokenminning)
+<p align="center">
+  <img src="resources/logo-dark.png" alt="Tokenminning" width="400"/>
+</p>
 
-## Maximizing intelligence per token
+<p align="center">
+  <strong>Maximize intelligence per token</strong>
+  <br/>
+  <em>Not by minimizing tokens, but by delivering the right context at the right time</em>
+</p>
 
-Tokenminning is an optimization philosophy within **context engineering** that seeks to maximize **intelligence per token**.
+<p align="center">
+  <a href="https://github.com/zwolf25/tokenminning/stargazers"><img src="https://img.shields.io/github/stars/zwolf25/tokenminning?style=flat-square&color=111111&label=stars" alt="GitHub Stars"></a>
+  <a href="https://github.com/zwolf25/tokenminning/commits/main"><img src="https://img.shields.io/github/commit-activity/m/zwolf25/tokenminning?style=flat-square&color=111111&label=commits%2Fmo" alt="Monthly Commits"></a>
+  <a href="https://github.com/zwolf25/tokenminning/commits/main"><img src="https://img.shields.io/github/last-commit/zwolf25/tokenminning?style=flat-square&color=111111&label=last%20commit" alt="Last Commit"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square&color=111111" alt="License"></a>
+  <a href="https://github.com/zwolf25/tokenminning/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square&color=111111" alt="PRs Welcome"></a>
+  <a href="https://medium.com/@zwolf25"><img src="https://img.shields.io/badge/medium-%40zwolf25-000000?style=flat-square&logo=medium&color=111111" alt="Medium"></a>
+</p>
 
-Rather than asking:
+<p align="center">
+  <a href="#case-studies">Case Studies</a> •
+  <a href="#principles">Principles</a> •
+  <a href="#techniques">Techniques</a> •
+  <a href="#real-world-results">Results</a> •
+  <a href="CONTRIBUTING.md">Contributing</a> •
+  <a href="https://medium.com/@zwolf25">Articles</a>
+</p>
 
-> "How do I give the model more context?"
+---
 
-Tokenminning asks:
-
-> "How do I give the model the *right* context at the right time?"
-
-The goal is not to minimize tokens.
-
-The goal is to maximize the value of the information presented to the model while preserving or improving performance.
-
-Tokenminning optimizes the **model's context surface**, not the size or complexity of the underlying system.
-
-## Tokenmaxxing vs Tokenminning
-
-![Before vs After Architecture](/resources/BeforevsAfterArchitecture.png)
+## Why Tokenminning?
 
 | Tokenmaxxing | Tokenminning |
-|---|---|
-| Add more context | Add better context |
-| Bigger prompts | Denser prompts |
-| Load everything | Retrieve what matters |
-| More memory | Better memory architecture |
-| More tokens | More intelligence per token |
+|:---|:---|
+| "How do I give the model **more** context?" | "How do I give the model the **right** context?" |
+| Add more context | Add **better** context |
+| Bigger prompts | **Denser** prompts |
+| Load everything | **Retrieve what matters** |
+| More memory | **Better memory architecture** |
+| More tokens | **More intelligence per token** |
 
-## What Tokenminning Is Not
+> **Tokenminning is not:** minimizing tokens to cut costs, aggressively shortening prompts, removing useful context, or avoiding large context windows.
+>
+> **Tokenminning is:** improving information density, eliminating context debt, and designing systems where the right context arrives at the right time.
 
-Tokenminning is **not**:
+![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning)
 
-- Using fewer tokens simply to reduce API costs
-- Aggressively shortening every prompt
-- Removing useful context
-- Avoiding large context windows
+---
 
-Instead, tokenminning is about improving information density and reducing unnecessary context.
+## Quick Start
 
-Sometimes the correct tokenminning solution uses **more** tokens—if those additional tokens significantly improve reasoning quality.
+Tokenminning isn't a tool—it's a design philosophy. Apply it in 3 steps:
 
-Likewise, many of the biggest improvements come from deleting duplicated, obsolete, or permanently loaded information rather than making existing prompts shorter.
+```bash
+# 1. Audit what's always loaded
+grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
+
+# 2. Replace full clones with stubs (summary + source-path)
+# 3. Add escalation ladder: local cache → stub → on-demand read
+```
+
+**Start here:** Read the [Principles](#principles) → Pick a [Case Study](#case-studies) → Apply one technique to your setup.
+
+---
 
 ## Principles
 
-![Tokenminning Decision Tree](/resources/TokenminningDecisionTree.png)
+| # | Principle | One-Liner |
+|:---:|:---|:---|
+| 1 | **🔍 Retrieve, don't preload** | Supply relevance on demand |
+| 2 | **🗜️ Compress, don't repeat** | Cut redundant instructions & history |
+| 3 | **📋 Structure, don't narrate** | Prefer structured data over prose |
+| 4 | **🎯 Spend tokens where reasoning matters** | Allocate budget to high-value thinking |
+| 5 | **🏗️ Design systems, not prompts** | Architecture (retrieval, tools, memory) drives savings |
+| 6 | **⚙️ Optimize context, not complexity** | "What does the model need right now?" |
+| 7 | **🧹 Eliminate context debt continuously** | Audit memories, routing, config like production code |
 
-### 1. Retrieve, don't preload
+![Tokenminning Decision Tree](resources/TokenminningDecisionTree.png)
 
-Provide the model with relevant information when needed rather than loading everything upfront.
+> [!NOTE]
+> These principles emerged from production Second Brain workflows at ServiceChannel, not theoretical speculation.
 
-### 2. Compress, don't repeat
+---
 
-Reduce redundant instructions, explanations, and historical context.
+## Techniques
 
-### 3. Structure, don't narrate
+| Technique | Description | Case Study |
+|:---|:---|:---|
+| **Stub Pattern** | Replace full clones with `summary + source-path` pointers | [Second Brain](#case-study-1-second-brain) |
+| **Grep-before-read** | Never read a folder wholesale; search first | [Config Audit](#case-study-2-config-audit) |
+| **Escalation Ladder** | Level 1: local cache → Level 2: stub lookup → Level 3: on-demand read | [All] |
+| **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](#case-study-3-wiki-pipeline) |
+| **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit] |
+| **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
 
-Use structured information over long prose whenever possible.
-
-### 4. Spend tokens where reasoning matters
-
-Allocate context and inference budget to areas where additional reasoning creates value.
-
-### 5. Design systems, not prompts
-
-The best token optimization comes from architecture: retrieval, tools, memory, and workflows.
-
-### 6. Optimize context, not complexity
-
-Tokenminning is not about making systems smaller.
-
-A complex system can still be tokenminning if it controls what information reaches the model.
-
-The question is not:
-
-> "How much exists?"
-
-The question is:
-
-> "What does the model need right now?"
-
-### 7. Eliminate context debt continuously
-
-Context naturally accumulates over time.
-
-Instructions are copied instead of referenced. Memories outlive their usefulness. Routing tables drift. Configuration becomes duplicated. Dead references remain.
-
-Tokenminning treats context like production code: it should be audited, refactored, and simplified continuously.
-
-The largest token savings often come not from compressing prompts, but from removing information that never needed to be loaded in the first place.
-
-A token-efficient system is not one that was optimized once—it is one that stays optimized.
-
-![Context Surface](/resources/ContextSurface.png)
-
-## Examples
-
-**Pattern examples:**
-- **CLAUDE.md**: Focused operating guidance, separate docs retrieved as needed
-- **Memory architecture**: Compress decisions, summarize volatile state
-- **RAG systems**: Rank and filter before retrieval, don't dump everything
-- **Tool design**: Every capability introduces context tradeoffs
-
-**Deep case studies:**
-- **[RTK & LLMLingua Evaluation](examples/rtk-llmlingua-evaluation.md)** — Evaluated 4 token-optimization repos; kept RTK for CLI tool-output compression; rejected LLMLingua (lossy prompt compression, wrong use case); discovered 1.5M tokens/30-day RTK adoption gap in compound commands.
-- **[Second Brain Config Audit](examples/second-brain-config-audit.md)** — Audited CLAUDE.md files, memory architecture, and config bloat; cut ~3,500 tokens/session (29% combined CLAUDE.md reduction) with monthly auto-enforcement.
-- **[Wiki Pipeline](examples/wiki-pipeline.md)** — How sc-wiki-builder → sc-wiki-cleanup went from $50+/run (11 agents, full-vault default) to $15-25/run (2-3 agents, recently-touched scope) by fixing default scope architecture.
-
-## Why this matters
-
-AI systems accumulate **context debt** in the same way software accumulates technical debt.
-
-Without ongoing maintenance, memories grow indefinitely, instructions become duplicated, routing drifts, and obsolete information continues consuming context long after it has stopped providing value.
-
-Tokenminning is the practice of continuously paying down that debt.
-
-As AI systems become more capable, the bottleneck shifts from context availability to context quality.
-
-Larger context windows do not eliminate the need for good information architecture.
-
-The future is not unlimited context.
-
-The future is intelligent context selection.
+---
 
 ## Real-World Results
 
-### Context maintenance can outperform prompt optimization
+| Metric | Before | After | Change |
+|:---|:---:|:---:|:---:|
+| **Second Brain wiki words** | 211K | 28K | **87% ↓** |
+| **Wiki pipeline cost/run** | $50+ (11 agents) | $15–25 (2–3 agents) | **~70% ↓ cost, 80% ↓ agents** |
+| **CLAUDE.md size** | ~48.6 KB | 34.4 KB | **29% ↓ (~3,500 tokens/session)** |
+| **Stale sync clones** | 66% | 0% | **100% eliminated** |
+| **RTK adoption gap** | 94% commands bypassed | → upstream fix | **1.5M tokens/30d recovered** |
 
-Many token optimization discussions focus on summarization or prompt compression.
+> [!NOTE]
+> These are measured results from production Second Brain workflows, not synthetic benchmarks.
 
-In practice, some of the largest recurring savings come from improving the architecture itself:
+---
 
-- Removing duplicated instructions
-- Eliminating stale configuration
-- Keeping startup context intentionally small
-- Moving durable knowledge into retrievable sources
-- Treating routing as a first-class design problem
+## Case Studies
 
-These changes reduce token usage before a conversation even begins.
+<details>
+<summary><strong>Case Study 1: Second Brain — 211K → 28K words (87% reduction)</strong></summary>
 
-| System | Before | After | Savings |
-|--------|--------|-------|---------|
-| Second Brain (wikis) | 211K words duplication | 28K words | 87% ↓ |
-| AI session cost | $15-25/session | $2-4/session | 75-85% ↓ |
-| Stale sync clones | 45/68 (66%) | 0 | 100% ↓ |
-| Wiki pipeline | $50+/run, 11 agents | $15-25/run, 2-3 agents | ~60-70% cost, 80% agents |
-| Second Brain config/memory audit | ~48.6 KB CLAUDE.md | 34.4 KB | ~29% ↓ (~3,500 tokens/session) |
-| RTK/LLMLingua evaluation | 4 repos reviewed | RTK kept; 1.5M tokens/30d gap found | Adoption gap → upstream fix |
+**Problem:** Team knowledge vault full of full-body clones  
+**Fix:** Stub Pattern + Grep-before-read + Escalation ladder  
+**Result:** 87% word reduction, $15–25 → $2–4/session, 66% → 0% stale clones
 
-See the [Second Brain case study](examples/second-brain-system.md), [RTK & LLMLingua Evaluation](examples/rtk-llmlingua-evaluation.md), [Config Audit case study](examples/second-brain-config-audit.md), and [Wiki Pipeline case study](examples/wiki-pipeline.md) for the full breakdown.
+[Read full case study →](examples/second-brain-system.md)
+</details>
 
-## Status
+<details>
+<summary><strong>Case Study 2: RTK & LLMLingua Evaluation — 1.5M token adoption gap found</strong></summary>
 
-Tokenminning is an emerging concept.
+**Problem:** Which external token tools improve CLI setup?  
+**Fix:** Evaluated 4 repos → kept RTK (deterministic tool-output compression), rejected LLMLingua (lossy prompt compression)  
+**Discovery:** `rtk discover` revealed only 6% of Bash calls used RTK (~1.5M tokens/30d missed)
 
-This repository is intended to refine the philosophy through discussion, examples, and real-world engineering experience.
+[Read full case study →](examples/rtk-llmlingua-evaluation.md)
+</details>
 
-Feedback, counterexamples, and alternative viewpoints are encouraged.
+<details>
+<summary><strong>Case Study 3: Config & Memory Audit — 3,500 tokens/session recurring savings</strong></summary>
+
+**Problem:** CLAUDE.md files bloated, MEMORY.md growing unbounded  
+**Fix:** 4-type memory classification + CLAUDE.md consistency audit + monthly auto-enforcement  
+**Result:** 29% CLAUDE.md reduction, MEMORY.md → 0 bytes, recurring ~3,500 tokens/session saved
+
+[Read full case study →](examples/second-brain-config-audit.md)
+</details>
+
+<details>
+<summary><strong>Case Study 4: Wiki Pipeline — $50 → $15/run (80% fewer agents)</strong></summary>
+
+**Problem:** Cleanup skill defaulted to full-vault audit (92 wikis) when only 12 changed  
+**Fix:** Added "recently-touched" scope tier seeded from builder run; full-vault now opt-in via `--full`  
+**Result:** 11→2–3 agents, ~70% cost reduction, 4 root-cause fixes across 2 skills
+
+[Read full case study →](examples/wiki-pipeline.md)
+</details>
+
+---
+
+## How It Works
+
+Tokenminning operates on a simple **escalation ladder** — the model only sees what it needs, when it needs it:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  LEVEL 1: LOCAL CACHE                                       │
+│  Hot context, recent decisions, active task state           │
+│  → Always loaded, ≤ 2K tokens                               │
+├─────────────────────────────────────────────────────────────┤
+│  LEVEL 2: STUB LOOKUP                                       │
+│  Summary + source-path pointers to durable knowledge        │
+│  → Loaded on reference, ~500 tokens each                    │
+├─────────────────────────────────────────────────────────────┤
+│  LEVEL 3: ON-DEMAND READ                                    │
+│  Full source content retrieved only when explicitly needed  │
+│  → Lazy, precise, unbounded depth                           │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**The key insight:** Most systems preload Level 3. Tokenminning makes Level 1 the default, Level 2 the bridge, Level 3 the exception.
+
+![Before vs After Architecture](resources/BeforevsAfterArchitecture.png)
+![Retrieval Escalation Pyramid](resources/RetrievalEscalationPyramid.png)
+
+---
+
+## Related Projects
+
+| Project | Description | Relation |
+|:---|:---|:---|
+| **[RTK](https://github.com/rtk-ai/rtk)** | Rust CLI proxy for tool-output compression (60-90% savings) | Complementary — handles command output; tokenminning handles context architecture |
+| **[Caveman](https://github.com/JuliusBrussee/caveman)** | Terse communication mode (65% fewer output tokens) | Sibling — reduces prompt verbosity; tokenminning reduces context surface |
+| **[Ponytail](https://github.com/DietrichGebert/ponytail)** | YAGNI code generation philosophy (~54% less code) | Sibling — reduces implementation bloat; tokenminning reduces context bloat |
+| **[GPTCache](https://github.com/zilliztech/GPTCache)** | Semantic caching for LLM APIs | Different layer — caches model responses; tokenminning optimizes what reaches the model |
+
+---
+
+## Contributing
+
+We welcome real-world examples, counterexamples, benchmarks, and tool-specific patterns.
+
+1. **Case studies** — Add to `examples/` in `case-study-XX-name.md` format
+2. **Techniques** — Document patterns in `techniques/`
+3. **Counterexamples** — Where tokenminning *doesn't* apply (valuable!)
+4. **Tool patterns** — Claude Code, Cursor, Codex, Continue, etc.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+---
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=zwolf25%2Ftokenminning&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=zwolf25/tokenminning&type=date&theme=dark&legend=top-left&sealed_token=BBCppQ67mTa4wI5rBMGBoHAaX4Fxr2SsMs40OSQKRCC_ID7tfQjRuh7312IPHSbhT2E9RkqzBv3LszM73nygwCxRC44cn0MLz3av3yVGGNj84-7zQAi-Kw" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=zwolf25/tokenminning&type=date&legend=top-left&sealed_token=BBCppQ67mTa4wI5rBMGBoHAaX4Fxr2SsMs40OSQKRCC_ID7tfQjRuh7312IPHSbhT2E9RkqzBv3LszM73nygwCxRC44cn0MLz3av3yVGGNj84-7zQAi-Kw" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=zwolf25/tokenminning&type=date&legend=top-left&sealed_token=BBCppQ67mTa4wI5rBMGBoHAaX4Fxr2SsMs40OSQKRCC_ID7tfQjRuh7312IPHSbhT2E9RkqzBv3LszM73nygwCxRC44cn0MLz3av3yVGGNj84-7zQAi-Kw" />
+ </picture>
+</a>
+
+---
+
+## Visual Reference
+
+<details>
+<summary><strong>Architecture diagrams & decision flows</strong></summary>
+
+| Diagram | Description |
+|---------|-------------|
+| ![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning) | Core contrast visualization |
+| ![Before vs After Architecture](resources/BeforevsAfterArchitecture.png) | System architecture comparison |
+| ![Tokenminning Decision Tree](resources/TokenminningDecisionTree.png) | Decision flow for technique selection |
+| ![Context Surface](resources/ContextSurface.png) | Context surface vs. underlying system |
+| ![Retrieval Escalation Pyramid](resources/RetrievalEscalationPyramid.png) | Escalation ladder visual |
+
+</details>
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
+
+---
 
 ## Origin
 
 The term "tokenminning" was introduced in July 2026 as a way to describe an emerging optimization philosophy centered on maximizing intelligence per token.
 
-Inspired by the emerging concept of tokenmaxxing: intentionally using larger context windows and more tokens to improve AI performance.
-
-## Core Techniques
-
-![Retrieval Escalation Pyramid](/resources/RetrievalEscalationPyramid.png)
-
-- **[Stub Pattern](examples/second-brain-system.md#the-stub-pattern)** — Replace full-body clones with reference-only pointers (summary + source-path)
-- **Grep-before-read** — Never read a folder wholesale; search for relevance first
-- **Escalation ladder** — Level 1: local cache, Level 2: stub lookup, Level 3: on-demand read
-- **Compaction** — Compress conversation history; keep active context under 15K tokens
-- **Context hygiene** — Regularly audit memories, instructions, and routing for duplication, stale content, and obsolete references
-- **Thin routers** — Keep startup instructions focused on behavior and routing; retrieve implementation details on demand
-- **Single source of truth** — Store durable knowledge once and reference it instead of copying it into multiple always-loaded locations
-
-## More
-
-Articles:
-- [Token Maxxing is Dead. Long Live Token Minning](https://medium.com/@zwolf25/token-maxxing-is-dead-long-live-token-minning-707fffbf2b95)
-- [Tokenminning Is Not About Tokens](https://medium.com/@zwolf25/tokenminning-is-not-about-tokens-d7e08673589a?sharedUserId=zwolf25)
-- [The 80% That Was Noise](https://medium.com/@zwolf25/the-80-that-was-noise-8984698ae4ea?sharedUserId=zwolf25)
-- [The Context Window Is a Distraction](https://medium.com/@zwolf25/the-context-window-is-a-distraction-e6e86ac9f2a1?sharedUserId=zwolf25)
-- [AI Tokenomics Measures. Tokenminning Builds](https://medium.com/@zwolf25/the-context-window-is-a-distraction-e6e86ac9f2a1?sharedUserId=zwolf25)
-- [Context Debt: The Hidden Tax](https://medium.com/@zwolf25/context-debt-the-hidden-tax-making-your-ai-less-intelligent-12cb00c2895f?sharedUserId=zwolf25)
-- [Your Prompt Isn’t the Problem. Your Workflow Is](https://medium.com/@zwolf25/your-prompt-isnt-the-problem-your-workflow-is-9dd29ca90a3c?sharedUserId=zwolf25)
-
-## Contributing
-
-Have you encountered an example of tokenminning?
-
-Open an Issue or Pull Request with:
-
-- Real-world examples
-- Counterexamples
-- Benchmarks
-- Alternative definitions
-- Related research
-- Tool-specific patterns (Claude Code, Codex, Continue, Cursor, etc.)
-
-The goal is to evolve the concept through practical experience rather than theory alone.
+Inspired by the emerging concept of **tokenmaxxing**: intentionally using larger context windows and more tokens to improve AI performance. Tokenminning asks the opposite question: *what's the minimum context that still produces maximum reasoning?*
