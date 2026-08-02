@@ -108,9 +108,9 @@ A token-efficient system is not one that was optimized once—it is one that sta
 - **Tool design**: Every capability introduces context tradeoffs
 
 **Deep case studies:**
-- **[Second Brain System](examples/second-brain-system.md)** — How a team knowledge vault went from 211K words of duplication to 28K words reference-only (87% reduction).
-- **[Wiki Pipeline](examples/wiki-pipeline.md)** — How sc-wiki-builder → sc-wiki-cleanup went from $50+/run (11 agents, full-vault default) to $15-25/run (2-3 agents, recently-touched scope) by fixing default scope architecture.
+- **[RTK & LLMLingua Evaluation](examples/rtk-llmlingua-evaluation.md)** — Evaluated 4 token-optimization repos; kept RTK for CLI tool-output compression; rejected LLMLingua (lossy prompt compression, wrong use case); discovered 1.5M tokens/30-day RTK adoption gap in compound commands.
 - **[Second Brain Config Audit](examples/second-brain-config-audit.md)** — Audited CLAUDE.md files, memory architecture, and config bloat; cut ~3,500 tokens/session (29% combined CLAUDE.md reduction) with monthly auto-enforcement.
+- **[Wiki Pipeline](examples/wiki-pipeline.md)** — How sc-wiki-builder → sc-wiki-cleanup went from $50+/run (11 agents, full-vault default) to $15-25/run (2-3 agents, recently-touched scope) by fixing default scope architecture.
 
 ## Why this matters
 
@@ -151,8 +151,9 @@ These changes reduce token usage before a conversation even begins.
 | Stale sync clones | 45/68 (66%) | 0 | 100% ↓ |
 | Wiki pipeline | $50+/run, 11 agents | $15-25/run, 2-3 agents | ~60-70% cost, 80% agents |
 | Second Brain config/memory audit | ~48.6 KB CLAUDE.md | 34.4 KB | ~29% ↓ (~3,500 tokens/session) |
+| RTK/LLMLingua evaluation | 4 repos reviewed | RTK kept; 1.5M tokens/30d gap found | Adoption gap → upstream fix |
 
-See the [Second Brain case study](examples/second-brain-system.md), [Wiki Pipeline case study](examples/wiki-pipeline.md), and [Config Audit case study](examples/second-brain-config-audit.md) for the full breakdown.
+See the [Second Brain case study](examples/second-brain-system.md), [RTK & LLMLingua Evaluation](examples/rtk-llmlingua-evaluation.md), [Config Audit case study](examples/second-brain-config-audit.md), and [Wiki Pipeline case study](examples/wiki-pipeline.md) for the full breakdown.
 
 ## Status
 
