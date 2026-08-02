@@ -110,6 +110,7 @@ A token-efficient system is not one that was optimized once—it is one that sta
 **Deep case studies:**
 - **[Second Brain System](examples/second-brain-system.md)** — How a team knowledge vault went from 211K words of duplication to 28K words reference-only (87% reduction).
 - **[Wiki Pipeline](examples/wiki-pipeline.md)** — How sc-wiki-builder → sc-wiki-cleanup went from $50+/run (11 agents, full-vault default) to $15-25/run (2-3 agents, recently-touched scope) by fixing default scope architecture.
+- **[Second Brain Config Audit](examples/second-brain-config-audit.md)** — Audited CLAUDE.md files, memory architecture, and config bloat; cut ~3,500 tokens/session (29% combined CLAUDE.md reduction) with monthly auto-enforcement.
 
 ## Why this matters
 
@@ -149,9 +150,9 @@ These changes reduce token usage before a conversation even begins.
 | AI session cost | $15-25/session | $2-4/session | 75-85% ↓ |
 | Stale sync clones | 45/68 (66%) | 0 | 100% ↓ |
 | Wiki pipeline | $50+/run, 11 agents | $15-25/run, 2-3 agents | ~60-70% cost, 80% agents |
+| Second Brain config/memory audit | ~48.6 KB CLAUDE.md | 34.4 KB | ~29% ↓ (~3,500 tokens/session) |
 
-See the [Second Brain case study](examples/second-brain-system.md) for the full breakdown.
-
+See the [Second Brain case study](examples/second-brain-system.md), [Wiki Pipeline case study](examples/wiki-pipeline.md), and [Config Audit case study](examples/second-brain-config-audit.md) for the full breakdown.
 
 ## Status
 
