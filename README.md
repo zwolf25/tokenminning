@@ -88,13 +88,13 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 
 | Technique | Description | Case Study |
 |:---|:---|:---|
-| **Stub Pattern** | Replace full clones with `summary + source-path` pointers | [Second Brain](#case-study-1-second-brain) |
-| **Grep-before-read** | Never read a folder wholesale; search first | [Config Audit](#case-study-2-config-audit) |
+| **Stub Pattern** | Replace full clones with `summary + source-path` pointers | [Second Brain](examples/second-brain-system.md) |
+| **Grep-before-read** | Never read a folder wholesale; search first | [Config Audit](examples/second-brain-config-audit.md) |
 | **Escalation Ladder** | Level 1: local cache → Level 2: stub lookup → Level 3: on-demand read | [All] |
-| **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](#case-study-3-wiki-pipeline) |
-| **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](#case-study-2-config-audit) |
+| **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](examples/wiki-pipeline.md) |
+| **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
-| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](#vault-lint-case-study) |
+| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) |
 
 ---
 
