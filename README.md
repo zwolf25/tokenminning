@@ -94,7 +94,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](#case-study-3-wiki-pipeline) |
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](#case-study-2-config-audit) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
-| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](#wiki-lint-case-study) |
+| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](#vault-lint-case-study) |
 
 ---
 
@@ -163,7 +163,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 **Fix:** Deterministic `vault-lint.py` (zero deps, ~2s) emits structured findings; skills now **only Read what's flagged**
 **Result:** 90 → 13 mechanical findings (85.6% ↓), 73 stub freshness issues → 0, $8.12 → ~$1.15/run est.
 
-[Read full case study →](examples/wiki-lint.md)
+[Read full case study →](examples/vault-lint-case-study.md)
 </details>
 
 ---
