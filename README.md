@@ -94,6 +94,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](#case-study-3-wiki-pipeline) |
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](#case-study-2-config-audit) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
+| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](#wiki-lint-case-study) |
 
 ---
 
@@ -106,13 +107,14 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **CLAUDE.md size** | ~48.6 KB | 34.4 KB | **29% ↓ (~3,500 tokens/session)** |
 | **Stale sync clones** | 66% | 0% | **100% eliminated** |
 | **RTK adoption gap** | 94% commands bypassed | → upstream fix | **1.5M tokens/30d recovered** |
+| **Wiki lint pre-filter (this repo)** | 8.5M tokens/run | ~1.2M est. | **~86% ↓** |
 
 > [!NOTE]
 > These are measured results from production Second Brain workflows, not synthetic benchmarks.
 
 ---
 
-## Case Studies
+## Case Studies {#case-studies}
 
 <details>
 <summary><strong>Case Study 1: Second Brain — 211K → 28K words (87% reduction)</strong></summary>
@@ -152,6 +154,16 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 **Result:** 11→2–3 agents, ~70% cost reduction, 4 root-cause fixes across 2 skills
 
 [Read full case study →](examples/wiki-pipeline.md)
+</details>
+
+<details>
+<summary><strong>Case Study 5: Wiki Lint — 85% mechanical findings eliminated, 86% token reduction</strong></summary>
+
+**Problem:** 4 wiki-maintenance skills re-read every file for 5 mechanical checks (~91 model `Read` calls/run)
+**Fix:** Deterministic `vault-lint.py` (zero deps, ~2s) emits structured findings; skills now **only Read what's flagged**
+**Result:** 90 → 13 mechanical findings (85.6% ↓), 73 stub freshness issues → 0, $8.12 → ~$1.15/run est.
+
+[Read full case study →](examples/wiki-lint.md)
 </details>
 
 ---
