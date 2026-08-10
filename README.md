@@ -273,6 +273,9 @@ Tokenminning operates on a simple **escalation ladder** — the model only sees 
 | **[Caveman](https://github.com/JuliusBrussee/caveman)** | Terse communication mode (65% fewer output tokens) | Sibling — reduces prompt verbosity; tokenminning reduces context surface |
 | **[Ponytail](https://github.com/DietrichGebert/ponytail)** | YAGNI code generation philosophy (~54% less code) | Sibling — reduces implementation bloat; tokenminning reduces context bloat |
 | **[GPTCache](https://github.com/zilliztech/GPTCache)** | Semantic caching for LLM APIs | Different layer — caches model responses; tokenminning optimizes what reaches the model |
+| **[Firecrawl](https://github.com/mendableai/firecrawl)** | Web search/scrape API — search, scrape, crawl, monitor, interact | **Levels 1–3** of the escalation ladder (credits, cache, scheduled monitors) |
+| **[Scrapling](https://github.com/Scrapling/Scrapling)** | Free local HTTP + stealth browser (Cloudflare bypass) | **Levels 4–5** of the ladder (credits exhausted, anti-bot pages) |
+| **[markitdown](https://github.com/microsoft/markitdown)** | Universal document converter (PDF, DOCX, XLSX, PPTX, HTML, images) | `doc-convert` **fallback engine** for scanned/image-heavy formats |
 
 ---
 
