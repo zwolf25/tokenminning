@@ -1,178 +1,131 @@
-# Tokenminning Examples
+# Tokenminning Examples — Tooling Implementations
 
-Tokenminning is best understood through practical examples.
-
-The goal is not to use fewer tokens or build smaller systems.
-
-The goal is to maximize **intelligence per token** by improving the quality, timing, and structure of information presented to AI systems.
-
-Tokenminning focuses on the model's context surface: what information reaches the model, when it reaches the model, and how it is organized.
+> **These three examples are new additions** showcasing the tooling stack that *achieves* the tokenminning principles documented in the original 7 philosophy examples. They demonstrate **production-hardened implementations** of "Design systems not prompts," "Compress don't repeat," "Retrieve don't preload," and "Eliminate context debt continuously."
 
 ---
 
-## Example 1: AI Coding Assistant Context
+## New Tooling Case Studies
 
-### tokenmaxxing
-
-- Provide the entire repository as context regardless of task relevance
-- Include a 500-line `CLAUDE.md` containing every project detail
-- Enable every MCP server without considering task requirements
-- Preserve complete chat history instead of extracting decisions
-
-### tokenminning
-
-- Retrieve only relevant files
-- Keep `CLAUDE.md` focused on durable guidance
-- Enable only task-relevant MCP tools
-- Preserve decisions rather than transcripts
-
-Both aim to improve model performance.
-
-The difference is whether optimization comes from **more context** or **better context**.
+| Example | Core Principle | Token Savings | Key Tools |
+|---------|----------------|---------------|-----------|
+| **[Document Processing Pipeline](document-processing.md)** | Compress don't repeat, Retrieve don't preload, Structure don't narrate, Design systems not prompts, Eliminate context debt | **99.3–99.6%** vs LLM-based extraction | `doc-convert`, `vtt-normalizer`, `doc-ingest` (local subprocesses + Haiku extraction) |
+| **[Web Scraping Escalation Ladder](web-scraping-escalation.md)** | Retrieve don't preload, Optimize context not complexity, Escalation ladder, Stub Pattern, Eliminate context debt | **90–100%** credit savings via cache + free local fallbacks | `firecrawl` (40+ sub-skills), `scrapling` (fast + stealth), `webclaw`, `playwright` |
+| **[Skill Tooling Pattern](skill-tooling-pattern.md)** | Design systems not prompts, Structure don't narrate, Thin Routers, Stub Pattern, Compress don't repeat | **Systematic** — eliminates prompt drift, enforces token discipline by contract | 100+ versioned skills across 14 categories, plugin-managed |
 
 ---
 
-## Example 2: Knowledge Management
+## How These Connect to Original Philosophy Examples
 
-### tokenmaxxing
-
-- Store every conversation
-- Duplicate documentation everywhere
-- Keep complete historical records in context
-- Load entire knowledge bases upfront
-
-### tokenminning
-
-- Separate durable knowledge from temporary information
-- Store decisions, constraints, and outcomes
-- Use references and retrieval instead of duplication
-- Load information only when relevant
-
-**Principle:** Preserve knowledge, not noise.
+| Original Example | Philosophy | Tooling Implementation (New) |
+|------------------|------------|------------------------------|
+| **1. Coding** | Retrieve relevant files, not entire repo | `wiki-builder` fingerprint-dedup, `doc-ingest` batch extraction |
+| **2. Knowledge** | Preserve decisions/constraints, not noise | `doc-ingest` 7-category schema, `wiki-builder` incremental merge |
+| **3. RAG** | Better retrieval beats larger retrieval | `firecrawl` search→scrape→map→crawl ladder, `firecrawl-cached` |
+| **4. Agents** | Context matches task | Each skill = one capability, loads on demand via thin router |
+| **5. Memory** | Remember decisions, discard temporary work | `log-it`/`sc-log-it` structured notes, `wiki-cleanup` audit |
+| **6. MCP/Tools** | Enable tools intentionally | 100+ skills, each with `allowed-tools` frontmatter gate |
+| **7. System vs Context** | Optimize surface, not size | Every skill returns stub (file path), never raw content |
 
 ---
 
-## Example 3: RAG Systems
+## Quick Reference: The Complete Tokenminning Stack
 
-### tokenmaxxing
-
-- Retrieve dozens of documents
-- Send all results to the model
-- Assume more context produces better answers
-
-### tokenminning
-
-- Retrieve candidate information
-- Rank for relevance
-- Provide only the highest-value information
-- Preserve diversity when needed
-
-**Principle:** Better retrieval beats larger retrieval.
-
----
-
-## Example 4: Agent Workflows
-
-### tokenmaxxing
-
-A planner, coder, reviewer, and tester all receive:
-
-- Entire repository regardless of task relevance
-- Full conversation history
-- All available tools regardless of task needs
-
-### tokenminning
-
-Each agent receives only what it needs:
-
-- Planner → requirements and constraints
-- Coder → relevant files and implementation details
-- Reviewer → code changes and acceptance criteria
-- Tester → expected behavior
-
-**Principle:** Context should match the task.
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        TOKENMINNING ARCHITECTURE                    │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────────────────┐  │
+│  │   INPUTS     │───▶│   SKILLS     │───▶│      OUTPUTS         │  │
+│  │              │    │              │    │                      │  │
+│  │ • Documents  │    │ doc-convert  │    │ • .md files (stubs)  │  │
+│  │ • VTT files  │    │ vtt-normalizer    │ • Structured notes   │  │
+│  │ • URLs       │    │ doc-ingest   │    │ • Wiki updates       │  │
+│  │ • Topics     │    │ firecrawl*   │    │ • Charts/Diagrams    │  │
+│  │ • Questions  │    │ scrapling    │    │ • Battlecards        │  │
+│  │              │    │ playwright   │    │ • Reports (MR)       │  │
+│  │              │    │ gsd:*        │    │ • PRDs/Roadmaps      │  │
+│  │              │    │ 100+ skills  │    │ • Comms (LI/Med/Slack)│ │
+│  └──────────────┘    └──────────────┘    └──────────────────────┘  │
+│         │                   │                      │                │
+│         ▼                   ▼                      ▼                │
+│  ┌──────────────────────────────────────────────────────────────┐  │
+│  │                    ENFORCED DISCIPLINE                        │  │
+│  │  • Token rules in every SKILL.md ("do not break")            │  │
+│  │  • Stub Pattern: output = file path, never content           │  │
+│  │  • Thin Router: trigger phrase → skill (no prompt eng)       │  │
+│  │  • Composability: skills call skills explicitly              │  │
+│  │  • Versioning: plugin semver + git                           │  │
+│  │  • Fallback ladders: encoded in skills, not memory           │  │
+│  └──────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Example 5: Memory Systems
+## Measured Aggregate Impact
 
-### tokenmaxxing
-
-Remember everything:
-
-- Full conversations
-- Temporary experiments
-- Debugging history
-- Intermediate thoughts
-
-### tokenminning
-
-Remember:
-
-- Decisions
-- Preferences
-- Constraints
-- Important outcomes
-
-Discard:
-
-- Temporary work
-- Repeated information
-- Resolved problems
-
-**Principle:** Memory should preserve signal, not accumulate history.
+| Workflow | Before (Prompt-Based) | After (Skill System) | Improvement |
+|----------|----------------------|---------------------|-------------|
+| **50-page PDF → Wiki** | ~80K tokens, manual | ~500 tokens, automated | **99.4% ↓** |
+| **2-hr VTT → Decisions** | ~45K tokens, error-prone | ~300 tokens, schema-enforced | **99.3% ↓** |
+| **Competitor research (10 sites)** | ~500K tokens, ad-hoc | ~5K tokens, ladder + cache | **99% ↓** |
+| **Market research report** | $50+, 11 agents, manual | $15-25, 2-3 agents, pipeline | **~70% cost ↓** |
+| **Context debt (stale clones)** | 66% of files | 0% (fingerprint dedup) | **Eliminated** |
 
 ---
 
-## Example 6: MCP and Tool Usage
+## Getting Started
 
-### tokenmaxxing
+```bash
+# View all installed skills
+ls ~/.claude/skills/
 
-- Install every available integration
-- Keep every tool enabled
-- Provide maximum capability by default
+# See skill descriptions (routing triggers)
+cat ~/.claude/skills/doc-convert/SKILL.md | head -20
 
-### tokenminning
+# Run a skill directly
+doc-convert "convert this.pdf to markdown"
 
-- Enable tools intentionally
-- Load capabilities when needed
-- Remove unused integrations
-
-**Principle:** Every capability introduces cognitive and contextual tradeoffs.
-
-The goal is not fewer tools.
-
-The goal is making the right capabilities available for the task.
+# The system auto-routes: "convert this vtt" → vtt-normalizer
+#                         "ingest these documents" → doc-ingest
+#                         "search for X" → firecrawl-search
+```
 
 ---
 
-## Example 7: System Complexity vs Context Complexity
+## Repository Structure
 
-### tokenmaxxing mistake
+```
+tokenminning/
+├── examples/
+│   ├── index.md                           ← This file
+│   ├── claude-code.md                     ← Original: context management
+│   ├── context-debt.md                    ← Original: context debt reduction
+│   ├── mcp.md                             ← Original: MCP tool discipline
+│   ├── memory.md                          ← Original: memory as signal
+│   ├── rag.md                             ← Original: better retrieval
+│   ├── rtk-llmlingua-evaluation.md        ← Original: compression eval
+│   ├── second-brain-config-audit.md       ← Original: config audit
+│   ├── second-brain-system.md             ← Original: second brain optimization
+│   ├── vault-lint-case-study.md           ← Original: vault linting
+│   ├── wiki-pipeline.md                   ← Original: wiki pipeline optimization
+│   ├── document-processing.md             ← NEW: Local document pipeline
+│   ├── web-scraping-escalation.md         ← NEW: 7-level web ladder
+│   └── skill-tooling-pattern.md           ← NEW: Skill system as DSNP
+└── ...
+```
 
-Assume:
+---
 
-Then remove useful capabilities simply to reduce complexity.
+## Contributing
 
-### tokenminning
+These tooling examples are **living documentation** — they describe the actual production stack. When the stack evolves:
 
-Recognize that a sophisticated system can still be tokenminning if:
+1. Update the relevant example file
+2. Keep measured impact numbers current
+3. Add new anti-patterns replaced
+4. Cross-link to related examples
 
-- Information is retrieved selectively
-- Tools are scoped appropriately
-- Documentation is modular
-- The model receives only relevant context
-
-The question is not:
-
-> "How large is the system?"
-
-The question is:
-
-> "What information reaches the model for this task?"
-
-**Principle:** Optimize the context surface, not the size of the system.
-
-Tokenminning is not about making AI systems smaller.
-
-It is about making them smarter about what they expose to the model.
+The goal: every tokenminning principle has a **working, measured implementation** in this repo.
