@@ -95,6 +95,10 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
 | **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) |
+| **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) |
+| **Schema-Enforced Extraction** | Rigid output schema (7 categories) forces structured data; no prose summaries | [Doc Pipeline](examples/document-processing.md) |
+| **Failure-Mode Driven Escalation** | Each ladder level has documented failure mode → next level; no guessing | [Web Ladder](examples/web-scraping-escalation.md) |
+| **Contract-Driven Tool Discipline** | Versioned SKILL.md contracts enforce token rules, routing, composition by design | [Skill System](examples/skill-tooling-pattern.md) |
 
 ---
 
@@ -114,7 +118,24 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 
 ---
 
-## Case Studies {#case-studies}
+## Tooling Measured Results
+
+*Production skill stack metrics (from Case Studies 6–8):*
+
+| Workflow | Before (Prompt-Based) | After (Skill System) | Improvement |
+|:---|:---:|:---:|:---:|
+| **50-page PDF → Wiki** | ~80K tokens, manual | ~500 tokens, automated | **99.4% ↓** |
+| **2-hr VTT → Decisions** | ~45K tokens, error-prone | ~300 tokens, schema-enforced | **99.3% ↓** |
+| **Competitor research (10 sites)** | ~500K tokens, ad-hoc | ~5K tokens, ladder + cache | **99% ↓** |
+| **Market research report** | $50+, 11 agents, manual | $15-25, 2-3 agents, pipeline | **~70% cost ↓** |
+| **Context debt (stale clones)** | 66% of files | 0% (fingerprint dedup) | **Eliminated** |
+| **Prompt drift / repeated instructions** | High (re-prompt every task) | Zero (contract loaded once) | **Eliminated** |
+| **Tool usage consistency** | Variable (human-dependent) | 100% (enforced by skill) | **Guaranteed** |
+| **New capability onboarding** | Hours (re-teach via prompt) | Minutes (install → auto-routes) | **100x faster** |
+
+---
+
+## Case Studies
 
 <details>
 <summary><strong>Case Study 1: Second Brain — 211K → 28K words (87% reduction)</strong></summary>
@@ -166,6 +187,36 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 [Read full case study →](examples/vault-lint-case-study.md)
 </details>
 
+<details>
+<summary><strong>Case Study 6: Document Processing Pipeline — 99.3%+ token reduction via local subprocesses</strong></summary>
+
+**Problem:** Reading raw binary (PDF, DOCX, VTT) into LLM context wastes 10K–100K+ tokens/file on formatting syntax
+**Fix:** 3-skill local pipeline (doc-convert → vtt-normalizer → doc-ingest) — all conversion in subprocesses, zero tokens spent on content
+**Result:** 99.4% ↓ tokens (50-page PDF), 99.3% ↓ (2-hr VTT), Haiku-only extraction cost ~$0.10/batch
+
+[Read full case study →](examples/document-processing.md)
+</details>
+
+<details>
+<summary><strong>Case Study 7: Web Scraping Escalation Ladder — 7-level fallback from API credits to free local tools</strong></summary>
+
+**Problem:** No single web tool handles all cases (static, JS, Cloudflare, auth, bulk crawl) — defaulting to one burns credits/time
+**Fix:** 7-level ladder encoded in firecrawl skill: search→scrape→cached→scrapling-fast→scrapling-stealth→webclaw→playwright, each with documented failure mode
+**Result:** 100% credit savings on repeat fetches, ~95% fewer monitor fetches, unblocked when credits exhausted, 10x faster on Cloudflare pages
+
+[Read full case study →](examples/web-scraping-escalation.md)
+</details>
+
+<details>
+<summary><strong>Case Study 8: Skill Tooling Pattern — 100+ versioned skills as "Design systems not prompts"</strong></summary>
+
+**Problem:** Prompt engineering doesn't scale — drifts, unversioned, untestable, every task a blank slate
+**Fix:** Skill system where every capability is a versioned SKILL.md contract: composable, routes by trigger phrase, enforces token rules by design
+**Result:** Eliminated prompt drift, 100% tool consistency, minutes-to-onboard new capabilities, systematic token discipline via contract
+
+[Read full case study →](examples/skill-tooling-pattern.md)
+</details>
+
 ---
 
 ## Technique Guides
@@ -178,7 +229,10 @@ Practical applications of tokenminning to specific systems:
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
 | [Memory Systems](examples/memory.md) | Preserve decisions/constraints, not transcripts |
 | [RAG Pipelines](examples/rag.md) | Rank → filter → focus; quality over quantity |
-| [All Examples Index](examples/index.md) | Quick reference for all 7 patterns |
+| [Local Document Pipeline](examples/document-processing.md) | Zero-token binary→markdown→structured extraction |
+| [Web Scraping Escalation](examples/web-scraping-escalation.md) | 7-level ladder: credits → cache → free local → browser |
+| [Skill System as DSNP](examples/skill-tooling-pattern.md) | 100+ versioned contracts, thin router, composable |
+| [All Examples Index](examples/index.md) | Quick reference for all 13 patterns |
 
 > These are *technique guides* — not measured case studies. Case studies in `examples/` (`second-brain-system.md`, etc.) show before/after metrics.
 
