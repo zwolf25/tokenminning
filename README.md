@@ -276,6 +276,7 @@ Tokenminning operates on a simple **escalation ladder** — the model only sees 
 | **[Firecrawl](https://github.com/mendableai/firecrawl)** | Web search/scrape API — search, scrape, crawl, monitor, interact | **Levels 1–3** of the escalation ladder (credits, cache, scheduled monitors) |
 | **[Scrapling](https://github.com/Scrapling/Scrapling)** | Free local HTTP + stealth browser (Cloudflare bypass) | **Levels 4–5** of the ladder (credits exhausted, anti-bot pages) |
 | **[markitdown](https://github.com/microsoft/markitdown)** | Universal document converter (PDF, DOCX, XLSX, PPTX, HTML, images) | `doc-convert` **fallback engine** for scanned/image-heavy formats |
+| **[Headroom](https://github.com/headroomlabs-ai/headroom)** | Open-source context compression layer for AI agents (60-95% fewer tokens for JSON, 15-20% coding agents) | Complementary — compresses context that reaches the model; tokenminning selects/retrieves better context |
 
 ---
 
