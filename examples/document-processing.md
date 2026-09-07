@@ -105,6 +105,20 @@ node "<SECOND_BRAIN_ROOT>/doc-style/convert.js" \
 
 **Supported formats:** DOCX, XLSX, PPTX, RTF, ODT, ODS, ODP, EPUB, CSV, text-based PDF → Markdown. Markdown → DOCX with preset styles.
 
+### Try It Yourself
+
+`doc-convert` is open-sourced in this repo, stripped of the internal path/brand specifics above — run it standalone:
+
+```bash
+# Any document → Markdown
+uv run --with firecrawl-anydoc --no-project tools/doc-convert/anydoc_to_md.py <source> <output>.md
+
+# Markdown → styled DOCX
+node tools/doc-convert/convert.js <source>.md <output>.docx [--style report]
+```
+
+See [tools/doc-convert](../tools/doc-convert) for install steps and the style-preset format.
+
 ### `vtt-normalizer` — Deterministic Transcript Cleaning
 
 ```bash

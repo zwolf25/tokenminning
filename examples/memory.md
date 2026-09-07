@@ -91,3 +91,10 @@ The goal is maximum future usefulness.
 Good memory is not remembering everything.
 
 Good memory is preserving what changes future decisions.
+
+---
+
+## Runnable Implementation
+
+See [tools/memory-template](../tools/memory-template) for a copy-pasteable memory
+index + frontmatter schema implementing this pattern.
