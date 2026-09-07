@@ -28,6 +28,8 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
+> 🆕 **What's New:** [v0.1.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.1.0) — the first runnable tools: [doc-convert](tools/doc-convert) and [memory-template](tools/memory-template).
+
 ---
 
 ## Why Tokenminning?
@@ -95,7 +97,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
 | **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) |
-| **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) |
+| **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) · [Try it](tools/doc-convert) |
 | **Schema-Enforced Extraction** | Rigid output schema (7 categories) forces structured data; no prose summaries | [Doc Pipeline](examples/document-processing.md) |
 | **Failure-Mode Driven Escalation** | Each ladder level has documented failure mode → next level; no guessing | [Web Ladder](examples/web-scraping-escalation.md) |
 | **Contract-Driven Tool Discipline** | Versioned SKILL.md contracts enforce token rules, routing, composition by design | [Skill System](examples/skill-tooling-pattern.md) |
@@ -227,7 +229,7 @@ Practical applications of tokenminning to specific systems:
 |-------|-------|
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
-| [Memory Systems](examples/memory.md) | Preserve decisions/constraints, not transcripts |
+| [Memory Systems](examples/memory.md) · [Try it](tools/memory-template) | Preserve decisions/constraints, not transcripts |
 | [RAG Pipelines](examples/rag.md) | Rank → filter → focus; quality over quantity |
 | [Local Document Pipeline](examples/document-processing.md) | Zero-token binary→markdown→structured extraction |
 | [Web Scraping Escalation](examples/web-scraping-escalation.md) | 7-level ladder: credits → cache → free local → browser |

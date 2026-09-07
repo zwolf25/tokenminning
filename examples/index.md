@@ -14,6 +14,17 @@
 
 ---
 
+## Runnable Artifacts (Open Source)
+
+Two of the tools referenced above are extracted and open-sourced in this repo — no company-specific setup required:
+
+| Tool | What it does | Case Study | Path |
+|------|---------------|-----------|------|
+| **doc-convert** | Zero-token document conversion: any doc → Markdown, Markdown → styled DOCX | [Document Processing Pipeline](document-processing.md) | [tools/doc-convert](../tools/doc-convert) |
+| **memory-template** | Copy-pasteable agent memory pattern: typed frontmatter + a self-shrinking index | [Memory Systems](memory.md) | [tools/memory-template](../tools/memory-template) |
+
+---
+
 ## How These Connect to Original Philosophy Examples
 
 | Original Example | Philosophy | Tooling Implementation (New) |
@@ -114,6 +125,9 @@ tokenminning/
 │   ├── document-processing.md             ← NEW: Local document pipeline
 │   ├── web-scraping-escalation.md         ← NEW: 7-level web ladder
 │   └── skill-tooling-pattern.md           ← NEW: Skill system as DSNP
+├── tools/
+│   ├── doc-convert/                       ← Runnable: zero-token doc conversion
+│   └── memory-template/                   ← Runnable: agent memory pattern
 └── ...
 ```
 

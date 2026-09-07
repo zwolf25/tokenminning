@@ -1,0 +1,35 @@
+{
+  "_note": "Default style preset — mirrors docx-style-guide.md. Sizes are docx half-points (e.g. 30 = 15pt). Keep in sync with docx-style-guide.md when either changes.",
+  "font": "Arial",
+  "colors": {
+    "dark": "1F2A44",
+    "accent": "2E5A88",
+    "grey": "E7ECF3",
+    "muted": "5A6472",
+    "borderOuter": "B0B8C4",
+    "borderInner": "D5DCE5",
+    "headerText": "FFFFFF"
+  },
+  "size": { "h1": 30, "h2": 24, "h3": 21, "h4": 19, "h5": 18, "h6": 18, "body": 20, "bullet": 20, "table": 18, "muted": 18 },
+  "page": { "width": 12240, "height": 15840, "margin": 1080 },
+  "table": { "width": 9360 },
+  "spacing": {
+    "_note": "line is in 240ths (240 = single, 276 = 1.15, 360 = 1.5). before/after are DXA.",
+    "line": 276,
+    "bodyBefore": 0,
+    "bodyAfter": 120,
+    "bulletBefore": 0,
+    "bulletAfter": 60,
+    "heading1Before": 240,
+    "heading1After": 120,
+    "heading2Before": 220,
+    "heading2After": 100,
+    "heading3Before": 160,
+    "heading3After": 80,
+    "heading4Before": 140, "heading4After": 60,
+    "heading5Before": 120, "heading5After": 40,
+    "heading6Before": 100, "heading6After": 20,
+    "tableBefore": 0,
+    "tableAfter": 120
+  }
+}
