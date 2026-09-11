@@ -219,6 +219,16 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 [Read full case study →](examples/skill-tooling-pattern.md)
 </details>
 
+<details>
+<summary><strong>Case Study 9: Honey/eso CCR Evaluation — 92% array compression, two reversals</strong></summary>
+
+**Problem:** Does an external 4-piece token-saving skill add anything beyond the existing RTK + caveman + ponytail setup?
+**Fix:** Evaluated all 4 pieces → kept only CCR (uniform JSON-array compression, vendored standalone as `eso`); rejected `honey-usage` (redundant/less accurate than `ccusage`); dropped a planned Windows addendum after finding RTK itself already ships a native Windows build
+**Discovery:** Live-reproduced a still-open Claude Code hook bug ([#68951](https://github.com/anthropics/claude-code/issues/68951)) on the current build, confirming CCR's optional auto-hook is inert — resolved with a default-behavior instruction instead
+
+[Read full case study →](examples/honey-eso-ccr-evaluation.md)
+</details>
+
 ---
 
 ## Technique Guides
@@ -279,6 +289,7 @@ Tokenminning operates on a simple **escalation ladder** — the model only sees 
 | **[Scrapling](https://github.com/Scrapling/Scrapling)** | Free local HTTP + stealth browser (Cloudflare bypass) | **Levels 4–5** of the ladder (credits exhausted, anti-bot pages) |
 | **[markitdown](https://github.com/microsoft/markitdown)** | Universal document converter (PDF, DOCX, XLSX, PPTX, HTML, images) | `doc-convert` **fallback engine** for scanned/image-heavy formats |
 | **[Headroom](https://github.com/headroomlabs-ai/headroom)** | Open-source context compression layer for AI agents (60-95% fewer tokens for JSON, 15-20% coding agents) | Complementary — compresses context that reaches the model; tokenminning selects/retrieves better context |
+| **[Honey (honey-for-devs)](https://github.com/green-pt/honey-for-devs)** | Cross-tool coding skill merging YAGNI/terse-prose modes with 3 novel pieces (ESON, CCR, honey-usage) | Sibling — CCR's array-compression idea was evaluated and partially adopted; RTK/caveman/ponytail already covered the rest ([case study](examples/honey-eso-ccr-evaluation.md)) |
 
 ---
 
