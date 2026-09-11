@@ -118,6 +118,7 @@ tokenminning/
 │   ├── memory.md                          ← Original: memory as signal
 │   ├── rag.md                             ← Original: better retrieval
 │   ├── rtk-llmlingua-evaluation.md        ← Original: compression eval
+│   ├── honey-eso-ccr-evaluation.md        ← Original: array-compression eval
 │   ├── second-brain-config-audit.md       ← Original: config audit
 │   ├── second-brain-system.md             ← Original: second brain optimization
 │   ├── vault-lint-case-study.md           ← Original: vault linting
