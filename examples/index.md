@@ -22,6 +22,7 @@ Two of the tools referenced above are extracted and open-sourced in this repo �
 |------|---------------|-----------|------|
 | **doc-convert** | Zero-token document conversion: any doc → Markdown, Markdown → styled DOCX | [Document Processing Pipeline](document-processing.md) | [tools/doc-convert](../tools/doc-convert) |
 | **memory-template** | Copy-pasteable agent memory pattern: typed frontmatter + a self-shrinking index | [Memory Systems](memory.md) | [tools/memory-template](../tools/memory-template) |
+| **visual-diff** | Pixel-diff pre-filter for screenshots: skip vision entirely when unchanged, crop to just the changed region otherwise | [Pixel-Diff Screenshot Validation](visual-validation-pipeline.md) | [tools/visual-diff](../tools/visual-diff) |
 
 ---
 
@@ -125,10 +126,12 @@ tokenminning/
 │   ├── wiki-pipeline.md                   ← Original: wiki pipeline optimization
 │   ├── document-processing.md             ← NEW: Local document pipeline
 │   ├── web-scraping-escalation.md         ← NEW: 7-level web ladder
-│   └── skill-tooling-pattern.md           ← NEW: Skill system as DSNP
+│   ├── skill-tooling-pattern.md           ← NEW: Skill system as DSNP
+│   └── visual-validation-pipeline.md      ← NEW: Pixel-diff screenshot validation
 ├── tools/
 │   ├── doc-convert/                       ← Runnable: zero-token doc conversion
-│   └── memory-template/                   ← Runnable: agent memory pattern
+│   ├── memory-template/                   ← Runnable: agent memory pattern
+│   └── visual-diff/                       ← Runnable: pixel-diff pre-filter
 └── ...
 ```
 

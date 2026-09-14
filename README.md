@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.1.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.1.0) — the first runnable tools: [doc-convert](tools/doc-convert) and [memory-template](tools/memory-template).
+> 🆕 **What's New:** [v0.2.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.0) — added [visual-diff](tools/visual-diff), a pixel-diff pre-filter that skips vision entirely on unchanged screenshots and crops to just the changed region otherwise.
 
 ---
 
@@ -96,7 +96,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](examples/wiki-pipeline.md) |
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
-| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) |
+| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) · [Visual Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) |
 | **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) · [Try it](tools/doc-convert) |
 | **Schema-Enforced Extraction** | Rigid output schema (7 categories) forces structured data; no prose summaries | [Doc Pipeline](examples/document-processing.md) |
 | **Failure-Mode Driven Escalation** | Each ladder level has documented failure mode → next level; no guessing | [Web Ladder](examples/web-scraping-escalation.md) |
@@ -229,6 +229,17 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 [Read full case study →](examples/honey-eso-ccr-evaluation.md)
 </details>
 
+<details>
+<summary><strong>Case Study 10: Pixel-Diff Screenshot Validation — ~97% estimated token reduction, pre-build (not yet measured)</strong></summary>
+
+**Problem:** Validating an AI-made edit to a slide/deck/mockup usually means viewing a full-resolution screenshot every time, even when nothing changed
+**Fix:** Deterministic pixel diff (`pixelmatch`/`pngjs`, pure JS) against a cached baseline before the model ever views the image — skip entirely if unchanged, crop to just the changed region if not
+**Result (pre-build estimate, not yet measured):** 10-slide deck / 2 edited slides scenario: 49,150 → ~1,300 tokens, ~97% ↓ — see the case study for the `gain.jsonl` ledger this will be replaced with once real usage accumulates
+**Verified separately from the token estimate:** self-test, a real PPTX-rendered end-to-end run (exact bbox match, 0% diff on an independent re-render), and an unbiased fresh-session test — 3/3 natural-language requests self-triggered correctly with no skill named
+
+[Read full case study →](examples/visual-validation-pipeline.md)
+</details>
+
 ---
 
 ## Technique Guides
@@ -244,7 +255,7 @@ Practical applications of tokenminning to specific systems:
 | [Local Document Pipeline](examples/document-processing.md) | Zero-token binary→markdown→structured extraction |
 | [Web Scraping Escalation](examples/web-scraping-escalation.md) | 7-level ladder: credits → cache → free local → browser |
 | [Skill System as DSNP](examples/skill-tooling-pattern.md) | 100+ versioned contracts, thin router, composable |
-| [All Examples Index](examples/index.md) | Quick reference for all 13 patterns |
+| [All Examples Index](examples/index.md) | Quick reference for all 14 patterns |
 
 > These are *technique guides* — not measured case studies. Case studies in `examples/` (`second-brain-system.md`, etc.) show before/after metrics.
 
