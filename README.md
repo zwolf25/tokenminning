@@ -229,6 +229,16 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 [Read full case study →](examples/honey-eso-ccr-evaluation.md)
 </details>
 
+<details>
+<summary><strong>Case Study 10: Pixel-Diff Screenshot Validation — ~97% estimated token reduction, pre-build (not yet measured)</strong></summary>
+
+**Problem:** Validating an AI-made edit to a slide/deck/mockup usually means viewing a full-resolution screenshot every time, even when nothing changed
+**Fix:** Deterministic pixel diff (`pixelmatch`/`pngjs`, pure JS) against a cached baseline before the model ever views the image — skip entirely if unchanged, crop to just the changed region if not
+**Result (pre-build estimate, not yet measured):** 10-slide deck / 2 edited slides scenario: 49,150 → ~1,300 tokens, ~97% ↓ — see the case study for the `gain.jsonl` ledger this will be replaced with once real usage accumulates
+
+[Read full case study →](examples/visual-validation-pipeline.md)
+</details>
+
 ---
 
 ## Technique Guides
@@ -244,7 +254,6 @@ Practical applications of tokenminning to specific systems:
 | [Local Document Pipeline](examples/document-processing.md) | Zero-token binary→markdown→structured extraction |
 | [Web Scraping Escalation](examples/web-scraping-escalation.md) | 7-level ladder: credits → cache → free local → browser |
 | [Skill System as DSNP](examples/skill-tooling-pattern.md) | 100+ versioned contracts, thin router, composable |
-| [Pixel-Diff Screenshot Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) | Skip vision entirely on unchanged screenshots; crop to just the changed region otherwise |
 | [All Examples Index](examples/index.md) | Quick reference for all 14 patterns |
 
 > These are *technique guides* — not measured case studies. Case studies in `examples/` (`second-brain-system.md`, etc.) show before/after metrics.

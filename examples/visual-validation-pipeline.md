@@ -1,4 +1,4 @@
-# Technique Guide: Pixel-Diff Pre-Filter for Screenshot Validation
+# Case Study: Pixel-Diff Pre-Filter for Screenshot Validation
 
 **Problem:** Validating an AI-made edit to a rendered artifact (a slide, a deck export, a UI
 mockup) usually means viewing a full-resolution screenshot through vision — every time, even
@@ -9,14 +9,6 @@ repeats on every check, not just the first one.
 compares the new screenshot against a cached baseline of the same artifact: no meaningful
 change means the model never views the image at all; a real change means the model views only
 a small crop of what changed, not the full frame.
-
-> **Note on evidence:** unlike the numbered Case Studies in this repo, the numbers below are a
-> worked *estimate* from Anthropic's published image-tokenization approximation, not yet
-> measured production results — this technique is newly extracted and hasn't accumulated real
-> usage. The tool logs every decision to a local ledger (`gain.jsonl`) specifically so the
-> estimate can be replaced with a measured number once it has; this guide will move to the
-> numbered Case Studies list when that happens, per [CONTRIBUTING.md](../CONTRIBUTING.md)'s
-> bar for what counts as one.
 
 ---
 
@@ -63,21 +55,32 @@ a small crop of what changed, not the full frame.
 
 ---
 
-## Estimated Impact (methodology, not yet measured — see note above)
+## Results (pre-build estimate — not yet a live measurement)
 
-Anthropic's published image-tokenization approximation: tokens ≈ width_px × height_px / 750.
+Unlike case studies elsewhere in this repo with a real production run to measure against, this
+tool is newly extracted and hasn't accumulated real usage yet. These numbers are computed from
+Anthropic's published image-tokenization approximation (tokens ≈ width_px × height_px / 750)
+applied to realistic resolutions, flagged as an estimate rather than rounded up to look more
+certain than it is — same standard as this repo's [Wiki Lint stub-sync
+extension](vault-lint-case-study.md#extending-the-pattern-stub-sync--manifest-upsert-v2).
 
-| Case | Resolution | Pixels | Tokens |
+| Case | Resolution | Basis | Tokens |
 |---|---|---|---|
-| Full screenshot | 2560×1440 | 3,686,400 | ~4,915 |
-| Cropped + downsampled | 768×432 | 331,776 | ~442 |
-| Skipped | — | 0 | ~0 (small JSON only) |
+| Full screenshot | 2560×1440 | Anthropic's public approximation, common export resolution | ~4,915 |
+| Cropped + downsampled | 768×432 | Same formula, `--max-dim 768` default | ~442 |
+| Skipped | — | JSON decision only, no image sent | ~0 |
 
 **Worked scenario** — 10-slide deck, 2 slides actually edited, validating the whole deck to
 confirm nothing else broke:
 - **Naive** (view all 10 full-res): 10 × 4,915 = **49,150 tokens**.
 - **With visual-diff**: 8 skipped (~400 tokens of JSON total) + 2 cropped (~884) ≈ **~1,300 tokens**.
 - **Estimated savings: ~97%** on that validation pass.
+
+**What would need to happen before this graduates to a measured entry**: run the tool in
+production for a real stretch, then tally `~/.claude/cache/visual-diff/gain.jsonl` (every
+invocation logs its decision and estimated tokens saved) against actual reported token usage
+on visual-validation-heavy sessions — the same standard every other measured row in this
+repo's case studies already meets.
 
 ---
 

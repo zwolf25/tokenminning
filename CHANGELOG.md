@@ -4,8 +4,8 @@ One entry per release, newest first. Not a log of every commit — see git histo
 
 ## v0.2.0 — 2026-09-14
 
-- Added [`tools/visual-diff`](tools/visual-diff) — pixel-diff pre-filter for screenshot/slide/UI-mockup validation (pure JS via `pixelmatch`/`pngjs`, no native dependencies): skips vision entirely when a screenshot hasn't meaningfully changed against its cached baseline, crops to just the changed region otherwise. Extracted from the new [Pixel-Diff Screenshot Validation](examples/visual-validation-pipeline.md) technique guide.
-- Cross-linked from README.md (Techniques table, Technique Guides table) and examples/index.md.
+- Added [`tools/visual-diff`](tools/visual-diff) — pixel-diff pre-filter for screenshot/slide/UI-mockup validation (pure JS via `pixelmatch`/`pngjs`, no native dependencies): skips vision entirely when a screenshot hasn't meaningfully changed against its cached baseline, crops to just the changed region otherwise. Extracted from the new [Pixel-Diff Screenshot Validation](examples/visual-validation-pipeline.md) case study (pre-build estimate, not yet a live measurement — same convention as the Wiki Lint case study's stub-sync extension).
+- Cross-linked from README.md (Techniques table, Case Studies) and examples/index.md.
 
 ## v0.1.0 — 2026-09-07
 
