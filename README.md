@@ -235,6 +235,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 **Problem:** Validating an AI-made edit to a slide/deck/mockup usually means viewing a full-resolution screenshot every time, even when nothing changed
 **Fix:** Deterministic pixel diff (`pixelmatch`/`pngjs`, pure JS) against a cached baseline before the model ever views the image — skip entirely if unchanged, crop to just the changed region if not
 **Result (pre-build estimate, not yet measured):** 10-slide deck / 2 edited slides scenario: 49,150 → ~1,300 tokens, ~97% ↓ — see the case study for the `gain.jsonl` ledger this will be replaced with once real usage accumulates
+**Verified separately from the token estimate:** self-test, a real PPTX-rendered end-to-end run (exact bbox match, 0% diff on an independent re-render), and an unbiased fresh-session test — 3/3 natural-language requests self-triggered correctly with no skill named
 
 [Read full case study →](examples/visual-validation-pipeline.md)
 </details>

@@ -84,6 +84,30 @@ repo's case studies already meets.
 
 ---
 
+## Validation (correctness, not yet token measurement)
+
+Separate from the token-savings estimate above — this is evidence the mechanism actually
+works, checked before publishing rather than assumed:
+
+- **Self-test** (`node visual-diff.js --self-test`): synthetic identical + changed-block PNGs
+  produce the correct `skip`/`crop` decision and an exact bounding box.
+- **Real rendered content, not synthetic test squares**: ran the full `full` → `skip` → `crop`
+  cycle against an actual PowerPoint export (PPTX → PDF → PNG). The crop's bounding box matched
+  the real edited region exactly, pixel for pixel. Also independently re-rendered the same
+  source file a second time (not a file copy — a fresh export) and diffed it against the first
+  render: **0% difference**, confirming the rendering pipeline itself doesn't introduce enough
+  noise (font hinting, antialiasing jitter) to false-positive against the default 0.5%
+  threshold — a real calibration risk for any pixel-diff tool, checked rather than assumed.
+- **Fresh-session auto-invocation, unbiased**: had an agent with no memory of this tool's
+  design run three natural-language requests ("does this look right?", "I re-exported, nothing
+  changed", "I added a callout box") against real screenshots, never naming the skill. All
+  three self-triggered correctly: `full` on first sight (and derived a sensible artifact key
+  from file + slide number on its own, unprompted), `skip` on the unchanged re-export
+  (confirmed it did not re-view the image, per the token rule), `crop` on the real edit
+  (described only the changed region, not the full frame).
+
+---
+
 ## Try It Yourself
 
 ```bash
