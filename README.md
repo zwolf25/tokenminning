@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.1.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.1.0) — the first runnable tools: [doc-convert](tools/doc-convert) and [memory-template](tools/memory-template).
+> 🆕 **What's New:** [v0.2.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.0) — added [visual-diff](tools/visual-diff), a pixel-diff pre-filter that skips vision entirely on unchanged screenshots and crops to just the changed region otherwise.
 
 ---
 
@@ -96,7 +96,7 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](examples/wiki-pipeline.md) |
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
-| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) |
+| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) · [Visual Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) |
 | **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) · [Try it](tools/doc-convert) |
 | **Schema-Enforced Extraction** | Rigid output schema (7 categories) forces structured data; no prose summaries | [Doc Pipeline](examples/document-processing.md) |
 | **Failure-Mode Driven Escalation** | Each ladder level has documented failure mode → next level; no guessing | [Web Ladder](examples/web-scraping-escalation.md) |
@@ -244,7 +244,8 @@ Practical applications of tokenminning to specific systems:
 | [Local Document Pipeline](examples/document-processing.md) | Zero-token binary→markdown→structured extraction |
 | [Web Scraping Escalation](examples/web-scraping-escalation.md) | 7-level ladder: credits → cache → free local → browser |
 | [Skill System as DSNP](examples/skill-tooling-pattern.md) | 100+ versioned contracts, thin router, composable |
-| [All Examples Index](examples/index.md) | Quick reference for all 13 patterns |
+| [Pixel-Diff Screenshot Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) | Skip vision entirely on unchanged screenshots; crop to just the changed region otherwise |
+| [All Examples Index](examples/index.md) | Quick reference for all 14 patterns |
 
 > These are *technique guides* — not measured case studies. Case studies in `examples/` (`second-brain-system.md`, etc.) show before/after metrics.
 
