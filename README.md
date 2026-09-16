@@ -301,6 +301,7 @@ Tokenminning operates on a simple **escalation ladder** — the model only sees 
 | **[markitdown](https://github.com/microsoft/markitdown)** | Universal document converter (PDF, DOCX, XLSX, PPTX, HTML, images) | `doc-convert` **fallback engine** for scanned/image-heavy formats |
 | **[Headroom](https://github.com/headroomlabs-ai/headroom)** | Open-source context compression layer for AI agents (60-95% fewer tokens for JSON, 15-20% coding agents) | Complementary — compresses context that reaches the model; tokenminning selects/retrieves better context |
 | **[Honey (honey-for-devs)](https://github.com/green-pt/honey-for-devs)** | Cross-tool coding skill merging YAGNI/terse-prose modes with 3 novel pieces (ESON, CCR, honey-usage) | Sibling — CCR's array-compression idea was evaluated and partially adopted; RTK/caveman/ponytail already covered the rest ([case study](examples/honey-eso-ccr-evaluation.md)) |
+| **[base (basemode)](https://github.com/ChristopherKahler/base)** | Rust CLI — tree-sitter code graph + Claude Code hooks injecting context at session-start/prompt/tool-use | Different mechanism — graph-derived injection via hooks instead of stub pointers; no published token deltas, unverified against tokenminning's own measured-savings bar |
 
 ---
 
