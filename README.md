@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.2.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.0) — added [visual-diff](tools/visual-diff), a pixel-diff pre-filter that skips vision entirely on unchanged screenshots and crops to just the changed region otherwise.
+> 🆕 **What's New:** [v0.2.0](CHANGELOG.md#v020--2026-09-14) — added [visual-diff](tools/visual-diff), a pixel-diff pre-filter that skips vision entirely on unchanged screenshots and crops to just the changed region otherwise.
 
 ---
 
