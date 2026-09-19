@@ -240,6 +240,16 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 [Read full case study →](examples/visual-validation-pipeline.md)
 </details>
 
+<details>
+<summary><strong>Case Study 11: Derived-Document Staleness — hash + materiality + guard</strong></summary>
+
+**Problem:** Derived documents refreshed on a date check; mechanical edits flagged everything, and refreshing from a thin source overwrote richer output. About 86K tokens per refresh  
+**Fix:** Content-hash sidecar, 5% size materiality, a thin-source guard with `.prev` backup, an output lint at session start, a peer-median thin check, weekly nudge with a token estimate  
+**Result (measured):** 6 false flags silenced (about 516K tokens), 2 lossy refreshes blocked (about 172K), 0 tokens when clean. No saving on the first run; padding is not detectable
+
+[Read full case study →](examples/derived-doc-staleness.md)
+</details>
+
 ---
 
 ## Technique Guides

@@ -11,6 +11,7 @@
 | **[Document Processing Pipeline](document-processing.md)** | Compress don't repeat, Retrieve don't preload, Structure don't narrate, Design systems not prompts, Eliminate context debt | **99.3–99.6%** vs LLM-based extraction | `doc-convert`, `vtt-normalizer`, `doc-ingest` (local subprocesses + Haiku extraction) |
 | **[Web Scraping Escalation Ladder](web-scraping-escalation.md)** | Retrieve don't preload, Optimize context not complexity, Escalation ladder, Stub Pattern, Eliminate context debt | **90–100%** credit savings via cache + free local fallbacks | `firecrawl` (40+ sub-skills), `scrapling` (fast + stealth), `webclaw`, `playwright` |
 | **[Skill Tooling Pattern](skill-tooling-pattern.md)** | Design systems not prompts, Structure don't narrate, Thin Routers, Stub Pattern, Compress don't repeat | **Systematic** — eliminates prompt drift, enforces token discipline by contract | 100+ versioned skills across 14 categories, plugin-managed |
+| **[Derived-Doc Staleness](derived-doc-staleness.md)** | Eliminate context debt continuously, Design systems not prompts, Retrieve don't preload, Compress don't repeat | **Prevents bulk false refreshes** (about 86K tokens each) and lossy regeneration; 0 tokens when clean | content hash sidecar, size materiality, output lint, peer-median check |
 
 ---
 

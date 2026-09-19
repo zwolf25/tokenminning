@@ -73,6 +73,18 @@ webclaw "<url>" --map
 
 ---
 
+## Delegation: the ladder must travel in the prompt
+A subagent knows only what its prompt says. In one run the research prompts said "Firecrawl is out of credits, use WebSearch/WebFetch instead". That overrode the ladder: review sites, a press-release wire, an SEC filing and a jobs site returned 403 to WebFetch and stayed unread, and the affected claims were downgraded to lower-confidence tags. The next pass re-fetched only those pages through `scrapling --stealth` (the documented next rung) and corrected or re-tagged roughly 80 claims across four subjects, at about 98K tokens per subject. Two pages still stayed blocked even in stealth mode, and the note says so instead of guessing.
+
+Rules that follow:
+- Copy the fallback ladder into every collection prompt; never write "use WebFetch instead" as the fallback for a Firecrawl failure.
+- A 404 is a wrong URL, not a block: search for the right URL and retry before escalating.
+- For SEC filings use the filing's HTML document, not the PDF.
+- Record which pages stayed blocked in the output's method note.
+- Encode the ladder where the workflow lives (the skill and its delegation pattern), not only in a personal instruction file, so a new session or a new subagent inherits it.
+
+---
+
 ## Tokenminning Principles Applied
 
 | Principle | How the Ladder Embodies It |
