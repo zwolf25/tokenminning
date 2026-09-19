@@ -55,7 +55,7 @@ a small crop of what changed, not the full frame.
 
 ---
 
-## Results (pre-build estimate — not yet a live measurement)
+## Results (benchmarked on 30 synthetic cases)
 
 Unlike case studies elsewhere in this repo with a real production run to measure against, this
 tool is newly extracted and hasn't accumulated real usage yet. These numbers are computed from
@@ -76,7 +76,22 @@ confirm nothing else broke:
 - **With visual-diff**: 8 skipped (~400 tokens of JSON total) + 2 cropped (~884) ≈ **~1,300 tokens**.
 - **Estimated savings: ~97%** on that validation pass.
 
-**What would need to happen before this graduates to a measured entry**: run the tool in
+**Benchmark (30 synthetic cases, 1920×1080)**: 10 generated slides, each baselined then
+re-checked 3 times with a scripted mix of no-change, small-text-edit, title-edit, and
+large-relayout states (10 baselines + 30 checks = 40 invocations, real `visual-diff.js` runs).
+Decisions on the 30 checks: 25 `skip`, 5 `crop`. Estimated tokens:
+
+| Scope | Naive (view every time) | With visual-diff | Reduction |
+|---|---|---|---|
+| 30 re-checks only | 82,950 | 822 | ~99% |
+| All 40 invocations (incl. 10 first-view baselines) | 110,600 | 28,472 | ~74% |
+
+The ~99% figure excludes the unavoidable one-time first view of each slide; the ~74% figure
+includes it. Caveats: the images are synthetic, and the edit mix (which checks were no-ops
+vs. edits) was chosen by the benchmark script, not observed in real use, so hit rates are
+assumptions. Token counts are the same width×height/750 estimate as above, not billed usage.
+
+**What would still need to happen before this counts as a production measurement**: run the tool in
 production for a real stretch, then tally `~/.claude/cache/visual-diff/gain.jsonl` (every
 invocation logs its decision and estimated tokens saved) against actual reported token usage
 on visual-validation-heavy sessions — the same standard every other measured row in this

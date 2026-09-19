@@ -230,11 +230,11 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 </details>
 
 <details>
-<summary><strong>Case Study 10: Pixel-Diff Screenshot Validation — ~97% estimated token reduction, pre-build (not yet measured)</strong></summary>
+<summary><strong>Case Study 10: Pixel-Diff Screenshot Validation — 74–99% token reduction, benchmarked on 30 synthetic cases</strong></summary>
 
 **Problem:** Validating an AI-made edit to a slide/deck/mockup usually means viewing a full-resolution screenshot every time, even when nothing changed
 **Fix:** Deterministic pixel diff (`pixelmatch`/`pngjs`, pure JS) against a cached baseline before the model ever views the image — skip entirely if unchanged, crop to just the changed region if not
-**Result (pre-build estimate, not yet measured):** 10-slide deck / 2 edited slides scenario: 49,150 → ~1,300 tokens, ~97% ↓ — see the case study for the `gain.jsonl` ledger this will be replaced with once real usage accumulates
+**Result (benchmarked on 30 synthetic checks across 10 slides):** 82,950 → 822 estimated tokens on the 30 re-checks (~99% ↓); 110,600 → 28,472 (~74% ↓) once each slide's one-time first-view baseline is counted. Caveat: the skip/edit mix (25 skip, 5 crop) was chosen, not observed, so real savings depend on real edit rates
 **Verified separately from the token estimate:** self-test, a real PPTX-rendered end-to-end run (exact bbox match, 0% diff on an independent re-render), and an unbiased fresh-session test — 3/3 natural-language requests self-triggered correctly with no skill named
 
 [Read full case study →](examples/visual-validation-pipeline.md)
