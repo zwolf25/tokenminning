@@ -144,3 +144,50 @@ AFTER:
 - `sc-wiki-cleanup/SKILL.md` — owner-tier config consistency phase
 - `CLAUDE-template.md` — memory policy corrected, lean checklist
 - 16 collaborator inbox notes — exact replacement text
+
+---
+
+## Follow-up: Turning the Checks into a Rubric (`claude-md-audit`)
+
+The four checks above found bugs (dead refs, wrong hierarchy) but not *noise*: lines that cost context every session yet change nothing Claude does. A second pass adapted the rubric from Alex Tong's [`claude-md-audit`](https://github.com/alextongme/alex-tong-toolkit/tree/main/claude-md-audit) (MIT) into a standalone skill and replaced the checks inside `wiki-cleanup` with one call to it.
+
+### What changed in the design
+
+| Decision | Why |
+|----------|-----|
+| **Noise taxonomy** — Duplicate, Wishlist, Stale Doc, Settings Leak, Railroader, Template Dump | Each label names the fix; "trim this" is not actionable |
+| **Tiers, not scores** (Strong / Functional / Needs work) | A numeric score invites gaming; a tier plus quoted lines does not |
+| **No-precedence rule** | Claude Code concatenates every CLAUDE.md into context and nothing overrides anything, so *every* cross-file contradiction is a coin flip per session and gets flagged, with a recommendation to delete one copy |
+| **`@` imports count toward size** | `~/.claude/CLAUDE.md` importing two files is one file to the model |
+| **AUTO vs QUESTION split** | Only fixes fully determined by verified facts (a renamed skill, a self-description that contradicts the file) are applied automatically; deletions, contradictions, and procedure moves are asked, each with a recommendation |
+| **Verify before flagging Stale Doc** | A false positive costs more trust than a missed finding; every dead-reference finding is checked against disk or the skill list |
+| **Edit-only tooling (no `Write`/`Bash`)** | The auditor cannot rewrite voice or wander outside the audited stack |
+
+Split trigger for wikis tightened the same way: a wiki is a split candidate only if it is over 15K chars **and** its sections fail a load-together test, not on size alone.
+
+### Measured results (character counts; the skill has no shell, so no token counts)
+
+| File | Before | After | Change |
+|------|--------|-------|--------|
+| `~/CLAUDE.md` (home workspace) | 14,520 | 10,284 | -29% |
+| `ZacAI/CLAUDE.md` (vs. the 19,923 B figure above) | 19,923 | 15,484 | -22% |
+| `CLAUDE-template.md` (what every new collaborator copies) | 26,733 | 20,729 | -22% |
+| `RTK.md` | 1,112 | 853 | -23% |
+
+The template change is the compounding one: the skill-routing table went from 65 rows to 14 by keeping only rows that disambiguate look-alike skills (every other skill already routes from its own trigger description).
+
+### What the audit caught that the first pass did not
+
+- An import described as `@RTK.md` when the file imported two files.
+- A routing row for a plugin that was verifiably gone.
+- A skill referenced under the wrong plugin prefix.
+- A hand-built 49-line wiki list in CLAUDE.md, replaced by a `grep "^description:"` triage rule.
+
+### Regression found while verifying
+
+Replacing that list broke triage silently: 24 of 57 wikis had no `description:` frontmatter, so the grep would never surface them (including the core product-context wikis). Caught by hand-reading the output, not by the audit. Fix: a temporary list until each wiki got a description, then removed. Lesson: when a rule is replaced by a mechanism, test the mechanism against the real corpus before deleting the rule.
+
+### Limits
+
+- Existing collaborator copies of CLAUDE.md do not shrink when the template does. They only shrink if the collaborator runs the audit (wired into `second-brain-doctor` as check 9).
+- Sizes are characters, not tokens, and one-time. The recurring saving is proportional but unmeasured here.

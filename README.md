@@ -164,7 +164,8 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 
 **Problem:** CLAUDE.md files bloated, MEMORY.md growing unbounded  
 **Fix:** 4-type memory classification + CLAUDE.md consistency audit + monthly auto-enforcement  
-**Result:** 29% CLAUDE.md reduction, MEMORY.md → 0 bytes, recurring ~3,500 tokens/session saved
+**Result:** 29% CLAUDE.md reduction, MEMORY.md → 0 bytes, recurring ~3,500 tokens/session saved  
+**Follow-up:** a noise-taxonomy audit skill took a further 22–29% off the same files and the collaborator template (character counts)
 
 [Read full case study →](examples/second-brain-config-audit.md)
 </details>

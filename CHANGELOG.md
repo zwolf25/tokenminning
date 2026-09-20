@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.2.3 — 2026-09-20
+
+- Extended [Second Brain Config & Memory Audit](examples/second-brain-config-audit.md) with a follow-up on the `claude-md-audit` rubric (adapted from Alex Tong's MIT-licensed skill): noise taxonomy, tiers instead of scores, the no-precedence rule for cross-file contradictions, AUTO-vs-QUESTION fixes, and measured character reductions (-29% home file, -22% project file, -22% collaborator template) plus a triage-regression found during verification.
+
 ## v0.2.2 — 2026-09-20
 
 - Extended [Second Brain Token Optimization](examples/second-brain-system.md) with a "Promotion" section (contributing local knowledge to the shared vault as a raw note, verify-then-trim, pointer wikis, owner/collaborator role split, measured local-size reduction with the caveat that it is not a per-session token saving) and a new anti-pattern: a derived-file sync that overwrites hand-curated fields.
