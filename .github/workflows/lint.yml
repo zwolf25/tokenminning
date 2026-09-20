@@ -1,0 +1,12 @@
+name: lint
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: python3 scripts/check-links.py
+      - run: npm ci --prefix tools/doc-convert && node tools/doc-convert/convert.js --self-test
+      - run: npm ci --prefix tools/visual-diff && node tools/visual-diff/visual-diff.js --self-test

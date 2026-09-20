@@ -19,8 +19,8 @@ uv tool install 'markitdown[all]'
 
 **For Markdown → DOCX:**
 ```bash
-# Node.js, then the docx package
-npm install -g docx
+# Node.js, then from this folder (or `npm install -g docx`, also resolved)
+npm install
 ```
 
 ## Usage
@@ -48,6 +48,8 @@ node convert.js <source>.md <output>.docx [--style <name>]
 - No `--style` → `styles/default.json` (Arial, navy/blue palette, styled tables — see [docx-style-guide.md](docx-style-guide.md)).
 - `--style report` → `styles/report.json`, a tighter-spacing variant.
 - Add your own: drop a new JSON file in `styles/` following the same shape, then pass `--style <filename-without-extension>`.
+
+Check the install with `node convert.js --self-test`.
 
 Supports headings (H1–H3), tables, bold/italic, bullets (nested), ordered lists, inline code, fenced code blocks, links, images (sized from the file, relative to the source .md), blockquotes, and HTML entities in table cells.
 

@@ -6,10 +6,10 @@ We welcome real-world examples, counterexamples, and tool-specific patterns from
 
 | Type | Description | Format |
 |------|-------------|--------|
-| **Case Study** | Measured before/after results from production | `examples/case-study-XX-name.md` |
-| **Technique Guide** | Practical application to a specific system | `examples/technique-name.md` |
+| **Case Study** | Measured before/after results from production | `examples/<kebab-name>.md` |
+| **Technique Guide** | Practical application to a specific system | `examples/<kebab-name>.md` |
 | **Counterexample** | Where tokenminning doesn't apply / fails | Discussion → Counterexamples |
-| **Tool Pattern** | How a specific tool (Cursor, Codex, etc.) applies tokenminning | `techniques/tool-name.md` |
+| **Tool Pattern** | How a specific tool (Cursor, Codex, etc.) applies tokenminning | `examples/<tool-name>.md` |
 | **Runnable Tool** | A generalizable, working script/utility implementing a tokenminning technique | `tools/tool-name/` (with its own README) |
 
 ## Guidelines
@@ -22,13 +22,13 @@ We welcome real-world examples, counterexamples, and tool-specific patterns from
 ## How to Contribute
 
 1. Fork the repo
-2. Add your content to `examples/` or `techniques/`
+2. Add your content to `examples/` (or `tools/` for runnable code)
 3. Update the README tables if adding a new case study/technique
 4. Open a PR
 
 ## Contributing a Tool
 
-`tools/` holds runnable code (scripts, CLIs); `techniques/` holds prose about how a third-party tool applies tokenminning — pick the right one before you start.
+`tools/` holds runnable code (scripts, CLIs); `examples/` holds prose, including how a third-party tool applies tokenminning — pick the right one before you start.
 
 1. Fork the repo
 2. Add a self-contained `tools/<name>/` directory with its own README (install + usage)

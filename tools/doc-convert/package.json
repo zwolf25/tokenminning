@@ -1,0 +1,12 @@
+{
+  "name": "doc-convert",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Zero-token document conversion (Markdown to styled DOCX)",
+  "scripts": {
+    "self-test": "node convert.js --self-test"
+  },
+  "dependencies": {
+    "docx": "^9.0.0"
+  }
+}

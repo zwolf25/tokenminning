@@ -102,7 +102,7 @@ reproduced [`anthropics/claude-code#68951`](https://github.com/anthropics/claude
 against the actual installed build (2.1.236, 2026-09-09) using the issue's own minimal repro —
 confirming the hook fires and reports success, but the model still receives the original,
 uncompressed output. This isn't a stale report from an older version; it reproduces on a current
-build.
+build. Re-checked 2026-09-20: the issue is still open (last updated 2026-09-07).
 
 **Resolution:** skipped the hook. Instead, made "pipe through `eso crush` yourself, as part of
 the same command, when output is likely to be a large uniform array" the default instruction —

@@ -2,6 +2,14 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.2.7 — 2026-09-20
+
+- Repo cleanup after a full review. Fixed 5 broken image links and a stray link in [Second Brain Token Optimization](examples/second-brain-system.md), renamed `resources/TokenmaxxingVsTokenminning` to `.png`, and removed 6 unused images (~9 MB).
+- Promoted [Context-Length Threshold](examples/context-length-threshold.md) and [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) to Case Studies 12 and 13 in the README; added them, and Context Debt, to `examples/index.md` and the README tables, plus two new Real-World Results rows.
+- Tools: added `package.json` to `doc-convert` and `visual-diff` (local `npm install`), a `--self-test` for `doc-convert`, a usage check and error exit in `anydoc_to_md.py`, and a `VISUAL_DIFF_CACHE_DIR` override.
+- Added `scripts/check-links.py` and a GitHub Actions workflow that checks links, unused images and both tool self-tests.
+- Corrected contributing guidance (there is no `techniques/` folder), refreshed stale plugin-version text, and re-checked the Claude Code hook bug in the Honey/eso study (still open as of 2026-09-20).
+
 ## v0.2.6 — 2026-09-20
 
 - Added [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) case study: joins per-session transcript cost to task ids (reconciled to ccusage); found 44% of spend in sessions with no task and no single expensive task. Includes method, caveats, and the `/todos <id>` session-start rule.

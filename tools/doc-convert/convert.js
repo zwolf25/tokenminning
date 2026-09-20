@@ -5,6 +5,7 @@
 //
 // Usage (identical on macOS/Windows/Linux — no shell-specific env-var syntax):
 //   node convert.js <input>.md <output>.docx [--style <name>]
+//   node convert.js --self-test
 
 const fs = require('fs');
 const path = require('path');
@@ -22,6 +23,20 @@ try {
 }
 const { Document, Packer, Paragraph, TextRun, ExternalHyperlink, ImageRun, HeadingLevel,
         Table, TableRow, TableCell, WidthType, BorderStyle, ShadingType, AlignmentType } = docxLib;
+
+// ---- self-test: convert a tiny inline markdown file, assert a valid .docx (zip) comes out ----
+if (process.argv.includes('--self-test')) {
+  const os = require('os');
+  const { execFileSync } = require('child_process');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'doc-convert-'));
+  const md = path.join(dir, 't.md'), out = path.join(dir, 't.docx');
+  fs.writeFileSync(md, '# Title\n\nBody **bold**.\n\n| a | b |\n|---|---|\n| 1 | 2 |\n\n- item\n');
+  execFileSync(process.execPath, [__filename, md, out], { stdio: 'inherit' });
+  const head = fs.readFileSync(out).subarray(0, 2).toString();
+  if (head !== 'PK') { console.error('self-test FAILED: output is not a docx (zip)'); process.exit(1); }
+  console.log('self-test OK');
+  process.exit(0);
+}
 
 // ---- args: two positionals (in, out) + optional --style <name> ----
 const argv = process.argv.slice(2);
