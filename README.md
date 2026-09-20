@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.2.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.1) — added the [Stale Detection for Derived Documents](examples/derived-doc-staleness.md) case study (content-hash staleness checks, measured ~86K-token refresh vs ~400K rebuild), plus a delegation section in Web Scraping Escalation. Previously: [v0.2.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.0) added [visual-diff](tools/visual-diff).
+> 🆕 **What's New:** [v0.2.7](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.7) — repo cleanup and CI: fixed broken links, promoted the [Context-Length Threshold](examples/context-length-threshold.md) and [Cost Attribution](examples/cost-attribution-to-tasks.md) studies to Case Studies 12–13, packaged the tools with `package.json` and self-tests, and added a link/self-test workflow. Previously: [v0.2.6](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.6) (cost attribution to tasks); [full changelog](CHANGELOG.md).
 
 ---
 
