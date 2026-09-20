@@ -9,4 +9,5 @@ jobs:
         with: { node-version: 22 }
       - run: python3 scripts/check-links.py
       - run: npm ci --prefix tools/doc-convert && node tools/doc-convert/convert.js --self-test
+      - run: python3 tools/context-threshold/context-threshold.py --self-test
       - run: npm ci --prefix tools/visual-diff && node tools/visual-diff/visual-diff.js --self-test

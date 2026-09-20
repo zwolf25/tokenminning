@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.3.0 — 2026-09-20
+
+- Added [`tools/context-threshold`](tools/context-threshold) — cost per turn versus context size from your own Claude Code transcripts (Python stdlib, no dependencies): bucket table plus the knee where per-turn cost passes 2x the baseline with at least 30% of spend above it. Extracted from the [Context-Length Threshold](examples/context-length-threshold.md) case study; on the author's data it reproduces the case study's table and 250k knee. Includes a `--self-test`, run in CI.
+
 ## v0.2.7 — 2026-09-20
 
 - Repo cleanup after a full review. Fixed 5 broken image links and a stray link in [Second Brain Token Optimization](examples/second-brain-system.md), renamed `resources/TokenmaxxingVsTokenminning` to `.png`, and removed 6 unused images (~9 MB).

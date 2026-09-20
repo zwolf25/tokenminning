@@ -19,13 +19,14 @@
 
 ## Runnable Artifacts (Open Source)
 
-Three of the tools referenced above are extracted and open-sourced in this repo — no company-specific setup required:
+Four of the tools referenced above are extracted and open-sourced in this repo — no company-specific setup required:
 
 | Tool | What it does | Case Study | Path |
 |------|---------------|-----------|------|
 | **doc-convert** | Zero-token document conversion: any doc → Markdown, Markdown → styled DOCX | [Document Processing Pipeline](document-processing.md) | [tools/doc-convert](../tools/doc-convert) |
 | **memory-template** | Copy-pasteable agent memory pattern: typed frontmatter + a self-shrinking index | [Memory Systems](memory.md) | [tools/memory-template](../tools/memory-template) |
 | **visual-diff** | Pixel-diff pre-filter for screenshots: skip vision entirely when unchanged, crop to just the changed region otherwise | [Pixel-Diff Screenshot Validation](visual-validation-pipeline.md) | [tools/visual-diff](../tools/visual-diff) |
+| **context-threshold** | Cost per turn vs context size from your own transcripts; finds your `/compact` knee | [Context-Length Threshold](context-length-threshold.md) | [tools/context-threshold](../tools/context-threshold) |
 
 ---
 
@@ -137,6 +138,7 @@ tokenminning/
 ├── tools/
 │   ├── doc-convert/                       ← Runnable: zero-token doc conversion
 │   ├── memory-template/                   ← Runnable: agent memory pattern
+│   ├── context-threshold/                 ← Runnable: cost-per-turn vs context size
 │   └── visual-diff/                       ← Runnable: pixel-diff pre-filter
 └── ...
 ```
