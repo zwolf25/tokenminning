@@ -1,6 +1,6 @@
 # Case Study: Second Brain Token Optimization
 
-![Second Brain Cover Image](/resources/SecondBrainCoverImage.png)
+![Second Brain Cover Image](../resources/SecondBrainCoverImage.png)
 
 ## The System
 
@@ -40,7 +40,7 @@ Collaborator A edits shared wiki
 
 This wasn't a one-time bug. It was a **systemic design flaw**. The system assumed fresh clones meant fresh data. It didn't.
 
-![Knowledge Bloat Cascade](/resources/KnowledgeBloatCascade.png)
+![Knowledge Bloat Cascade](../resources/KnowledgeBloatCascade.png)
 
 ---
 
@@ -69,7 +69,7 @@ topics: [servicechannel-strategy, ai-strategy, pm-skills-and-frameworks]
 
 The shared Second Brain vault's `servicechannel-context.md` covers SC's product strategy, roadmap themes, and platform evolution. Last verified: 2026-07-18.
 
-[Read the live content](mdc:source-path-here) when relevant.
+Read the live content (the `source-path`) when relevant.
 ```
 
 **Key design choices**:
@@ -99,7 +99,7 @@ for stub in shared_clones:  # 68 iterations
 ```
 **Cost**: 28K words read. 87% reduction.
 
-![Before vs After Architecture](/resources/BeforevsAfterArchitecture.png)
+![Before vs After Architecture](../resources/BeforevsAfterArchitecture.png)
 
 **When content IS needed**:
 ```python
@@ -136,7 +136,7 @@ for path in unprocessed:
 - `$1.20 saved per run`
 - Same correctness, 92% fewer I/O operations
 
-![Grep Before Read](/resources/GrepBeforeRead.png)
+![Grep Before Read](../resources/GrepBeforeRead.png)
 
 ---
 
@@ -172,7 +172,7 @@ for source, meta in manifest.items():
 
 ## Escalation Ladder: How Lookups Work
 
-![Retrieval Escalation Pyramid](/resources/RetrievalEscalationPyramid.png)
+![Retrieval Escalation Pyramid](../resources/RetrievalEscalationPyramid.png)
 
 When a collaborator asks "where is this info?":
 

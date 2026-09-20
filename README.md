@@ -47,7 +47,7 @@
 >
 > **Tokenminning is:** improving information density, eliminating context debt, and designing systems where the right context arrives at the right time.
 
-![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning)
+![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning.png)
 
 ---
 
@@ -57,7 +57,7 @@ Tokenminning isn't a tool—it's a design philosophy. Apply it in 3 steps:
 
 ```bash
 # 1. Audit what's always loaded
-grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
+grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 
 # 2. Replace full clones with stubs (summary + source-path)
 # 3. Add escalation ladder: local cache → stub → on-demand read
@@ -114,6 +114,8 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 | **Stale sync clones** | 66% | 0% | **100% eliminated** |
 | **RTK adoption gap** | 94% commands bypassed | → upstream fix | **1.5M tokens/30d recovered** |
 | **Wiki lint pre-filter (this repo)** | 8.5M tokens/run | ~1.2M est. | **~86% ↓** |
+| **Long-session cost per turn** | 2.1x at 250k context, 4–5x at 500k+ | `/compact` at ~250k | **59% of one model's spend was above the knee** |
+| **Untracked spend** | 44% of spend in sessions with no task id | `/todos <id>` at session start | **Cost now has an owner** |
 
 > [!NOTE]
 > These are measured results from production Second Brain workflows, not synthetic benchmarks.
@@ -251,6 +253,26 @@ grep -r "always.*load\|preload\|startup" .claude/ CLAUDE.md
 [Read full case study →](examples/derived-doc-staleness.md)
 </details>
 
+<details>
+<summary><strong>Case Study 12: Context-Length Threshold — cost per turn is ~2.1x at 250k</strong></summary>
+
+**Problem:** No data on when a long session starts costing noticeably more per turn
+**Fix:** Per-turn cost from raw transcripts (311 sessions), bucketed by context size; `/compact` rule set at the knee
+**Result:** ~2.1x at 250k, ~4–5x at 500k+; about 59% of one model's spend sat above 250k. Rate ratios are assumed, so the percentages are usable and absolute dollars are not
+
+[Read full case study →](examples/context-length-threshold.md)
+</details>
+
+<details>
+<summary><strong>Case Study 13: Cost Attribution to Tasks — 44% of spend had no task</strong></summary>
+
+**Problem:** `ccusage` groups by project directory, so it cannot say which task a dollar belongs to
+**Fix:** Join transcript cost to task ids from tool calls, scaled to match `ccusage` totals (1590.60 vs 1590.58)
+**Result:** ~$700 of $1,590 sat in 198 sessions with no task id; no single task above ~3.5% of spend. Rule: open each session with `/todos <id>`
+
+[Read full case study →](examples/cost-attribution-to-tasks.md)
+</details>
+
 ---
 
 ## Technique Guides
@@ -262,6 +284,7 @@ Practical applications of tokenminning to specific systems:
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
 | [Context-Length Threshold](examples/context-length-threshold.md) | Measure cost per turn vs context size; compact at the knee (~250k here) |
 | [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) | Join transcript cost to task ids; 44% of spend was untracked |
+| [Context Debt](examples/context-debt.md) | Stale, duplicated, or always-loaded context that costs tokens without paying back |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
 | [Memory Systems](examples/memory.md) · [Try it](tools/memory-template) | Preserve decisions/constraints, not transcripts |
 | [RAG Pipelines](examples/rag.md) | Rank → filter → focus; quality over quantity |
@@ -322,8 +345,8 @@ Tokenminning operates on a simple **escalation ladder** — the model only sees 
 
 We welcome real-world examples, counterexamples, benchmarks, and tool-specific patterns.
 
-1. **Case studies** — Add to `examples/` in `case-study-XX-name.md` format
-2. **Techniques** — Document patterns in `techniques/`
+1. **Case studies** — Add to `examples/` as `<kebab-name>.md`
+2. **Techniques** — Document patterns in `examples/` too
 3. **Counterexamples** — Where tokenminning *doesn't* apply (valuable!)
 4. **Tool patterns** — Claude Code, Cursor, Codex, Continue, etc.
 
@@ -350,7 +373,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 | Diagram | Description |
 |---------|-------------|
-| ![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning) | Core contrast visualization |
+| ![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning.png) | Core contrast visualization |
 | ![Before vs After Architecture](resources/BeforevsAfterArchitecture.png) | System architecture comparison |
 | ![Tokenminning Decision Tree](resources/TokenminningDecisionTree.png) | Decision flow for technique selection |
 | ![Context Surface](resources/ContextSurface.png) | Context surface vs. underlying system |

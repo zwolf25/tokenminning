@@ -172,7 +172,7 @@ Skills live in two repositories:
 | `zacai-skills` | Personal (Zac) | Local only — `~/.claude/skills/` symlinks |
 | `example-skills` | Experimental | Plugin: `example-skills` — enable to use |
 
-**Plugin versioning:** `second-brain-skills@sc-pm-skills` at `1.0.78` (vault) vs `1.0.76` (installed) → `claude plugin update` syncs.
+**Plugin versioning:** a plugin whose vault version runs ahead of the installed one (e.g. `second-brain-skills@sc-pm-skills` at `1.0.161` vs `1.0.158` on 2026-09-20) is flagged at session start → `claude plugin update` syncs.
 
 **No "prompt drift."** Skills are code. They're reviewed, tested, versioned, and deployed like any other dependency.
 
