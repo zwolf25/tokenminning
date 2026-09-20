@@ -45,7 +45,7 @@ Capping sessions near 250k and resetting to ~100k would cut roughly 35% of spend
 
 - Rate ratios are assumed. Calibrating against ccusage totals came out ~25% low on absolute dollars; the percentages and ratios are the usable part.
 - Long sessions may contain heavier work, so not all of the rise is avoidable.
-- One user, one setup. The threshold depends on your model and base context size; measure your own before copying 250k. The `context-length-threshold` skill in the `second-brain-skills` plugin does this per model from your own transcripts.
+- One user, one setup. The threshold depends on your model and base context size; measure your own before copying 250k. The [`tools/context-threshold`](../tools/context-threshold) script in this repo (and the `context-length-threshold` skill in the `second-brain-skills` plugin) does this per model from your own transcripts.
 
 ## Takeaway
 

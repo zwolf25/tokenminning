@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.2.7](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.7) — repo cleanup and CI: fixed broken links, promoted the [Context-Length Threshold](examples/context-length-threshold.md) and [Cost Attribution](examples/cost-attribution-to-tasks.md) studies to Case Studies 12–13, packaged the tools with `package.json` and self-tests, and added a link/self-test workflow. Previously: [v0.2.6](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.6) (cost attribution to tasks); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.3.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.3.0) — added [context-threshold](tools/context-threshold), a zero-dependency script that finds your own `/compact` point from your Claude Code transcripts (from the [Context-Length Threshold](examples/context-length-threshold.md) case study). Previously: [v0.2.7](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.7) (cleanup, tool packaging, lint CI); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -260,7 +260,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Per-turn cost from raw transcripts (311 sessions), bucketed by context size; `/compact` rule set at the knee
 **Result:** ~2.1x at 250k, ~4–5x at 500k+; about 59% of one model's spend sat above 250k. Rate ratios are assumed, so the percentages are usable and absolute dollars are not
 
-[Read full case study →](examples/context-length-threshold.md)
+[Read full case study →](examples/context-length-threshold.md) · [Try it](tools/context-threshold)
 </details>
 
 <details>
@@ -282,7 +282,7 @@ Practical applications of tokenminning to specific systems:
 | Guide | Focus |
 |-------|-------|
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
-| [Context-Length Threshold](examples/context-length-threshold.md) | Measure cost per turn vs context size; compact at the knee (~250k here) |
+| [Context-Length Threshold](examples/context-length-threshold.md) · [Try it](tools/context-threshold) | Measure cost per turn vs context size; compact at the knee (~250k here) |
 | [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) | Join transcript cost to task ids; 44% of spend was untracked |
 | [Context Debt](examples/context-debt.md) | Stale, duplicated, or always-loaded context that costs tokens without paying back |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
