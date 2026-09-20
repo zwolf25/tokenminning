@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.2.5 — 2026-09-20
+
+- Revised the [Context-Length Threshold](examples/context-length-threshold.md) case study from ~300k to ~250k using a more defensible baseline (cheapest well-populated bucket), documented how the baseline choice moves the knee, and linked the per-model `context-length-threshold` skill.
+
 ## v0.2.4 — 2026-09-20
 
 - Added [Context-Length Threshold](examples/context-length-threshold.md) case study: per-turn cost from raw transcripts across 311 sessions shows ~2.4x cost at 300k context and ~4–5x at 500k+; turns above 300k are 30% of turns but ~49% of spend. Adopted a `/compact` at ~300k rule; includes caveats (assumed rate ratios, upper-bound saving).

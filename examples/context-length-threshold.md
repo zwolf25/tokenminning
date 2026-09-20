@@ -1,8 +1,8 @@
 # Case Study: Where Does Session Length Start Costing More?
 
 **Question:** At what context size does cost per turn climb enough to justify `/compact` or `/clear`?
-**Result:** Per-turn cost is ~2.4x at 300k tokens of context and ~4–5x at 500k+, versus 50–100k. Turns above 300k are 30% of turns but ~49% of spend.
-**Rule adopted:** `/compact` (or `/clear` between unrelated tasks) at ~300k.
+**Result:** Per-turn cost is ~2.1x at 250k tokens of context and ~4–5x at 500k+, versus the cheapest well-populated bucket. About 59% of this model's spend sits at or above 250k.
+**Rule adopted:** `/compact` (or `/clear` between unrelated tasks) at ~250k.
 
 ---
 
@@ -18,30 +18,35 @@
 
 ## Result
 
-| Context size | Cost per turn (vs 50–100k) | Share of spend |
-|:---|:---:|:---:|
-| 50–100k | 1.0x | 8.7% |
-| 100–150k | 1.1x | 12.1% |
-| 150–200k | 1.4x | 10.3% |
-| 200–250k | 1.75x | 9.9% |
-| 250–300k | 2.0x | 9.6% |
-| 300–400k | 2.4x | 17.2% |
-| 400–500k | 2.9x | 12.2% |
-| 500–700k | 3.75x | 13.4% |
-| 700k+ | ~5x | 6.6% |
+| Context size | Turns | Cost per turn (vs cheapest bucket) | Share of spend |
+|:---|---:|:---:|:---:|
+| 50–75k | 697 | 1.33x | 2.3% |
+| 75–100k | 2,608 | 1.00x | 6.4% |
+| 100–150k | 4,085 | 1.20x | 12.1% |
+| 150–200k | 2,729 | 1.54x | 10.3% |
+| 200–250k | 2,139 | 1.88x | 9.9% |
+| 250–300k | 1,816 | 2.14x | 9.6% |
+| 300–400k | 2,683 | 2.60x | 17.2% |
+| 400–500k | 1,612 | 3.06x | 12.2% |
+| 500–700k | 1,352 | 4.02x | 13.4% |
+| 700k+ | 502 | 5.32x | 6.6% |
+
+**Knee rule:** the first bucket where per-turn cost is at least 2x the baseline *and* at least 30% of spend sits at or above it. Here that is 250k.
+
+**How the number moved:** the first pass merged 50–100k as the baseline and read the knee as ~300k. Using the cheapest well-populated bucket instead moves it to 250k. The baseline choice shifts the knee by a bucket or two, so treat the threshold as approximate and measure your own.
 
 Context never drops below 50k in this setup: the always-loaded base (instructions, skills, tool schemas) is already large. That is the same lever as [Config Audit](second-brain-config-audit.md): a smaller base lowers the floor for every turn.
 
 ## Estimated saving
 
-Capping sessions near 300k and resetting to ~100k would cut roughly 30% of spend on this model. That is an **upper bound**: it ignores the cost of compacting and the context lost when you do.
+Capping sessions near 250k and resetting to ~100k would cut roughly 35% of spend on this model. That is an **upper bound**: it ignores the cost of compacting and the context lost when you do.
 
 ## Caveats
 
 - Rate ratios are assumed. Calibrating against ccusage totals came out ~25% low on absolute dollars; the percentages and ratios are the usable part.
 - Long sessions may contain heavier work, so not all of the rise is avoidable.
-- One user, one setup. The threshold depends on your base context size; measure your own before copying 300k.
+- One user, one setup. The threshold depends on your model and base context size; measure your own before copying 250k. The `context-length-threshold` skill in the `second-brain-skills` plugin does this per model from your own transcripts.
 
 ## Takeaway
 
-Cost per turn grows with context, and most of the spend sits in the long tail of sessions. A one-line rule is a cheap test. Re-measure after a few weeks to see whether the >300k share of spend actually falls.
+Cost per turn grows with context, and most of the spend sits in the long tail of sessions. A one-line rule is a cheap test. Re-measure after a few weeks to see whether the >250k share of spend actually falls.
