@@ -261,6 +261,7 @@ Practical applications of tokenminning to specific systems:
 |-------|-------|
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
 | [Context-Length Threshold](examples/context-length-threshold.md) | Measure cost per turn vs context size; compact at the knee (~250k here) |
+| [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) | Join transcript cost to task ids; 44% of spend was untracked |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
 | [Memory Systems](examples/memory.md) · [Try it](tools/memory-template) | Preserve decisions/constraints, not transcripts |
 | [RAG Pipelines](examples/rag.md) | Rank → filter → focus; quality over quantity |

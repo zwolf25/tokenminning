@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.2.6 — 2026-09-20
+
+- Added [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) case study: joins per-session transcript cost to task ids (reconciled to ccusage); found 44% of spend in sessions with no task and no single expensive task. Includes method, caveats, and the `/todos <id>` session-start rule.
+
 ## v0.2.5 — 2026-09-20
 
 - Revised the [Context-Length Threshold](examples/context-length-threshold.md) case study from ~300k to ~250k using a more defensible baseline (cheapest well-populated bucket), documented how the baseline choice moves the knee, and linked the per-model `context-length-threshold` skill.
