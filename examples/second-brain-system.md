@@ -264,6 +264,24 @@ The result was a smaller **always-loaded context surface**.
 
 ---
 
+## Promotion: Closing the Loop from Local to Shared
+
+The stub pattern moves shared knowledge *down* into a personal vault as a pointer. The reverse case is the one that quietly re-creates the original duplication: a personal wiki that holds team-wide facts nobody else can see, sitting next to (or drifting away from) a shared wiki on the same topic.
+
+Promotion is the write-side of the same pattern, run as a periodic audit step rather than a one-off migration:
+
+1. **Detect** (judgment, never auto-applied): a local wiki that is team-relevant and has no shared equivalent, or one that is materially ahead of a same-topic shared wiki. A second class needs no shared write at all: a local wiki that is a condensed subset of a shared one.
+2. **Contribute as raw input, not as a wiki.** The shared wiki is derived; only the owner's builder writes it. The contributor drops a scrubbed raw note (facts only, no personal paths or voice), so the builder's normal synthesis and its checks still apply.
+3. **Verify before trimming.** The local copy is trimmed only after the built shared wiki has been read against the local source. Trimming first turns a bad build into data loss.
+4. **Trim to a pointer, not to nothing.** Routing tables, other wikis and skills still reference the old name. A one-line pointer plus any local-only residue keeps every reference resolving. The single exception is a local file whose name collides with its own stub, which is deleted.
+5. **Re-stub and re-link.** The stub sync creates the `sc-<name>` stub; `topics:` linking runs as usual.
+
+Measured on one run (12 local wikis, bytes on disk): about 300K to about 107K locally, roughly 64% less, with the removed content now held once in the shared vault. This is duplication and drift reduction, not a per-session token saving. Wikis load on demand, so the always-loaded surface did not change.
+
+Role split keeps the shared vault single-writer: the owner runs the whole path (raw note, build, verify, trim, stub); a collaborator's run stops at the raw note, stamps the local wiki as pending, and a later run offers the trim once the shared wiki exists.
+
+---
+
 ## The Pattern (Generalizable)
 
 This isn't specific to wikis or Obsidian. Works anywhere:
@@ -361,6 +379,16 @@ Never Read a folder's contents wholesale. Always:
 **Failure**: a single frontmatter field (e.g. tracking every contributing source by name) grows without a cap. Individually invisible, it compounds the same way full-body clones did — just slower. One file's tracking line went from a handful of names to around fifty, adding hundreds of tokens to every load of that file, for a field almost never read in full.
 
 **Fix**: cap display to the most recent N plus a total count. Full history stays reconstructable via the reverse link (each contributor already points back to what it updated) — nothing is lost, only the unbounded growth.
+
+---
+
+### ❌ Derived-File Sync That Overwrites Curation
+
+> "The stub is generated, so regenerating it is always safe."
+
+**Failure**: the stub sync rewrote a stale stub from the template, and the template's `topics:` was empty. Every hand-linked `topics:` list on the refreshed stubs (21 in one run) was reset to `[]`. Nothing errored; the links just disappeared, and the first sign was an audit.
+
+**Fix**: a regenerate step must carry over any field a human or a later judgment step fills in. The sync now preserves a non-empty `topics:` block, and a regression assertion covers it (a stale stub with linked topics must keep them after a refresh). Same run fixed a relative `source-path` written when the source root was passed as a relative path.
 
 ---
 

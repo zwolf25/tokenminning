@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.2.2 — 2026-09-20
+
+- Extended [Second Brain Token Optimization](examples/second-brain-system.md) with a "Promotion" section (contributing local knowledge to the shared vault as a raw note, verify-then-trim, pointer wikis, owner/collaborator role split, measured local-size reduction with the caveat that it is not a per-session token saving) and a new anti-pattern: a derived-file sync that overwrites hand-curated fields.
+
 ## v0.2.1 — 2026-09-18
 
 - Added [Stale Detection for Derived Documents](examples/derived-doc-staleness.md) case study: content-hash staleness with a size-materiality check, a guard against regenerating from a source thinner than the existing output, an output lint that catches skipped skill steps, and a peer-median thin-source check. Includes the measured cost of a plain refresh (about 86K tokens) versus rebuilding a thin source (about 400K), three dogfooding bugs, and the limits (no first-run saving, padding not detectable).
