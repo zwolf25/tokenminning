@@ -1,0 +1,13 @@
+{
+  "name": "visual-diff",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pixel-diff pre-filter for screenshot validation",
+  "scripts": {
+    "self-test": "node visual-diff.js --self-test"
+  },
+  "dependencies": {
+    "pixelmatch": "^7.0.0",
+    "pngjs": "^7.0.0"
+  }
+}

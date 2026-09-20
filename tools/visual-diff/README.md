@@ -12,7 +12,8 @@ Compares a new screenshot against a cached baseline of the same artifact:
 ## Install
 
 ```bash
-npm install -g pixelmatch pngjs
+# from this folder (or `npm install -g pixelmatch pngjs`, also resolved)
+npm install
 ```
 
 Pure JS, no native bindings — deliberately not `sharp` or another native-compiled image lib,
@@ -38,7 +39,7 @@ Prints one JSON object to stdout:
 - `"decision": "crop"` — real change. View only `cropPath` (a small PNG of the changed region + padding), never the original.
 - `"decision": "full"` — first time this artifact's been checked, nothing to diff against yet. Becomes the baseline for next time.
 
-Every run also appends one line to `~/.claude/cache/visual-diff/gain.jsonl` (decision, pixel
+Every run also appends one line to `~/.claude/cache/visual-diff/gain.jsonl` (override the directory with `VISUAL_DIFF_CACHE_DIR` or `--cache-dir`) (decision, pixel
 counts, estimated tokens saved) — a real-usage ledger so the estimate below can be replaced
 with a measured number over time.
 

@@ -131,7 +131,7 @@ function downsample(png, maxDim) {
 }
 
 function defaultCacheDir() {
-  return path.join(os.homedir(), '.claude', 'cache', 'visual-diff');
+  return process.env.VISUAL_DIFF_CACHE_DIR || path.join(os.homedir(), '.claude', 'cache', 'visual-diff');
 }
 
 function appendGainLog(cacheDirPath, entry) {
