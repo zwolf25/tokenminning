@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.2.4 — 2026-09-20
+
+- Added [Context-Length Threshold](examples/context-length-threshold.md) case study: per-turn cost from raw transcripts across 311 sessions shows ~2.4x cost at 300k context and ~4–5x at 500k+; turns above 300k are 30% of turns but ~49% of spend. Adopted a `/compact` at ~300k rule; includes caveats (assumed rate ratios, upper-bound saving).
+
 ## v0.2.3 — 2026-09-20
 
 - Extended [Second Brain Config & Memory Audit](examples/second-brain-config-audit.md) with a follow-up on the `claude-md-audit` rubric (adapted from Alex Tong's MIT-licensed skill): noise taxonomy, tiers instead of scores, the no-precedence rule for cross-file contradictions, AUTO-vs-QUESTION fixes, and measured character reductions (-29% home file, -22% project file, -22% collaborator template) plus a triage-regression found during verification.
