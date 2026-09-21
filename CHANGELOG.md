@@ -28,7 +28,7 @@ One entry per release, newest first. Not a log of every commit — see git histo
 
 ## v0.2.3 — 2026-09-20
 
-- Extended [Second Brain Config & Memory Audit](examples/second-brain-config-audit.md) with a follow-up on the `claude-md-audit` rubric (adapted from Alex Tong's MIT-licensed skill): noise taxonomy, tiers instead of scores, the no-precedence rule for cross-file contradictions, AUTO-vs-QUESTION fixes, and measured character reductions (-29% home file, -22% project file, -22% collaborator template) plus a triage-regression found during verification.
+- Extended [Second Brain Config & Memory Audit](examples/second-brain-config-audit.md) with a follow-up on the `claude-md-audit` rubric (adapted from Alex Tong's MIT-licensed skill): noise taxonomy, tiers instead of scores, the no-precedence rule for cross-file contradictions (from Alex's `hierarchy` mode), AUTO-vs-QUESTION fixes, and measured character reductions (-29% home file, -22% project file, -22% collaborator template) plus a triage-regression found during verification.
 
 ## v0.2.2 — 2026-09-20
 

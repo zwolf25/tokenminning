@@ -151,13 +151,15 @@ AFTER:
 
 The four checks above found bugs (dead refs, wrong hierarchy) but not *noise*: lines that cost context every session yet change nothing Claude does. A second pass adapted the rubric from Alex Tong's [`claude-md-audit`](https://github.com/alextongme/alex-tong-toolkit/tree/main/claude-md-audit) (MIT) into a standalone skill and replaced the checks inside `wiki-cleanup` with one call to it.
 
-### What changed in the design
+### What the rubric contains
+
+The no-precedence rule below comes from Alex's `hierarchy` mode, not from this repo's adaptation. What this setup added is the wiring: `hierarchy` runs as part of the vault's periodic wiki cleanup, and the default mode runs from the setup health check that collaborators run.
 
 | Decision | Why |
 |----------|-----|
 | **Noise taxonomy** — Duplicate, Wishlist, Stale Doc, Settings Leak, Railroader, Template Dump | Each label names the fix; "trim this" is not actionable |
 | **Tiers, not scores** (Strong / Functional / Needs work) | A numeric score invites gaming; a tier plus quoted lines does not |
-| **No-precedence rule** | Claude Code concatenates every CLAUDE.md into context and nothing overrides anything, so *every* cross-file contradiction is a coin flip per session and gets flagged, with a recommendation to delete one copy |
+| **No-precedence rule** (Alex's `hierarchy` mode, H2, v1.0.3) | Claude Code concatenates every CLAUDE.md into context and nothing overrides anything, so *every* cross-file contradiction is a coin flip per session and gets flagged, with a recommendation to delete one copy |
 | **`@` imports count toward size** | `~/.claude/CLAUDE.md` importing two files is one file to the model |
 | **AUTO vs QUESTION split** | Only fixes fully determined by verified facts (a renamed skill, a self-description that contradicts the file) are applied automatically; deletions, contradictions, and procedure moves are asked, each with a recommendation |
 | **Verify before flagging Stale Doc** | A false positive costs more trust than a missed finding; every dead-reference finding is checked against disk or the skill list |
