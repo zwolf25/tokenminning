@@ -151,19 +151,21 @@ AFTER:
 
 The four checks above found bugs (dead refs, wrong hierarchy) but not *noise*: lines that cost context every session yet change nothing Claude does. A second pass adapted the rubric from Alex Tong's [`claude-md-audit`](https://github.com/alextongme/alex-tong-toolkit/tree/main/claude-md-audit) (MIT) into a standalone skill and replaced the checks inside `wiki-cleanup` with one call to it.
 
-### What the rubric contains
+### What the rubric contains, and where each part came from
 
-The no-precedence rule below comes from Alex's `hierarchy` mode, not from this repo's adaptation. What this setup added is the wiring: `hierarchy` runs as part of the vault's periodic wiki cleanup, and the default mode runs from the setup health check that collaborators run.
+Alex's skill is a read-only scorer for a code repo: it awards points for signal, deducts for noise, and never edits. Rows marked **Alex** are his design, kept as is. Rows marked **This setup** are changes made while adapting it for a personal knowledge base (persona, routing rules, wiki pointers) that other files and skills depend on.
 
-| Decision | Why |
-|----------|-----|
-| **Noise taxonomy** — Duplicate, Wishlist, Stale Doc, Settings Leak, Railroader, Template Dump | Each label names the fix; "trim this" is not actionable |
-| **Tiers, not scores** (Strong / Functional / Needs work) | A numeric score invites gaming; a tier plus quoted lines does not |
-| **No-precedence rule** (Alex's `hierarchy` mode, H2, v1.0.3) | Claude Code concatenates every CLAUDE.md into context and nothing overrides anything, so *every* cross-file contradiction is a coin flip per session and gets flagged, with a recommendation to delete one copy |
-| **`@` imports count toward size** | `~/.claude/CLAUDE.md` importing two files is one file to the model |
-| **AUTO vs QUESTION split** | Only fixes fully determined by verified facts (a renamed skill, a self-description that contradicts the file) are applied automatically; deletions, contradictions, and procedure moves are asked, each with a recommendation |
-| **Verify before flagging Stale Doc** | A false positive costs more trust than a missed finding; every dead-reference finding is checked against disk or the skill list |
-| **Edit-only tooling (no `Write`/`Bash`)** | The auditor cannot rewrite voice or wander outside the audited stack |
+| Origin | Decision | Why |
+|--------|----------|-----|
+| **Alex** | **Noise taxonomy**: Duplicate, Wishlist, Stale Doc, Settings Leak, Railroader, Template Dump | Each label names the fix; "trim this" is not actionable |
+| **Alex** | **No-precedence rule** (`hierarchy` mode, H2, v1.0.3) | Claude Code concatenates every CLAUDE.md into context and nothing overrides anything, so *every* cross-file contradiction is a coin flip per session and gets flagged, with a recommendation to delete one copy |
+| **Alex** | **`@` imports count toward size** | `~/.claude/CLAUDE.md` importing two files is one file to the model |
+| **Alex** | **Verify before flagging Stale Doc** | A false positive costs more trust than a missed finding; every dead-reference finding is checked against disk |
+| **This setup** | **Tiers, not scores** (Strong / Functional / Needs work); signals reported present or absent | A numeric score invites gaming; a tier plus quoted lines does not |
+| **This setup** | **AUTO vs QUESTION split**: the skill applies fixes itself, but only ones fully determined by verified facts (a renamed skill, a self-description that contradicts the file, a dangling pointer). Deletions, contradictions, and procedure moves are asked, each with a recommendation | Alex's skill stays read-only; here the audit is one step in a cleanup pipeline, so a report nobody applies saves nothing. The split keeps the risky edits with the human |
+| **This setup** | **Edit-only tooling** (no `Write`/`Bash`) | Lets the auditor apply fixes without rewriting voice or wandering outside the audited stack |
+| **This setup** | **Retuned for a knowledge base**: Duplicate means restating a skill's trigger description, a wiki section, or a parent CLAUDE.md; the codebase-file checks are dropped; persona and voice text is exempt except for verbatim duplicates or stale references; Stale Doc is verified against the skill list and wiki folder as well as paths | A personal CLAUDE.md routes to skills and wikis rather than describing a code repo |
+| **This setup** | **Caller contract and wiring**: a fixed output format so other skills can consume findings; default mode runs from the setup health check collaborators run, `hierarchy` runs inside the vault's periodic cleanup; report-only when the caller is in a confirm-first phase | The audit runs where the drift happens instead of waiting to be remembered |
 
 Split trigger for wikis tightened the same way: a wiki is a split candidate only if it is over 15K chars **and** its sections fail a load-together test, not on size alone.
 
