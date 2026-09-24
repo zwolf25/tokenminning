@@ -102,3 +102,5 @@ more certain than it is.
 **What would need to happen before this graduates to a measured entry**: run both scripts in
 production for a real stretch, then diff actual token spend against a prior comparable window —
 the same standard every other row in this file's Results table already meets.
+
+**Runnable version:** a generalized `vault-lint` (no vault-specific defaults) ships in [tools/lint](../tools/lint).
