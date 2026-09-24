@@ -19,7 +19,7 @@
 
 ## Runnable Artifacts (Open Source)
 
-Four of the tools referenced above are extracted and open-sourced in this repo — no company-specific setup required:
+Five of the tools referenced above are extracted and open-sourced in this repo — no company-specific setup required:
 
 | Tool | What it does | Case Study | Path |
 |------|---------------|-----------|------|
@@ -27,6 +27,7 @@ Four of the tools referenced above are extracted and open-sourced in this repo �
 | **memory-template** | Copy-pasteable agent memory pattern: typed frontmatter + a self-shrinking index | [Memory Systems](memory.md) | [tools/memory-template](../tools/memory-template) |
 | **visual-diff** | Pixel-diff pre-filter for screenshots: skip vision entirely when unchanged, crop to just the changed region otherwise | [Pixel-Diff Screenshot Validation](visual-validation-pipeline.md) | [tools/visual-diff](../tools/visual-diff) |
 | **context-threshold** | Cost per turn vs context size from your own transcripts; finds your `/compact` knee | [Context-Length Threshold](context-length-threshold.md) | [tools/context-threshold](../tools/context-threshold) |
+| **lint** | Two deterministic linters on one findings format: `vault-lint` (wiki hygiene) and `claude-md-lint` (CLAUDE.md size, dangling imports, duplicates) | [Wiki Lint](vault-lint-case-study.md), [Config Audit](second-brain-config-audit.md) | [tools/lint](../tools/lint) |
 
 ---
 
@@ -139,6 +140,7 @@ tokenminning/
 │   ├── doc-convert/                       ← Runnable: zero-token doc conversion
 │   ├── memory-template/                   ← Runnable: agent memory pattern
 │   ├── context-threshold/                 ← Runnable: cost-per-turn vs context size
+│   ├── lint/                              ← Runnable: vault-lint + claude-md-lint
 │   └── visual-diff/                       ← Runnable: pixel-diff pre-filter
 └── ...
 ```

@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.3.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.3.0) — added [context-threshold](tools/context-threshold), a zero-dependency script that finds your own `/compact` point from your Claude Code transcripts (from the [Context-Length Threshold](examples/context-length-threshold.md) case study). Previously: [v0.2.7](https://github.com/zwolf25/tokenminning/releases/tag/v0.2.7) (cleanup, tool packaging, lint CI); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.4.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.0) — added [lint](tools/lint), two zero-dependency linters: `vault-lint` for mechanical wiki checks and `claude-md-lint` for size, dangling imports and cross-file duplicates in your CLAUDE.md stack (from the [Wiki Lint](examples/vault-lint-case-study.md) and [Config Audit](examples/second-brain-config-audit.md) case studies). Previously: [v0.3.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.3.0) (context-threshold); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -96,7 +96,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](examples/wiki-pipeline.md) |
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
-| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) · [Visual Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) |
+| **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) · [Try it](tools/lint) · [Visual Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) |
 | **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) · [Try it](tools/doc-convert) |
 | **Schema-Enforced Extraction** | Rigid output schema (7 categories) forces structured data; no prose summaries | [Doc Pipeline](examples/document-processing.md) |
 | **Failure-Mode Driven Escalation** | Each ladder level has documented failure mode → next level; no guessing | [Web Ladder](examples/web-scraping-escalation.md) |
@@ -169,7 +169,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Result:** 29% CLAUDE.md reduction, MEMORY.md → 0 bytes, recurring ~3,500 tokens/session saved  
 **Follow-up:** a noise-taxonomy audit skill took a further 22–29% off the same files and the collaborator template (character counts)
 
-[Read full case study →](examples/second-brain-config-audit.md)
+[Read full case study →](examples/second-brain-config-audit.md) · [Try it](tools/lint)
 </details>
 
 <details>
@@ -189,7 +189,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Deterministic `vault-lint.py` (zero deps, ~2s) emits structured findings; skills now **only Read what's flagged**
 **Result:** 90 → 13 mechanical findings (85.6% ↓), 73 stub freshness issues → 0, $8.12 → ~$1.15/run est.
 
-[Read full case study →](examples/vault-lint-case-study.md)
+[Read full case study →](examples/vault-lint-case-study.md) · [Try it](tools/lint)
 </details>
 
 <details>

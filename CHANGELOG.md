@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.4.0 — 2026-09-23
+
+- Added [`tools/lint`](tools/lint) — two zero-dependency Python linters on one findings format. `vault-lint` runs the mechanical wiki checks from the [Wiki Lint](examples/vault-lint-case-study.md) case study (required frontmatter, broken `[[wikilinks]]`, required sections in order, trailing `## Recap`), generalized to flags so it needs no particular vault layout. `claude-md-lint` is the deterministic slice of the [Config Audit](examples/second-brain-config-audit.md) rubric: size including `@imports`, missing imports and paths, 3+ line cross-file duplicates, settings pasted as prose, and a per-file tier. Contradictions and vague advice stay with a model. Both have a `--self-test`, run in CI.
+
 ## v0.3.0 — 2026-09-20
 
 - Added [`tools/context-threshold`](tools/context-threshold) — cost per turn versus context size from your own Claude Code transcripts (Python stdlib, no dependencies): bucket table plus the knee where per-turn cost passes 2x the baseline with at least 30% of spend above it. Extracted from the [Context-Length Threshold](examples/context-length-threshold.md) case study; on the author's data it reproduces the case study's table and 250k knee. Includes a `--self-test`, run in CI.

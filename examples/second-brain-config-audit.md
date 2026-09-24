@@ -195,3 +195,5 @@ Replacing that list broke triage silently: 24 of 57 wikis had no `description:` 
 
 - Existing collaborator copies of CLAUDE.md do not shrink when the template does. They only shrink if the collaborator runs the audit (wired into `second-brain-doctor` as check 9).
 - Sizes are characters, not tokens, and one-time. The recurring saving is proportional but unmeasured here.
+
+**Runnable version:** the deterministic checks of this rubric ship as `claude-md-lint` in [tools/lint](../tools/lint); the judgment-based ones stay with the audit skill.
