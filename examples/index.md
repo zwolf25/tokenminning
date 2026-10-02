@@ -28,7 +28,7 @@ Five of the tools referenced above are extracted and open-sourced in this repo â
 | **memory-template** | Copy-pasteable agent memory pattern: typed frontmatter + a self-shrinking index | [Memory Systems](memory.md) | [tools/memory-template](../tools/memory-template) |
 | **visual-diff** | Pixel-diff pre-filter for screenshots: skip vision entirely when unchanged, crop to just the changed region otherwise | [Pixel-Diff Screenshot Validation](visual-validation-pipeline.md) | [tools/visual-diff](../tools/visual-diff) |
 | **context-threshold** | Cost per turn vs context size from your own transcripts; finds your `/compact` knee | [Context-Length Threshold](context-length-threshold.md) | [tools/context-threshold](../tools/context-threshold) |
-| **lint** | Two deterministic linters on one findings format: `vault-lint` (wiki hygiene) and `claude-md-lint` (CLAUDE.md size, dangling imports, duplicates) | [Wiki Lint](vault-lint-case-study.md), [Config Audit](second-brain-config-audit.md) | [tools/lint](../tools/lint) |
+| **lint** | Two deterministic linters on one findings format: `vault-lint` (wiki hygiene) and `claude-md-lint` (CLAUDE.md size in lines and chars, dangling imports, duplicates) | [Wiki Lint](vault-lint-case-study.md), [Config Audit](second-brain-config-audit.md) | [tools/lint](../tools/lint) |
 
 ---
 
