@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.4.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.0) — added [lint](tools/lint), two zero-dependency linters: `vault-lint` for mechanical wiki checks and `claude-md-lint` for size, dangling imports and cross-file duplicates in your CLAUDE.md stack (from the [Wiki Lint](examples/vault-lint-case-study.md) and [Config Audit](examples/second-brain-config-audit.md) case studies). Previously: [v0.3.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.3.0) (context-threshold); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.4.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.1) — added the [CLAUDE.md context trim](examples/claude-md-context-trim.md) case study (about 21% less always-loaded context). Previously: [v0.4.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.0) (lint tools); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -95,6 +95,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 | **Escalation Ladder** | Level 1: local cache → Level 2: stub lookup → Level 3: on-demand read | [All] |
 | **Compaction** | Keep active context ≤ 15K tokens | [Wiki Pipeline](examples/wiki-pipeline.md) |
 | **Thin Routers** | Startup instructions = behavior/routing only; retrieve details on demand | [Config Audit](examples/second-brain-config-audit.md) |
+| **Trim Resident Context** | Remove always-loaded text that is injected elsewhere, duplicated, or rarely needed | [CLAUDE.md Trim](examples/claude-md-context-trim.md) · [Try it](tools/lint) |
 | **Single Source of Truth** | Store durable knowledge once, reference everywhere | [All] |
 | **Deterministic Pre-filter** | Run a zero-dep script first; model only judges flagged items | [Wiki Lint](examples/vault-lint-case-study.md) · [Try it](tools/lint) · [Visual Validation](examples/visual-validation-pipeline.md) · [Try it](tools/visual-diff) |
 | **Zero-Token Content Processing** | Convert binary (PDF/DOCX/VTT) locally via subprocess; model only sees file path | [Doc Pipeline](examples/document-processing.md) · [Try it](tools/doc-convert) |
@@ -115,6 +116,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 | **RTK adoption gap** | 94% commands bypassed | → upstream fix | **1.5M tokens/30d recovered** |
 | **Wiki lint pre-filter (this repo)** | 8.5M tokens/run | ~1.2M est. | **~86% ↓** |
 | **Long-session cost per turn** | 2.1x at 250k context, 4–5x at 500k+ | `/compact` at ~250k | **59% of one model's spend was above the knee** |
+| **Always-loaded CLAUDE.md context** | 32,157 B (~8K tokens) | 25,365 B | **~21% ↓ (~1.7K tokens/session, chars/4 est.)** |
 | **Untracked spend** | 44% of spend in sessions with no task id | `/todos <id>` at session start | **Cost now has an owner** |
 
 > [!NOTE]
@@ -271,6 +273,16 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Result:** ~$700 of $1,590 sat in 198 sessions with no task id; no single task above ~3.5% of spend. Rule: open each session with `/todos <id>`
 
 [Read full case study →](examples/cost-attribution-to-tasks.md)
+</details>
+
+<details>
+<summary><strong>Case Study 14: Trimming Always-Loaded CLAUDE.md Context — ~21% less resident context</strong></summary>
+
+**Problem:** ~8K tokens of CLAUDE.md files and imports loaded every session, much of it duplicating skill descriptions and hook-injected rules
+**Fix:** Remove text that is injected elsewhere, stated in two files, or rarely needed; point to an on-demand index instead; batch edits per file
+**Result:** 32,157 → 25,365 bytes (~1.7K tokens/session, chars/4 estimate). Routing checked statically on 8 prompts, not live
+
+[Read full case study →](examples/claude-md-context-trim.md) · [Try it](tools/lint)
 </details>
 
 ---
