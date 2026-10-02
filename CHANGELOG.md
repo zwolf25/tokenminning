@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.4.1 — 2026-10-01
+
+- Added [Trimming Always-Loaded CLAUDE.md Context](examples/claude-md-context-trim.md) as Case Study 14: resident context cut from 32,157 to 25,365 bytes (about 21%, ~1.7K tokens per session, chars/4 estimate) by removing text that is already injected elsewhere, stated in two files, or rarely needed. Routing was checked statically on 8 prompts, not in a live session. Added it to the README and `examples/index.md` tables.
+
 ## v0.4.0 — 2026-09-23
 
 - Added [`tools/lint`](tools/lint) — two zero-dependency Python linters on one findings format. `vault-lint` runs the mechanical wiki checks from the [Wiki Lint](examples/vault-lint-case-study.md) case study (required frontmatter, broken `[[wikilinks]]`, required sections in order, trailing `## Recap`), generalized to flags so it needs no particular vault layout. `claude-md-lint` is the deterministic slice of the [Config Audit](examples/second-brain-config-audit.md) rubric: size including `@imports`, missing imports and paths, 3+ line cross-file duplicates, settings pasted as prose, and a per-file tier. Contradictions and vague advice stay with a model. Both have a `--self-test`, run in CI.
