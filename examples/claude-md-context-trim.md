@@ -35,7 +35,7 @@ A control test caught what a read-through did not. Each routing-only prompt was 
 - "Drop competitive intel for the team" routed to a generic logging skill instead of the intake skill. That skill was named in exactly one place: the moved folder bullet.
 - "Where does a Q1 roadmap get written?" routed to a generic working folder instead of the roadmap skill, for the same reason.
 
-Fix: keep the two routing facts in the pointer line (+~200 chars). All retests then matched the old template.
+Fix: keep the two routing facts in the pointer line (+237 chars). All retests then matched the old template.
 
 ## Lessons
 - The biggest wins were duplicates of what the harness already injects, not prose tightening.
