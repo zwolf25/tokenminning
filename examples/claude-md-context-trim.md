@@ -31,5 +31,5 @@ About -6.8K bytes, roughly **1.7K tokens (-21%)** per session, using a chars/4 e
 ## Lessons
 - The biggest wins were duplicates of what the harness already injects, not prose tightening.
 - Encode the removal tests into your audit tooling so the trim does not drift back.
-- Run [`claude-md-lint`](../tools/lint) on your own stack to find size, dangling imports and cross-file duplicates before trimming by hand.
+- Run [`claude-md-lint`](../tools/lint) on your own stack before and after: it reports resident chars and ~tokens (chars/4) plus dangling imports and cross-file duplicates, so you can reproduce the table above.
 - At 21% this is a modest win; it is worth doing once, not a headline number.

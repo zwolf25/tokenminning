@@ -41,6 +41,7 @@ With no files it audits `~/.claude/CLAUDE.md`, `~/.claude/rules/*.md`, and each 
 | `stale-path` | An explicit `~/...` or `/Users/...` path that does not exist |
 | `duplicate` | 3+ consecutive lines repeated across two files in the stack; a single repeated line is exempt |
 | `settings-leak` | A fenced block with `hooks`, `permissions` or `env` keys, which belongs in `settings.json` |
+| `resident-size` | Informational, one row first: total chars and approximate tokens (chars/4, not billed usage) across the stack, each file counted once; each `tier` row also carries its own file's chars. Comment lines are not counted |
 | `tier` | Per file: Strong (0 flags), Functional (1-2), Needs work (3+). Tiers, not scores |
 
 `@x` inside backticks or code fences is not an import, block `<!-- comments -->` are not counted (Claude strips them), and imports are followed up to 5 hops.

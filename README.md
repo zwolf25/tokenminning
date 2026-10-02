@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.4.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.1) — added the [CLAUDE.md context trim](examples/claude-md-context-trim.md) case study (about 21% less always-loaded context). Previously: [v0.4.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.0) (lint tools); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.5.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.0) — [claude-md-lint](tools/lint) now reports resident size in chars and approximate tokens, so you can reproduce the [CLAUDE.md context trim](examples/claude-md-context-trim.md) measurement. Previously: [v0.4.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.1) (context trim case study); [full changelog](CHANGELOG.md).
 
 ---
 

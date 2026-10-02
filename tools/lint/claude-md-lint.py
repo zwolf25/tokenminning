@@ -4,7 +4,7 @@
 Claude Code concatenates every CLAUDE.md it finds into context and nothing overrides anything,
 so lines that repeat or dangle are paid for every session. This flags what needs no judgment:
 size incl. @imports, missing @imports, missing explicit paths, 3+ line cross-file duplicates,
-settings.json pasted as prose. Tiers, not scores. Wishlist, Railroader and contradictions need
+settings.json pasted as prose, plus resident size in chars and ~tokens (chars/4). Tiers, not scores. Wishlist, Railroader and contradictions need
 a model; run the claude-md-audit skill for those (see ../../examples/second-brain-config-audit.md).
 
 Usage: claude-md-lint.py [FILE ...] [--format json|tsv] [--self-test]
@@ -81,6 +81,11 @@ def stack(files):
     for f in files:
         visit(Path(f), 0, frozenset())
     return order, data, totals, missing
+
+
+def chars(lines):
+    """Chars Claude loads for one file (comment lines already dropped); a newline counts per line."""
+    return sum(len(text) + 1 for _, text, _ in lines)
 
 
 def check_size(p, total, findings):
@@ -161,7 +166,11 @@ def lint(files):
     # ponytail: contradictions (A says X, B says not-X) need judgment; left to the claude-md-audit skill
     for p in order:
         n = sum(1 for f in findings if f["dimension"] != "tier" and (f["file"] == str(p) or (f["dimension"] == "duplicate" and f"in {p} " in f["detail"])))
-        findings.append(row(p, "tier", f"{tier(n)} ({n} flags, {totals[p]} lines incl. imports)", "tiers, not scores"))
+        c = chars(data[p])
+        findings.append(row(p, "tier", f"{tier(n)} ({n} flags, {totals[p]} lines incl. imports, {c:,} chars ~{c // 4:,} tokens)", "tiers, not scores"))
+    total = sum(chars(data[p]) for p in order)
+    # ponytail: chars/4 is an estimate, not billed tokens; swap in a tokenizer only if the estimate misleads
+    findings.insert(0, row("(stack)", "resident-size", f"{total:,} chars ~{total // 4:,} tokens across {len(order)} files", "informational: chars/4 estimate"))
     return findings
 
 
@@ -202,6 +211,10 @@ def self_test():
     assert tiers["a.md"] == "Needs work" and tiers["b.md"] == "Functional" and tiers["imp.md"] == "Strong", tiers
     a_total = next(x for x in f if x["dimension"] == "tier" and x["file"].endswith("a.md"))["detail"]
     assert "13 lines" in a_total, f"comment lines dropped, 2 imported lines counted: {a_total}"
+    (d / "e.md").write_text("12345678\n" * 2)
+    (d / "g.md").write_text("@e.md\n")
+    size = next(x for x in lint([d / "g.md"]) if x["dimension"] == "resident-size")["detail"]
+    assert size == "24 chars ~6 tokens across 2 files", f"18 chars imported + 6 own, each file counted once: {size}"
     big = lint([d / "big.md"])
     assert [x["dimension"] for x in big if x["dimension"] == "size"] == ["size"] and big[-1]["detail"].startswith("Functional")
     print("self-test OK")
