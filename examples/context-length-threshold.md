@@ -47,6 +47,20 @@ Capping sessions near 250k and resetting to ~100k would cut roughly 35% of spend
 - Long sessions may contain heavier work, so not all of the rise is avoidable.
 - One user, one setup. The threshold depends on your model and base context size; measure your own before copying 250k. The [`tools/context-threshold`](../tools/context-threshold) script in this repo (and the `context-length-threshold` skill in the `second-brain-skills` plugin) does this per model from your own transcripts.
 
+## Follow-up: enforce it with `CLAUDE_CODE_AUTO_COMPACT_WINDOW`
+
+A habit rule drifts. Claude Code reads the `CLAUDE_CODE_AUTO_COMPACT_WINDOW` environment variable (token count) to set the context size at which it auto-compacts; without it the window defaults large, so sessions can grow past the knee. Set it in `~/.claude/settings.json` to your own knee (here 250000):
+
+```json
+{ "env": { "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "250000" } }
+```
+
+It applies to new sessions only. Check the variable name against your Claude Code version before relying on it.
+
+**Result after two weeks (one user, one setup):** turns at or above 250k context went from 7.3% (the day before the change) to 0.0% over 14 days, so the cap holds. Cost per day (`ccusage`, 7-day average) fell from $46.95 to $23.47 over the last week, but treat that as suggestive: daily cost varied about 10x with workload, and the model mix also changed in the window. The mechanism (no turns over the knee) is the solid claim; the dollar drop is not attributable to the cap alone.
+
+Do not copy 250k. Run the threshold tool on your own history first and set the variable to the knee it finds.
+
 ## Takeaway
 
 Cost per turn grows with context, and most of the spend sits in the long tail of sessions. A one-line rule is a cheap test. Re-measure after a few weeks to see whether the >250k share of spend actually falls.
