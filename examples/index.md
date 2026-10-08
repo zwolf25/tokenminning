@@ -14,6 +14,7 @@
 | **[Derived-Doc Staleness](derived-doc-staleness.md)** | Eliminate context debt continuously, Design systems not prompts, Retrieve don't preload, Compress don't repeat | **Prevents bulk false refreshes** (about 86K tokens each) and lossy regeneration; 0 tokens when clean | content hash sidecar, size materiality, output lint, peer-median check |
 | **[Context-Length Threshold](context-length-threshold.md)** | Eliminate context debt continuously, Measure don't guess | **~2.1x** per-turn cost at 250k context; 59% of one model's spend above the knee | raw transcripts, `ccusage`, `/compact` rule |
 | **[CLAUDE.md Context Trim](claude-md-context-trim.md)** | Eliminate context debt continuously, Single source of truth, Thin routers | **~21%** less always-loaded context (32,157 → 25,365 bytes) | `claude-md-lint`, `claude-md-audit` skill |
+| **[Incremental Wiki Refresh](incremental-wiki-refresh.md)** | Design systems not prompts, Eliminate context debt continuously, Measure don't guess | **~121K** fresh tokens for a whole session vs ~565K for the earlier fold alone (single run, not like-for-like) | content hash gate, unified diff, `--mark-folded` |
 | **[Cost Attribution to Tasks](cost-attribution-to-tasks.md)** | Design systems not prompts, Eliminate context debt continuously | **44%** of spend had no task owner; per-task cost now reconciled to `ccusage` | transcripts, `/todos <id>` |
 
 ---
@@ -132,6 +133,7 @@ tokenminning/
 │   ├── wiki-pipeline.md                   ← Original: wiki pipeline optimization
 │   ├── context-length-threshold.md        ← NEW: Cost per turn vs context size
 │   ├── claude-md-context-trim.md          ← NEW: Trim always-loaded context
+│   ├── incremental-wiki-refresh.md        ← NEW: Hash gate and diff-first folding
 │   ├── cost-attribution-to-tasks.md       ← NEW: Cost joined to task ids
 │   ├── derived-doc-staleness.md           ← NEW: Hash-based staleness detection
 │   ├── document-processing.md             ← NEW: Local document pipeline

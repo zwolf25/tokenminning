@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.5.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.0) — [claude-md-lint](tools/lint) now reports resident size in chars and approximate tokens, so you can reproduce the [CLAUDE.md context trim](examples/claude-md-context-trim.md) measurement. Previously: [v0.4.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.4.1) (context trim case study); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.5.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.1) — new case study: [Incremental Wiki Refresh](examples/incremental-wiki-refresh.md), a content-hash gate plus diff-first folding for an export-and-fold pipeline. Previously: [v0.5.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.0) (claude-md-lint resident size); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -283,6 +283,16 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Result:** 32,157 → 25,365 bytes (~1.7K tokens/session, chars/4 estimate). Routing checked statically on 8 prompts, not live
 
 [Read full case study →](examples/claude-md-context-trim.md) · [Try it](tools/lint)
+</details>
+
+<details>
+<summary><strong>Case Study 15: Incremental Wiki Refresh — hash gate and diff-first folding</strong></summary>
+
+**Problem:** a scheduled export queued pages on version bumps, and an agent re-read each one in full: ~565K tokens for 27 pages, 13 of them with no material change
+**Fix:** Queue on a content hash of the normalized body, hand the agent a script-computed diff and a pre-computed target wiki, and normalize rendering noise before hashing
+**Result:** one run folded 21 pages in ~121K fresh tokens for the whole session (single run, different queues, fresh tokens only); 14 of the 21 were rendering noise, now filtered
+
+[Read full case study →](examples/incremental-wiki-refresh.md)
 </details>
 
 ---
