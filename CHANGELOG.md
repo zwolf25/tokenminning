@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.5.1 — 2026-10-08
+
+- Added [Incremental Wiki Refresh](examples/incremental-wiki-refresh.md) as Case Study 15: a content-hash gate, diff-first folding and a normalization fix for an export-and-fold pipeline. One measured run used about 121K fresh tokens for a whole session against a 565K baseline for the fold alone (single run, different queues).
+
 ## v0.5.0 — 2026-10-02
 
 - `claude-md-lint` now reports resident size: a first `resident-size` row with total chars and approximate tokens (chars/4) across the stack, and chars per file on each `tier` row. This is the measurement behind the [CLAUDE.md Context Trim](examples/claude-md-context-trim.md) case study (32,157 to 25,365 bytes), which could previously only be counted by hand. `--self-test` covers it; see [`tools/lint`](tools/lint).
