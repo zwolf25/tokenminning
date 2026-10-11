@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.5.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.1) — new case study: [Incremental Wiki Refresh](examples/incremental-wiki-refresh.md), a content-hash gate plus diff-first folding for an export-and-fold pipeline. Previously: [v0.5.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.0) (claude-md-lint resident size); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.5.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.2) — the [Context-Length Threshold](examples/context-length-threshold.md) case study now has a portable status line script and a `ccusage` before/after audit recipe. Previously: [v0.5.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.1) (Incremental Wiki Refresh); [full changelog](CHANGELOG.md).
 
 ---
 

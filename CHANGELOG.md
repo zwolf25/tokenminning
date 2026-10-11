@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.5.2 — 2026-10-11
+
+- Extended the [Context-Length Threshold](examples/context-length-threshold.md) case study with a portable status line script (context size against the auto-compact window, colored as it nears it) and a `ccusage` before/after audit recipe, including the pitfalls hit while measuring: `ccusage` reprices history, a cost-per-day drop is confounded by workload and model mix, and a cap on context does nothing for sessions that are long in turns rather than large in context.
+
 ## v0.5.1 — 2026-10-08
 
 - Added [Incremental Wiki Refresh](examples/incremental-wiki-refresh.md) as Case Study 15: a content-hash gate, diff-first folding and a normalization fix for an export-and-fold pipeline. One measured run used about 121K fresh tokens for a whole session against a 565K baseline for the fold alone (single run, different queues).
