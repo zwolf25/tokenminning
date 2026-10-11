@@ -61,6 +61,39 @@ It applies to new sessions only. Check the variable name against your Claude Cod
 
 Do not copy 250k. Run the threshold tool on your own history first and set the variable to the knee it finds.
 
+## Make it visible: context on the status line
+
+A cap you cannot see is easy to forget. This status line script (Claude Code pipes session JSON to it on stdin) prints context size against the window: grey normally, amber at 60% of the window, red at or over it. It reads the same `CLAUDE_CODE_AUTO_COMPACT_WINDOW` variable the cap uses, so the two cannot disagree. Needs `jq`.
+
+```bash
+#!/bin/bash
+input=$(cat)
+tokens=$(jq -r '.context_window.current_usage // empty
+  | (.input_tokens + .cache_creation_input_tokens + .cache_read_input_tokens)' <<<"$input")
+[ -z "$tokens" ] && exit 0
+limit=${CLAUDE_CODE_AUTO_COMPACT_WINDOW:-250000}
+color=245
+[ $((tokens * 100 / limit)) -ge 60 ] && color=214
+[ "$tokens" -ge "$limit" ] && color=196
+printf '\033[38;5;%sm%sk/%sk\033[0m' "$color" $((tokens / 1000)) $((limit / 1000))
+```
+
+Save it as `~/.claude/statusline.sh`, make it executable, and point the `statusLine` setting at it (`{ "statusLine": { "type": "command", "command": "~/.claude/statusline.sh" } }`). The `current_usage` field name is from the Claude Code build used here (2.1.236); check it against your version. The context definition (input + cache read + cache creation) is the same one the threshold analysis uses.
+
+## Audit recipe: before and after with `ccusage`
+
+1. **Baseline first.** Before changing anything, record a week of daily cost and cache-read share:
+   ```bash
+   ccusage daily --since YYYYMMDD --until YYYYMMDD --json \
+     | jq '{days:(.daily|length), avg_per_day:(([.daily[].totalCost]|add)/(.daily|length)), cache_read_share:(([.daily[].cacheReadTokens]|add)/([.daily[].totalTokens]|add))}'
+   ```
+2. **Find your knee** with [`tools/context-threshold`](../tools/context-threshold) on your own transcripts. If it reports no knee, stop; there is nothing to cap.
+3. **Set the window** to that number, and run for at least a week of new sessions.
+4. **Re-measure both windows on the same day** with the same command. `ccusage` reprices history when its pricing table updates: re-running the baseline week above, written up in this case study, gave $48.51 a day against the $46.95 recorded at the time.
+5. **Compare 7-day averages, not days.** Daily cost here ranged from $6.57 to $64.51, so a single day says nothing.
+6. **Check the mechanism separately from the dollars.** The share of turns at or above your window is the thing the cap controls. The cost per day is also moved by workload and model mix. One session in this setup cost $47.46 across 1,276 requests and peaked at 219k context, never touching the cap: long sessions are a turn-count problem the cap does not address.
+7. **Use one cost source.** OpenTelemetry's cost metric ran about 30% above `ccusage` on the same days here (cause not verified). Do not mix them in one comparison.
+
 ## Takeaway
 
 Cost per turn grows with context, and most of the spend sits in the long tail of sessions. A one-line rule is a cheap test. Re-measure after a few weeks to see whether the >250k share of spend actually falls.
