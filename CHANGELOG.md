@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## Unreleased
+
+- Added [`tools/derived-stale`](tools/derived-stale) — content-hash staleness check for derived documents (Python stdlib, no dependencies): sidecar hash, 5% size materiality, a thin-source guard that keeps a `.prev` backup, and a peer-median thin check. Extracted from the [Stale Detection](examples/derived-doc-staleness.md) case study (output lint and weekly nudge not included). Includes a `--self-test`, run in CI.
+
 ## v0.5.2 — 2026-10-11
 
 - Extended the [Context-Length Threshold](examples/context-length-threshold.md) case study with a portable status line script (context size against the auto-compact window, colored as it nears it) and a `ccusage` before/after audit recipe, including the pitfalls hit while measuring: `ccusage` reprices history, a cost-per-day drop is confounded by workload and model mix, and a cap on context does nothing for sessions that are long in turns rather than large in context.
