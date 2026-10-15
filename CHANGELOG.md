@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## Unreleased
+
+- Added [`tools/derived-stale`](tools/derived-stale) — content-hash staleness check for derived documents (Python stdlib, no dependencies): sidecar hash, 5% size materiality, a thin-source guard that keeps a `.prev` backup, and a peer-median thin check. Extracted from the [Stale Detection](examples/derived-doc-staleness.md) case study (output lint and weekly nudge not included). Includes a `--self-test`, run in CI.
+
 ## v0.5.1 — 2026-10-08
 
 - Added [Incremental Wiki Refresh](examples/incremental-wiki-refresh.md) as Case Study 15: a content-hash gate, diff-first folding and a normalization fix for an export-and-fold pipeline. One measured run used about 121K fresh tokens for a whole session against a 565K baseline for the fold alone (single run, different queues).

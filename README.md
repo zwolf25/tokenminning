@@ -252,7 +252,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Content-hash sidecar, 5% size materiality, a thin-source guard with `.prev` backup, an output lint at session start, a peer-median thin check, weekly nudge with a token estimate  
 **Result (measured):** 6 false flags silenced (about 516K tokens), 2 lossy refreshes blocked (about 172K), 0 tokens when clean. No saving on the first run; padding is not detectable
 
-[Read full case study →](examples/derived-doc-staleness.md)
+[Read full case study →](examples/derived-doc-staleness.md) · [Try it](tools/derived-stale)
 </details>
 
 <details>
