@@ -2,8 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
-## Unreleased
+## v0.6.0 — 2026-10-17
 
+- Added [`tools/statusline`](tools/statusline) — the context-size status line from the [Context-Length Threshold](examples/context-length-threshold.md) case study as a standalone script (bash plus `jq`): grey, amber at 60% of the compact window, red at or over it. Includes a `--self-test`, run in CI.
+- Added [`tools/cost-by-task`](tools/cost-by-task) — Claude Code spend per task id, joined from your own transcripts and reconciled to `ccusage` (Python stdlib plus the `ccusage` CLI). Extracted from the [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) case study; needs a task tracker exposed as MCP tools (set `--tool-prefix` and `--id-field`). Includes a `--self-test`, run in CI.
 - Added [`tools/derived-stale`](tools/derived-stale) — content-hash staleness check for derived documents (Python stdlib, no dependencies): sidecar hash, 5% size materiality, a thin-source guard that keeps a `.prev` backup, and a peer-median thin check. Extracted from the [Stale Detection](examples/derived-doc-staleness.md) case study (output lint and weekly nudge not included). Includes a `--self-test`, run in CI.
 
 ## v0.5.2 — 2026-10-11
