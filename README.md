@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.5.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.2) — the [Context-Length Threshold](examples/context-length-threshold.md) case study now has a portable status line script and a `ccusage` before/after audit recipe. Previously: [v0.5.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.1) (Incremental Wiki Refresh); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.6.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.6.0) — three new tools in [`tools/`](tools): [`cost-by-task`](tools/cost-by-task) (Claude Code spend per task id, reconciled to `ccusage`), [`derived-stale`](tools/derived-stale) (content-hash staleness check) and [`statusline`](tools/statusline) (context size against your compact window). Previously: [v0.5.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.2) (status line and `ccusage` audit recipe); [full changelog](CHANGELOG.md).
 
 ---
 
