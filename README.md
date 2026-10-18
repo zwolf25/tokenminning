@@ -262,7 +262,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Per-turn cost from raw transcripts (311 sessions), bucketed by context size; `/compact` rule set at the knee
 **Result:** ~2.1x at 250k, ~4–5x at 500k+; about 59% of one model's spend sat above 250k. Rate ratios are assumed, so the percentages are usable and absolute dollars are not
 
-[Read full case study →](examples/context-length-threshold.md) · [Try it](tools/context-threshold)
+[Read full case study →](examples/context-length-threshold.md) · [Try it](tools/context-threshold) · [Status line](tools/statusline)
 </details>
 
 <details>
