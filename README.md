@@ -272,7 +272,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Join transcript cost to task ids from tool calls, scaled to match `ccusage` totals (1590.60 vs 1590.58)
 **Result:** ~$700 of $1,590 sat in 198 sessions with no task id; no single task above ~3.5% of spend. Rule: open each session with `/todos <id>`
 
-[Read full case study →](examples/cost-attribution-to-tasks.md)
+[Read full case study →](examples/cost-attribution-to-tasks.md) · [Try it](tools/cost-by-task)
 </details>
 
 <details>
@@ -305,7 +305,7 @@ Practical applications of tokenminning to specific systems:
 |-------|-------|
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
 | [Context-Length Threshold](examples/context-length-threshold.md) · [Try it](tools/context-threshold) | Measure cost per turn vs context size; compact at the knee (~250k here) |
-| [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) | Join transcript cost to task ids; 44% of spend was untracked |
+| [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) · [Try it](tools/cost-by-task) | Join transcript cost to task ids; 44% of spend was untracked |
 | [Context Debt](examples/context-debt.md) | Stale, duplicated, or always-loaded context that costs tokens without paying back |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
 | [Memory Systems](examples/memory.md) · [Try it](tools/memory-template) | Preserve decisions/constraints, not transcripts |
