@@ -2,7 +2,7 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
-## Unreleased
+## v0.7.0 — 2026-10-22
 
 - Added [`tools/skill-usage`](tools/skill-usage) — silent `PostToolUse` hook that logs one JSONL line per skill call, plus a stdlib Python report of calls, last-used date, and installed skills never or rarely used against the size of their always-loaded listing entry (measured in characters, not tokens). Extracted from the [Skill Tooling Pattern](examples/skill-tooling-pattern.md) setup. Includes a `--self-test`.
 

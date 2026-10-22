@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.6.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.6.0) — three new tools in [`tools/`](tools): [`cost-by-task`](tools/cost-by-task) (Claude Code spend per task id, reconciled to `ccusage`), [`derived-stale`](tools/derived-stale) (content-hash staleness check) and [`statusline`](tools/statusline) (context size against your compact window). Previously: [v0.5.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.2) (status line and `ccusage` audit recipe); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.7.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.7.0) — [`skill-usage`](tools/skill-usage): log every skill call with a silent hook, then report which installed skills are never used and what they cost in the always-loaded listing. Previously: [v0.6.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.6.0) (`cost-by-task`, `derived-stale`, `statusline`); [full changelog](CHANGELOG.md).
 
 ---
 
