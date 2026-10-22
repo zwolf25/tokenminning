@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## Unreleased
+
+- Added [`tools/skill-usage`](tools/skill-usage) — silent `PostToolUse` hook that logs one JSONL line per skill call, plus a stdlib Python report of calls, last-used date, and installed skills never or rarely used against the size of their always-loaded listing entry (measured in characters, not tokens). Extracted from the [Skill Tooling Pattern](examples/skill-tooling-pattern.md) setup. Includes a `--self-test`.
+
 ## v0.6.0 — 2026-10-17
 
 - Added [`tools/statusline`](tools/statusline) — the context-size status line from the [Context-Length Threshold](examples/context-length-threshold.md) case study as a standalone script (bash plus `jq`): grey, amber at 60% of the compact window, red at or over it. Includes a `--self-test`, run in CI.
