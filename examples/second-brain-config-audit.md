@@ -167,6 +167,8 @@ Alex's skill is a read-only scorer for a code repo: it awards points for signal,
 | **This setup** | **Retuned for a knowledge base**: Duplicate means restating a skill's trigger description, a wiki section, or a parent CLAUDE.md; the codebase-file checks are dropped; persona and voice text is exempt except for verbatim duplicates or stale references; Stale Doc is verified against the skill list and wiki folder as well as paths | A personal CLAUDE.md routes to skills and wikis rather than describing a code repo |
 | **This setup** | **Caller contract and wiring**: a fixed output format so other skills can consume findings; default mode runs from the setup health check collaborators run, `hierarchy` runs inside the vault's periodic cleanup; report-only when the caller is in a confirm-first phase | The audit runs where the drift happens instead of waiting to be remembered |
 
+The skill listing is also always-loaded context. [`tools/skill-usage`](../tools/skill-usage) measures which installed skills are ever called; see [Measuring Skill Usage](skill-tooling-pattern.md#measuring-skill-usage).
+
 Split trigger for wikis tightened the same way: a wiki is a split candidate only if it is over 15K chars **and** its sections fail a load-together test, not on size alone.
 
 ### Measured results (character counts; the skill has no shell, so no token counts)

@@ -204,6 +204,12 @@ Skills live in two repositories:
 
 ---
 
+## Measuring Skill Usage
+
+Every installed skill puts its name and description in the always-loaded listing, used or not. [`tools/skill-usage`](../tools/skill-usage) logs each skill call (silent hook, zero transcript tokens) and reports which installed skills are never called.
+
+On the author's log (1,326 calls, 2026-07-19 to 2026-10-22; 129 `SKILL.md` files under `~/.claude/skills`, found recursively): 44 skills were used and 85 never. 101 had 2 or fewer calls. The listing totals 47,957 characters (name plus description), and those 101 skills account for 33,275 of them (69%). Characters, not tokens; single machine; a zero may be a new skill. Plugin skill directories were not scanned.
+
 ## Creating New Skills
 
 The `skill-creator` skill bootstraps new skills:
@@ -226,6 +232,7 @@ Generates:
 ## Related Examples
 
 - [`document-processing.md`](document-processing.md) — Pipeline of 3 composed skills (doc-convert → vtt-normalizer → doc-ingest)
+- [`second-brain-config-audit.md`](second-brain-config-audit.md) — audits what the always-loaded config costs; `tools/skill-usage` does the same for the skill listing
 - [`web-scraping-escalation.md`](web-scraping-escalation.md) — 7-level ladder encoded in `firecrawl` skill fallback logic
 
 ---

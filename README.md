@@ -305,6 +305,7 @@ Practical applications of tokenminning to specific systems:
 |-------|-------|
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
 | [Context-Length Threshold](examples/context-length-threshold.md) · [Try it](tools/context-threshold) | Measure cost per turn vs context size; compact at the knee (~250k here) |
+| [Skill Usage](examples/skill-tooling-pattern.md#measuring-skill-usage) · [Try it](tools/skill-usage) | Log skill calls; find installed skills that load every session but are never used |
 | [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) | Join transcript cost to task ids; 44% of spend was untracked |
 | [Context Debt](examples/context-debt.md) | Stale, duplicated, or always-loaded context that costs tokens without paying back |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
