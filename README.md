@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.5.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.2) — the [Context-Length Threshold](examples/context-length-threshold.md) case study now has a portable status line script and a `ccusage` before/after audit recipe. Previously: [v0.5.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.1) (Incremental Wiki Refresh); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.6.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.6.0) — three new tools in [`tools/`](tools): [`cost-by-task`](tools/cost-by-task) (Claude Code spend per task id, reconciled to `ccusage`), [`derived-stale`](tools/derived-stale) (content-hash staleness check) and [`statusline`](tools/statusline) (context size against your compact window). Previously: [v0.5.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.5.2) (status line and `ccusage` audit recipe); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -262,7 +262,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Per-turn cost from raw transcripts (311 sessions), bucketed by context size; `/compact` rule set at the knee
 **Result:** ~2.1x at 250k, ~4–5x at 500k+; about 59% of one model's spend sat above 250k. Rate ratios are assumed, so the percentages are usable and absolute dollars are not
 
-[Read full case study →](examples/context-length-threshold.md) · [Try it](tools/context-threshold)
+[Read full case study →](examples/context-length-threshold.md) · [Try it](tools/context-threshold) · [Status line](tools/statusline)
 </details>
 
 <details>
@@ -272,7 +272,7 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 **Fix:** Join transcript cost to task ids from tool calls, scaled to match `ccusage` totals (1590.60 vs 1590.58)
 **Result:** ~$700 of $1,590 sat in 198 sessions with no task id; no single task above ~3.5% of spend. Rule: open each session with `/todos <id>`
 
-[Read full case study →](examples/cost-attribution-to-tasks.md)
+[Read full case study →](examples/cost-attribution-to-tasks.md) · [Try it](tools/cost-by-task)
 </details>
 
 <details>
@@ -306,7 +306,7 @@ Practical applications of tokenminning to specific systems:
 | [Claude Code & `CLAUDE.md`](examples/claude-code.md) | Keep config focused; retrieve on demand |
 | [Context-Length Threshold](examples/context-length-threshold.md) · [Try it](tools/context-threshold) | Measure cost per turn vs context size; compact at the knee (~250k here) |
 | [Skill Usage](examples/skill-tooling-pattern.md#measuring-skill-usage) · [Try it](tools/skill-usage) | Log skill calls; find installed skills that load every session but are never used |
-| [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) | Join transcript cost to task ids; 44% of spend was untracked |
+| [Cost Attribution to Tasks](examples/cost-attribution-to-tasks.md) · [Try it](tools/cost-by-task) | Join transcript cost to task ids; 44% of spend was untracked |
 | [Context Debt](examples/context-debt.md) | Stale, duplicated, or always-loaded context that costs tokens without paying back |
 | [MCP / Tool Scoping](examples/mcp.md) | Load capabilities only when workflow needs them |
 | [Memory Systems](examples/memory.md) · [Try it](tools/memory-template) | Preserve decisions/constraints, not transcripts |
