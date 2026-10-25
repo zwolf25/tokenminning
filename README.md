@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.7.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.7.0) — [`skill-usage`](tools/skill-usage): log every skill call with a silent hook, then report which installed skills are never used and what they cost in the always-loaded listing. Previously: [v0.6.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.6.0) (`cost-by-task`, `derived-stale`, `statusline`); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.8.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.0) — [`retrieval-gaps`](tools/retrieval-gaps): count the times you had to point Claude at the right file before building retrieval infrastructure, plus the [Evaluate Before Adopting](examples/evaluate-before-adopting.md) case study (0 verified misses in 3,306 messages). Previously: [v0.7.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.7.0) (`skill-usage`); [full changelog](CHANGELOG.md).
 
 ---
 
