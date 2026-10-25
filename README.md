@@ -1,7 +1,7 @@
 # Tokenminning
 
 <p align="center">
-  <img src="resources/logo-dark.png" alt="Tokenminning" width="400"/>
+  <img src="resources/logo.svg" alt="Tokenminning" width="400"/>
 </p>
 
 <p align="center">
@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.8.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.0) — [`retrieval-gaps`](tools/retrieval-gaps): count the times you had to point Claude at the right file before building retrieval infrastructure, plus the [Evaluate Before Adopting](examples/evaluate-before-adopting.md) case study (0 verified misses in 3,306 messages). Previously: [v0.7.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.7.0) (`skill-usage`); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.8.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.1) — all diagrams redrawn as editable SVG and Mermaid (11.5 MB of PNGs down to 48 KB). Previously: [v0.8.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.0) (`retrieval-gaps`); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -47,7 +47,7 @@
 >
 > **Tokenminning is:** improving information density, eliminating context debt, and designing systems where the right context arrives at the right time.
 
-![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning.png)
+![Tokenmaxxing versus Tokenminning: five paired shifts from more context to better context](resources/TokenmaxxingVsTokenminning.svg)
 
 ---
 
@@ -79,7 +79,20 @@ grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
 | 6 | **⚙️ Optimize context, not complexity** | "What does the model need right now?" |
 | 7 | **🧹 Eliminate context debt continuously** | Audit memories, routing, config like production code |
 
-![Tokenminning Decision Tree](resources/TokenminningDecisionTree.png)
+```mermaid
+flowchart TD
+    Q{"Need this information?"}
+    Q -- NO --> N["Don't load it."]
+    Q -- YES --> Y["Read the live source."]
+    Q -- MAYBE --> G{"Grep first"}
+    G -- Found --> F["Read only matches."]
+    G -- "Not found" --> A["Ask the human or fail fast."]
+    classDef ok fill:#12241F,stroke:#10C99A,color:#E8EAED
+    classDef bad fill:#2A1E14,stroke:#F0A04B,color:#E8EAED
+    class F,Y ok
+    class N,A bad
+```
+*Default: don't load unless justified.*
 
 > [!NOTE]
 > These principles emerged from production Second Brain workflows at ServiceChannel, not theoretical speculation.
@@ -343,8 +356,25 @@ Tokenminning operates on a simple **escalation ladder** — the model only sees 
 
 **The key insight:** Most systems preload Level 3. Tokenminning makes Level 1 the default, Level 2 the bridge, Level 3 the exception.
 
-![Before vs After Architecture](resources/BeforevsAfterArchitecture.png)
-![Retrieval Escalation Pyramid](resources/RetrievalEscalationPyramid.png)
+```mermaid
+flowchart LR
+    subgraph B["Before: 211K words, full-body clones, high token cost"]
+        direction TB
+        b1["AI session"] --> b2["Read wiki 1"] --> b3["Read wiki 2"] --> b4["... Read wiki 68"] --> b5["Answer"]
+    end
+    subgraph A["After: 28K words, stub-first, on-demand retrieval"]
+        direction TB
+        a1["AI session"] --> a2["Read stub"] --> a3{"Relevant?"}
+        a3 -- Yes --> a4["Read live source"] --> a5["Answer"]
+        a3 -- No --> a6["Skip"] --> a5
+    end
+    B ~~~ A
+    classDef bad fill:#2A1E14,stroke:#F0716A,color:#E8EAED
+    classDef ok fill:#12241F,stroke:#10C99A,color:#E8EAED
+    class b1,b2,b3,b4,b5 bad
+    class a1,a2,a3,a4,a5,a6 ok
+```
+![Retrieval Escalation Ladder: local wiki 60% of lookups at 0 tokens, stub 30% at 50-100, live read 10% at 2K-5K](resources/RetrievalEscalationLadder.svg)
 
 ---
 
@@ -393,15 +423,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 ## Visual Reference
 
 <details>
-<summary><strong>Architecture diagrams & decision flows</strong></summary>
+<summary><strong>More diagrams</strong></summary>
 
-| Diagram | Description |
-|---------|-------------|
-| ![Tokenmaxxing vs Tokenminning](resources/TokenmaxxingVsTokenminning.png) | Core contrast visualization |
-| ![Before vs After Architecture](resources/BeforevsAfterArchitecture.png) | System architecture comparison |
-| ![Tokenminning Decision Tree](resources/TokenminningDecisionTree.png) | Decision flow for technique selection |
-| ![Context Surface](resources/ContextSurface.png) | Context surface vs. underlying system |
-| ![Retrieval Escalation Pyramid](resources/RetrievalEscalationPyramid.png) | Escalation ladder visual |
+- [Context Surface](resources/ContextSurface.svg): optimize what crosses the boundary into the model
+- [Grep Before Read](resources/GrepBeforeRead.svg): 402 files filtered to 31 reads
+- [Knowledge Bloat Cascade](resources/KnowledgeBloatCascade.svg): how full clones drift into stale copies
+- [Second Brain cover](resources/SecondBrainCoverImage.svg): dormant notes versus selective retrieval
 
 </details>
 
