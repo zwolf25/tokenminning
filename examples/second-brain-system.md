@@ -1,6 +1,6 @@
 # Case Study: Second Brain Token Optimization
 
-![Second Brain Cover Image](../resources/SecondBrainCoverImage.png)
+![Second Brain token optimization: dormant notes, four retrieved into the model](../resources/SecondBrainCoverImage.svg)
 
 ## The System
 
@@ -40,7 +40,7 @@ Collaborator A edits shared wiki
 
 This wasn't a one-time bug. It was a **systemic design flaw**. The system assumed fresh clones meant fresh data. It didn't.
 
-![Knowledge Bloat Cascade](../resources/KnowledgeBloatCascade.png)
+![Knowledge bloat cascade: 68 clones, 45 stale, conflict copies, silent drift](../resources/KnowledgeBloatCascade.svg)
 
 ---
 
@@ -99,7 +99,24 @@ for stub in shared_clones:  # 68 iterations
 ```
 **Cost**: 28K words read. 87% reduction.
 
-![Before vs After Architecture](../resources/BeforevsAfterArchitecture.png)
+```mermaid
+flowchart LR
+    subgraph B["Before: 211K words, full-body clones, high token cost"]
+        direction TB
+        b1["AI session"] --> b2["Read wiki 1"] --> b3["Read wiki 2"] --> b4["... Read wiki 68"] --> b5["Answer"]
+    end
+    subgraph A["After: 28K words, stub-first, on-demand retrieval"]
+        direction TB
+        a1["AI session"] --> a2["Read stub"] --> a3{"Relevant?"}
+        a3 -- Yes --> a4["Read live source"] --> a5["Answer"]
+        a3 -- No --> a6["Skip"] --> a5
+    end
+    B ~~~ A
+    classDef bad fill:#2A1E14,stroke:#F0716A,color:#E8EAED
+    classDef ok fill:#12241F,stroke:#10C99A,color:#E8EAED
+    class b1,b2,b3,b4,b5 bad
+    class a1,a2,a3,a4,a5,a6 ok
+```
 
 **When content IS needed**:
 ```python
@@ -136,7 +153,7 @@ for path in unprocessed:
 - `$1.20 saved per run`
 - Same correctness, 92% fewer I/O operations
 
-![Grep Before Read](../resources/GrepBeforeRead.png)
+![Grep before read: 402 files filtered to 31 reads](../resources/GrepBeforeRead.svg)
 
 ---
 
@@ -172,7 +189,7 @@ for source, meta in manifest.items():
 
 ## Escalation Ladder: How Lookups Work
 
-![Retrieval Escalation Pyramid](../resources/RetrievalEscalationPyramid.png)
+![Retrieval escalation ladder](../resources/RetrievalEscalationLadder.svg)
 
 When a collaborator asks "where is this info?":
 
