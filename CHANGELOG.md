@@ -2,7 +2,7 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
-## Unreleased
+## v0.8.0 — 2026-10-25
 
 - Added [`tools/retrieval-gaps`](tools/retrieval-gaps) — mines your own Claude Code transcripts for the times you had to point Claude at the right file ("it's in the X wiki", "you missed that"), so you can count real retrieval misses before building retrieval infrastructure. Python stdlib, local, no model tokens; includes a `--self-test`, run in CI. Extracted from the new [Evaluate Before Adopting](examples/evaluate-before-adopting.md) case study.
 
