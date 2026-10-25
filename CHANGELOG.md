@@ -4,6 +4,7 @@ One entry per release, newest first. Not a log of every commit — see git histo
 
 ## Unreleased
 
+- Added [`tools/retrieval-gaps`](tools/retrieval-gaps) — mines your own Claude Code transcripts for the times you had to point Claude at the right file ("it's in the X wiki", "you missed that"), so you can count real retrieval misses before building retrieval infrastructure. Python stdlib, local, no model tokens; includes a `--self-test`, run in CI. Extracted from the new [Evaluate Before Adopting](examples/evaluate-before-adopting.md) case study.
 - Added [`tools/skill-usage`](tools/skill-usage) — silent `PostToolUse` hook that logs one JSONL line per skill call, plus a stdlib Python report of calls, last-used date, and installed skills never or rarely used against the size of their always-loaded listing entry (measured in characters, not tokens). Extracted from the [Skill Tooling Pattern](examples/skill-tooling-pattern.md) setup. Includes a `--self-test`.
 
 ## v0.6.0 — 2026-10-17
