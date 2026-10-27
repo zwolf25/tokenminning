@@ -15,6 +15,7 @@ jobs:
       - run: python3 tools/derived-stale/derived-stale.py --self-test
       - run: python3 tools/skill-usage/skill-usage.py --self-test
       - run: python3 tools/retrieval-gaps/retrieval-gaps.py --self-test
+      - run: bash tools/loop-detect/loop-detect.sh --self-test
       - run: python3 tools/lint/vault-lint.py --self-test
       - run: python3 tools/lint/claude-md-lint.py --self-test
       - run: npm ci --prefix tools/visual-diff && node tools/visual-diff/visual-diff.js --self-test

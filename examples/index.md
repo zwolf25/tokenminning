@@ -147,6 +147,7 @@ tokenminning/
 │   ├── context-threshold/                 ← Runnable: cost-per-turn vs context size
 │   ├── cost-by-task/                      ← Runnable: transcript cost joined to task ids
 │   ├── statusline/                        ← Runnable: context size on the status line
+│   ├── loop-detect/                       ← Runnable: retry-loop guard hook
 │   ├── lint/                              ← Runnable: vault-lint + claude-md-lint
 │   └── visual-diff/                       ← Runnable: pixel-diff pre-filter
 └── ...

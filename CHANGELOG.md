@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## Unreleased
+
+- Added [`tools/loop-detect`](tools/loop-detect) — a `PreToolUse` hook that asks for confirmation on the 3rd identical tool call in a row, to catch retry loops (bash plus `jq`). No measured savings: zero such loops in the author's 13,753-call history. Includes a `--self-test`, run in CI.
+
 ## v0.8.1 — 2026-10-25
 
 - Replaced the nine AI-generated PNGs in `resources/` (11.5 MB) with seven hand-built SVGs (48 KB) on one dark-card style, plus two Mermaid diagrams for the decision tree and before/after flow. Text is now real text, so a number change is an edit, not a regeneration. Fixed the typo ("Retrieval"), garbled labels and other-vendor logos in the old images, and removed the duplicated "Visual Reference" table. `ContextSurface` and the cover image now have alt text that states their point.
