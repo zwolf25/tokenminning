@@ -2,7 +2,7 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
-## Unreleased
+## v0.9.0 — 2026-10-26
 
 - Added [`tools/loop-detect`](tools/loop-detect) — a `PreToolUse` hook that asks for confirmation on the 3rd identical tool call in a row, to catch retry loops (bash plus `jq`). No measured savings: zero such loops in the author's 13,753-call history. Includes a `--self-test`, run in CI.
 
