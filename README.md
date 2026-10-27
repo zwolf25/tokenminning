@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.8.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.1) — all diagrams redrawn as editable SVG and Mermaid (11.5 MB of PNGs down to 48 KB). Previously: [v0.8.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.0) (`retrieval-gaps`); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.9.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.0) — `loop-detect`, a hook that asks before a 3rd identical tool call in a row. Previously: [v0.8.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.1) (SVG diagrams); [full changelog](CHANGELOG.md).
 
 ---
 
