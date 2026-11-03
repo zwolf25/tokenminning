@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.9.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.0) — `loop-detect`, a hook that asks before a 3rd identical tool call in a row. Previously: [v0.8.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.8.1) (SVG diagrams); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.9.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.1) — [`BACKLOG.md`](BACKLOG.md), a living list of planned improvements. Previously: [v0.9.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.0) (`loop-detect`); [full changelog](CHANGELOG.md).
 
 ---
 
