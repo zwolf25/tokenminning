@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.9.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.1) — [`BACKLOG.md`](BACKLOG.md), a living list of planned improvements. Previously: [v0.9.0](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.0) (`loop-detect`); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.9.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.2) — CI on macOS and a clear error for `anydoc_to_md.py`. Previously: [v0.9.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.1) (`BACKLOG.md`); [full changelog](CHANGELOG.md).
 
 ---
 
