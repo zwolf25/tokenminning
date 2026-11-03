@@ -15,7 +15,6 @@ Living list of planned updates and improvements. Newest review first in the log 
 
 | ID | Pri | Item | Notes | Status |
 |----|-----|------|-------|--------|
-| B-001 | P1 | `tools/doc-convert` AnyDoc path is not covered by CI or `--self-test`. `anydoc_to_md.py` does `import anydoc` and only works through `uv run --with firecrawl-anydoc`; a plain `python3` run fails with `ModuleNotFoundError`. | Catch `ImportError` and print the `uv run` command. Add an AnyDoc case to the self-test, or state the gap in the README. | todo |
 | B-002 | P1 | Case studies cite measured numbers (87%, 99.4%, 59% above the knee) that nobody can re-check; the data is private. | Add a `Method / Reproduce` box per case study: data source, sample size, date, what is estimated. Mirror the caveats already used in CS10 and CS12. | todo |
 | B-003 | P2 | README "Real-World Results" and "Tooling Measured Results" mix measured and estimated values in one column (for example "~1.2M est."). | Add an `Evidence` column: measured / estimated / single run. | todo |
 | B-004 | P2 | "100+ versioned skills", "100% tool consistency", "100x faster" are unsourced. | Cite a count and method, or reword. Claims like these cut against the repo's own "measured results" bar. | todo |
@@ -26,7 +25,6 @@ Living list of planned updates and improvements. Newest review first in the log 
 
 | ID | Pri | Item | Notes | Status |
 |----|-----|------|-------|--------|
-| B-010 | P1 | CI runs only on `ubuntu-latest`. Tools are used on macOS (`md5`/`shasum` branches in `loop-detect`, `statusline`). | Add a `macos-latest` matrix leg. | todo |
 | B-011 | P2 | No pinned Python version in CI; tools claim "stdlib only". | Pin `actions/setup-python` (3.9 and latest) so the stdlib claim is tested. | todo |
 | B-012 | P2 | `check-links.py` checks relative links only. External links (shields, medium, upstream repos, issue #68951) can rot. | Add a scheduled (weekly) external-link check, non-blocking. | todo |
 | B-013 | P2 | `check-links.py` does not check `#anchor` targets. README nav (`#case-studies`, `#principles`) can break silently. | Validate heading anchors for local `.md` targets. | todo |
@@ -59,7 +57,8 @@ Living list of planned updates and improvements. Newest review first in the log 
 
 | ID | Item | Release |
 |----|------|---------|
-| — | none yet | — |
+| B-001 | AnyDoc path: clear `uv run` error and self-test (real conversion still untested) | v0.9.2 |
+| B-010 | CI matrix adds `macos-latest` | v0.9.2 |
 
 ## Review log
 

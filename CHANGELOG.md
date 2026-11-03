@@ -2,6 +2,11 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.9.2 — 2026-11-02
+
+- CI now runs every check on `macos-latest` as well as Ubuntu, so the macOS branches in `loop-detect` and `statusline` are tested.
+- `tools/doc-convert/anydoc_to_md.py` now exits with the `uv run --with firecrawl-anydoc` command when `anydoc` is missing, instead of a `ModuleNotFoundError` traceback. Added a `--self-test` for that message, run in CI. It does not run a real AnyDoc conversion; the [README](tools/doc-convert/README.md) says so.
+
 ## v0.9.1 — 2026-11-02
 
 - Added [`BACKLOG.md`](BACKLOG.md) — a living list of planned updates and improvements (33 items from a full review at v0.9.0, with IDs, priorities and maintenance rules), linked from the README and [CONTRIBUTING](CONTRIBUTING.md).

@@ -31,6 +31,8 @@ npm install
 uv run --with firecrawl-anydoc --no-project anydoc_to_md.py <source> <output>.md
 ```
 
+Plain `python3 anydoc_to_md.py` exits with this same command if `anydoc` is missing. The self-test (`python3 anydoc_to_md.py --self-test`) covers that message only; it does not run a real conversion, which needs `uv` and a network fetch on first use.
+
 Handles DOCX, XLSX, PPTX, RTF, ODT, ODS, ODP, EPUB, CSV, and text-based PDF. Falls back to `markitdown` (if installed) for scanned/image-heavy PDFs, HTML, and images — or if AnyDoc errors on a file:
 
 ```bash
