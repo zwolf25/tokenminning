@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.9.1 — 2026-11-02
+
+- Added [`BACKLOG.md`](BACKLOG.md) — a living list of planned updates and improvements (33 items from a full review at v0.9.0, with IDs, priorities and maintenance rules), linked from the README and [CONTRIBUTING](CONTRIBUTING.md).
+
 ## v0.9.0 — 2026-10-26
 
 - Added [`tools/loop-detect`](tools/loop-detect) — a `PreToolUse` hook that asks for confirmation on the 3rd identical tool call in a row, to catch retry loops (bash plus `jq`). No measured savings: zero such loops in the author's 13,753-call history. Includes a `--self-test`, run in CI.
