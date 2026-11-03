@@ -404,7 +404,7 @@ We welcome real-world examples, counterexamples, benchmarks, and tool-specific p
 3. **Counterexamples** — Where tokenminning *doesn't* apply (valuable!)
 4. **Tool patterns** — Claude Code, Cursor, Codex, Continue, etc.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details, and [BACKLOG.md](BACKLOG.md) for planned work.
 
 ---
 

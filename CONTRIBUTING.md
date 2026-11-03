@@ -36,6 +36,10 @@ We welcome real-world examples, counterexamples, and tool-specific patterns from
 4. Add a "Try it" link to the matching README.md table row
 5. Open a PR
 
+## Backlog
+
+Planned updates and improvements live in [BACKLOG.md](BACKLOG.md). Pick an open item, or propose one by PR.
+
 ## Discussion First
 
 For exploration, questions, or "does this belong here?" — start a [Discussion](https://github.com/zwolf25/tokenminning/discussions) instead.
