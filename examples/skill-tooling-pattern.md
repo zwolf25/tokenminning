@@ -69,7 +69,7 @@
 | **Infra/Config** | `mcp-builder`, `skill-creator`, `update-config`, `keybindings-help`, `init`, `run`, `verify`, `fewer-permission-prompts`, `loop`, `schedule` | Tooling, automation, env config |
 | **Code Quality** | `code-review`, `security-review`, `simplify`, `playwright-test` | Review, test, verify |
 
-**Total: 100+ skills** across 14 categories. Each: versioned, composable, contract-driven.
+**Total: many skills (count not audited)** across 14 categories. Each: versioned, composable, contract-driven.
 
 ---
 
@@ -196,7 +196,7 @@ Skills live in two repositories:
 | Metric | Prompt-Based | Skill System | Improvement |
 |--------|--------------|--------------|-------------|
 | **Token waste on repeated instructions** | High (re-prompt every task) | Zero (contract loaded once) | **Eliminated** |
-| **Consistency of tool usage** | Variable (human-dependent) | 100% (enforced by skill) | **Guaranteed** |
+| **Consistency of tool usage** | Variable (human-dependent) | Set by the skill contract | **Observed, not measured** |
 | **Onboarding new capability** | Re-teach via prompt | Install plugin → auto-routes | **Minutes vs hours** |
 | **Composability** | Manual (copy-paste) | Native (skills call skills) | **Native** |
 | **Version control** | None (chat history) | Git + plugin semver | **Full** |
@@ -244,5 +244,5 @@ Generates:
 - **Skill metadata**: `~/.claude/plugins/cache/<plugin>/<skill>/SKILL.md` (versioned per plugin)
 - **Plugin registry**: `~/.claude/plugins/plugin-registry.json`
 
-Run `ls ~/.claude/skills/` to see all 100+ available skills.
+Run `ls ~/.claude/skills/` to see all available skills.
 Run `/skills` in Claude Code for interactive list with descriptions.

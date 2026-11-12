@@ -2,6 +2,13 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.9.3 — 2026-11-12
+
+- README landing page is smaller (27 KB → 21 KB): the 15 case-study `<details>` blocks are now one table row each, with the full write-up in [`examples/`](examples/index.md).
+- README "Real-World Results" and "Tooling Measured Results" gain an **Evidence** column (measured, estimated, single run, qualitative). The unsourced "100x faster", "100% tool consistency" and "100+ skills" claims are reworded or marked as observed, not measured, in the README, [`skill-tooling-pattern.md`](examples/skill-tooling-pattern.md) and [`examples/index.md`](examples/index.md).
+- Quick Start is now three runnable steps built on [`claude-md-lint.py`](tools/lint/claude-md-lint.py), replacing a `grep` of private paths and two comment-only steps.
+- [`BACKLOG.md`](BACKLOG.md): re-review adds seven items (B-007, B-008, B-017, B-018, B-027, B-028, B-029) and reprioritizes; five items shipped. GitHub topics and homepage are now set.
+
 ## v0.9.2 — 2026-11-02
 
 - CI now runs every check on `macos-latest` as well as Ubuntu, so the macOS branches in `loop-detect` and `statusline` are tested.
