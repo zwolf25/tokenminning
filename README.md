@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.9.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.2) — CI on macOS and a clear error for `anydoc_to_md.py`. Previously: [v0.9.1](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.1) (`BACKLOG.md`); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.9.3](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.3) — a smaller README (case studies as one table), an Evidence column on every results table, and a runnable Quick Start. Previously: [v0.9.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.2); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -53,17 +53,19 @@
 
 ## Quick Start
 
-Tokenminning isn't a tool—it's a design philosophy. Apply it in 3 steps:
+Tokenminning is a design philosophy; the tools here measure it on your own setup. Three steps, about five minutes:
 
 ```bash
-# 1. Audit what's always loaded
-grep -r "always.*load\|preload\|startup" .claude/ ~/.claude/ CLAUDE.md
+git clone https://github.com/zwolf25/tokenminning && cd tokenminning
 
-# 2. Replace full clones with stubs (summary + source-path)
-# 3. Add escalation ladder: local cache → stub → on-demand read
+# 1. Audit what loads every session (stdlib Python, read-only, never writes)
+python3 tools/lint/claude-md-lint.py
+
+# 2. Read the output: resident size in chars and ~tokens, dangling @imports, duplicated blocks.
+# 3. Apply one trim (delete a duplicate or an @import you never use), then re-run step 1.
 ```
 
-**Start here:** Read the [Principles](#principles) → Pick a [Case Study](#case-studies) → Apply one technique to your setup.
+**Then:** read the [Principles](#principles), pick a [Case Study](#case-studies), and apply one technique.
 
 ---
 
@@ -120,193 +122,63 @@ flowchart TD
 
 ## Real-World Results
 
-| Metric | Before | After | Change |
-|:---|:---:|:---:|:---:|
-| **Second Brain wiki words** | 211K | 28K | **87% ↓** |
-| **Wiki pipeline cost/run** | $50+ (11 agents) | $15–25 (2–3 agents) | **~70% ↓ cost, 80% ↓ agents** |
-| **CLAUDE.md size** | ~48.6 KB | 34.4 KB | **29% ↓ (~3,500 tokens/session)** |
-| **Stale sync clones** | 66% | 0% | **100% eliminated** |
-| **RTK adoption gap** | 94% commands bypassed | → upstream fix | **1.5M tokens/30d recovered** |
-| **Wiki lint pre-filter (this repo)** | 8.5M tokens/run | ~1.2M est. | **~86% ↓** |
-| **Long-session cost per turn** | 2.1x at 250k context, 4–5x at 500k+ | `/compact` at ~250k | **59% of one model's spend was above the knee** |
-| **Always-loaded CLAUDE.md context** | 32,157 B (~8K tokens) | 25,365 B | **~21% ↓ (~1.7K tokens/session, chars/4 est.)** |
-| **Untracked spend** | 44% of spend in sessions with no task id | `/todos <id>` at session start | **Cost now has an owner** |
+Evidence column: **measured** = counted from real data; **estimated** = derived with stated assumptions; **single run** = one observation. The data behind these is private; each case study states its method and caveats, and B-002 in the [backlog](BACKLOG.md) tracks making them re-checkable.
+
+| Metric | Before | After | Change | Evidence |
+|:---|:---:|:---:|:---:|:---:|
+| **Second Brain wiki words** | 211K | 28K | **87% ↓** | measured |
+| **Wiki pipeline cost/run** | $50+ (11 agents) | $15–25 (2–3 agents) | **~70% ↓ cost, 80% ↓ agents** | single run |
+| **CLAUDE.md size** | ~48.6 KB | 34.4 KB | **29% ↓ (~3,500 tokens/session)** | measured (bytes); tokens estimated |
+| **Stale sync clones** | 66% | 0% | **100% eliminated** | measured |
+| **RTK adoption gap** | 94% commands bypassed | → upstream fix | **1.5M tokens/30d recovered** | estimated |
+| **Wiki lint pre-filter (this repo)** | 8.5M tokens/run | ~1.2M est. | **~86% ↓** | estimated |
+| **Long-session cost per turn** | 2.1x at 250k context, 4–5x at 500k+ | `/compact` at ~250k | **59% of one model's spend was above the knee** | measured (rate ratios assumed) |
+| **Always-loaded CLAUDE.md context** | 32,157 B (~8K tokens) | 25,365 B | **~21% ↓ (~1.7K tokens/session, chars/4 est.)** | measured (bytes); tokens estimated |
+| **Untracked spend** | 44% of spend in sessions with no task id | `/todos <id>` at session start | **Cost now has an owner** | measured |
 
 > [!NOTE]
-> These are measured results from production Second Brain workflows, not synthetic benchmarks.
+> These come from production Second Brain workflows, not synthetic benchmarks, except Case Study 10, which is labeled synthetic.
 
 ---
 
 ## Tooling Measured Results
 
-*Production skill stack metrics (from Case Studies 6–8):*
+*Production skill stack figures (from Case Studies 6–8). Token counts for these are author estimates; the case studies do not state a sample size.*
 
-| Workflow | Before (Prompt-Based) | After (Skill System) | Improvement |
-|:---|:---:|:---:|:---:|
-| **50-page PDF → Wiki** | ~80K tokens, manual | ~500 tokens, automated | **99.4% ↓** |
-| **2-hr VTT → Decisions** | ~45K tokens, error-prone | ~300 tokens, schema-enforced | **99.3% ↓** |
-| **Competitor research (10 sites)** | ~500K tokens, ad-hoc | ~5K tokens, ladder + cache | **99% ↓** |
-| **Market research report** | $50+, 11 agents, manual | $15-25, 2-3 agents, pipeline | **~70% cost ↓** |
-| **Context debt (stale clones)** | 66% of files | 0% (fingerprint dedup) | **Eliminated** |
-| **Prompt drift / repeated instructions** | High (re-prompt every task) | Zero (contract loaded once) | **Eliminated** |
-| **Tool usage consistency** | Variable (human-dependent) | 100% (enforced by skill) | **Guaranteed** |
-| **New capability onboarding** | Hours (re-teach via prompt) | Minutes (install → auto-routes) | **100x faster** |
+| Workflow | Before (Prompt-Based) | After (Skill System) | Improvement | Evidence |
+|:---|:---:|:---:|:---:|:---:|
+| **50-page PDF → Wiki** | ~80K tokens, manual | ~500 tokens, automated | **99.4% ↓** | estimated |
+| **2-hr VTT → Decisions** | ~45K tokens, error-prone | ~300 tokens, schema-enforced | **99.3% ↓** | estimated |
+| **Competitor research (10 sites)** | ~500K tokens, ad-hoc | ~5K tokens, ladder + cache | **99% ↓** | estimated |
+| **Market research report** | $50+, 11 agents, manual | $15-25, 2-3 agents, pipeline | **~70% cost ↓** | single run |
+| **Context debt (stale clones)** | 66% of files | 0% (fingerprint dedup) | **Eliminated** | measured |
+| **Prompt drift / repeated instructions** | Re-prompt every task | Contract loaded once | **Observed, not measured** | qualitative |
+| **Tool usage consistency** | Varies by person | Set by the skill contract | **Observed, not measured** | qualitative |
+| **New capability onboarding** | Hours (re-teach via prompt) | Minutes (install → auto-routes) | **Observed, not timed** | qualitative |
 
 ---
 
 ## Case Studies
 
-<details>
-<summary><strong>Case Study 1: Second Brain — 211K → 28K words (87% reduction)</strong></summary>
+One row each; the full problem, fix, result and caveats live in the linked file.
 
-**Problem:** Team knowledge vault full of full-body clones  
-**Fix:** Stub Pattern + Grep-before-read + Escalation ladder  
-**Result:** 87% word reduction, $15–25 → $2–4/session, 66% → 0% stale clones
-
-[Read full case study →](examples/second-brain-system.md)
-</details>
-
-<details>
-<summary><strong>Case Study 2: RTK & LLMLingua Evaluation — 1.5M token adoption gap found</strong></summary>
-
-**Problem:** Which external token tools improve CLI setup?  
-**Fix:** Evaluated 4 repos → kept RTK (deterministic tool-output compression), rejected LLMLingua (lossy prompt compression)  
-**Discovery:** `rtk discover` revealed only 6% of Bash calls used RTK (~1.5M tokens/30d missed)
-
-[Read full case study →](examples/rtk-llmlingua-evaluation.md)
-</details>
-
-<details>
-<summary><strong>Case Study 3: Config & Memory Audit — 3,500 tokens/session recurring savings</strong></summary>
-
-**Problem:** CLAUDE.md files bloated, MEMORY.md growing unbounded  
-**Fix:** 4-type memory classification + CLAUDE.md consistency audit + monthly auto-enforcement  
-**Result:** 29% CLAUDE.md reduction, MEMORY.md → 0 bytes, recurring ~3,500 tokens/session saved  
-**Follow-up:** a noise-taxonomy audit skill took a further 22–29% off the same files and the collaborator template (character counts)
-
-[Read full case study →](examples/second-brain-config-audit.md) · [Try it](tools/lint)
-</details>
-
-<details>
-<summary><strong>Case Study 4: Wiki Pipeline — $50 → $15/run (80% fewer agents)</strong></summary>
-
-**Problem:** Cleanup skill defaulted to full-vault audit (92 wikis) when only 12 changed  
-**Fix:** Added "recently-touched" scope tier seeded from builder run; full-vault now opt-in via `--full`  
-**Result:** 11→2–3 agents, ~70% cost reduction, 4 root-cause fixes across 2 skills
-
-[Read full case study →](examples/wiki-pipeline.md)
-</details>
-
-<details>
-<summary><strong>Case Study 5: Wiki Lint — 85% mechanical findings eliminated, 86% token reduction</strong></summary>
-
-**Problem:** 4 wiki-maintenance skills re-read every file for 5 mechanical checks (~91 model `Read` calls/run)
-**Fix:** Deterministic `vault-lint.py` (zero deps, ~2s) emits structured findings; skills now **only Read what's flagged**
-**Result:** 90 → 13 mechanical findings (85.6% ↓), 73 stub freshness issues → 0, $8.12 → ~$1.15/run est.
-
-[Read full case study →](examples/vault-lint-case-study.md) · [Try it](tools/lint)
-</details>
-
-<details>
-<summary><strong>Case Study 6: Document Processing Pipeline — 99.3%+ token reduction via local subprocesses</strong></summary>
-
-**Problem:** Reading raw binary (PDF, DOCX, VTT) into LLM context wastes 10K–100K+ tokens/file on formatting syntax
-**Fix:** 3-skill local pipeline (doc-convert → vtt-normalizer → doc-ingest) — all conversion in subprocesses, zero tokens spent on content
-**Result:** 99.4% ↓ tokens (50-page PDF), 99.3% ↓ (2-hr VTT), Haiku-only extraction cost ~$0.10/batch
-
-[Read full case study →](examples/document-processing.md)
-</details>
-
-<details>
-<summary><strong>Case Study 7: Web Scraping Escalation Ladder — 7-level fallback from API credits to free local tools</strong></summary>
-
-**Problem:** No single web tool handles all cases (static, JS, Cloudflare, auth, bulk crawl) — defaulting to one burns credits/time
-**Fix:** 7-level ladder encoded in firecrawl skill: search→scrape→cached→scrapling-fast→scrapling-stealth→webclaw→playwright, each with documented failure mode
-**Result:** 100% credit savings on repeat fetches, ~95% fewer monitor fetches, unblocked when credits exhausted, 10x faster on Cloudflare pages
-
-[Read full case study →](examples/web-scraping-escalation.md)
-</details>
-
-<details>
-<summary><strong>Case Study 8: Skill Tooling Pattern — 100+ versioned skills as "Design systems not prompts"</strong></summary>
-
-**Problem:** Prompt engineering doesn't scale — drifts, unversioned, untestable, every task a blank slate
-**Fix:** Skill system where every capability is a versioned SKILL.md contract: composable, routes by trigger phrase, enforces token rules by design
-**Result:** Eliminated prompt drift, 100% tool consistency, minutes-to-onboard new capabilities, systematic token discipline via contract
-
-[Read full case study →](examples/skill-tooling-pattern.md)
-</details>
-
-<details>
-<summary><strong>Case Study 9: Honey/eso CCR Evaluation — 92% array compression, two reversals</strong></summary>
-
-**Problem:** Does an external 4-piece token-saving skill add anything beyond the existing RTK + caveman + ponytail setup?
-**Fix:** Evaluated all 4 pieces → kept only CCR (uniform JSON-array compression, vendored standalone as `eso`); rejected `honey-usage` (redundant/less accurate than `ccusage`); dropped a planned Windows addendum after finding RTK itself already ships a native Windows build
-**Discovery:** Live-reproduced a still-open Claude Code hook bug ([#68951](https://github.com/anthropics/claude-code/issues/68951)) on the current build, confirming CCR's optional auto-hook is inert — resolved with a default-behavior instruction instead
-
-[Read full case study →](examples/honey-eso-ccr-evaluation.md)
-</details>
-
-<details>
-<summary><strong>Case Study 10: Pixel-Diff Screenshot Validation — 74–99% token reduction, benchmarked on 30 synthetic cases</strong></summary>
-
-**Problem:** Validating an AI-made edit to a slide/deck/mockup usually means viewing a full-resolution screenshot every time, even when nothing changed
-**Fix:** Deterministic pixel diff (`pixelmatch`/`pngjs`, pure JS) against a cached baseline before the model ever views the image — skip entirely if unchanged, crop to just the changed region if not
-**Result (benchmarked on 30 synthetic checks across 10 slides):** 82,950 → 822 estimated tokens on the 30 re-checks (~99% ↓); 110,600 → 28,472 (~74% ↓) once each slide's one-time first-view baseline is counted. Caveat: the skip/edit mix (25 skip, 5 crop) was chosen, not observed, so real savings depend on real edit rates
-**Verified separately from the token estimate:** self-test, a real PPTX-rendered end-to-end run (exact bbox match, 0% diff on an independent re-render), and an unbiased fresh-session test — 3/3 natural-language requests self-triggered correctly with no skill named
-
-[Read full case study →](examples/visual-validation-pipeline.md)
-</details>
-
-<details>
-<summary><strong>Case Study 11: Derived-Document Staleness — hash + materiality + guard</strong></summary>
-
-**Problem:** Derived documents refreshed on a date check; mechanical edits flagged everything, and refreshing from a thin source overwrote richer output. About 86K tokens per refresh  
-**Fix:** Content-hash sidecar, 5% size materiality, a thin-source guard with `.prev` backup, an output lint at session start, a peer-median thin check, weekly nudge with a token estimate  
-**Result (measured):** 6 false flags silenced (about 516K tokens), 2 lossy refreshes blocked (about 172K), 0 tokens when clean. No saving on the first run; padding is not detectable
-
-[Read full case study →](examples/derived-doc-staleness.md) · [Try it](tools/derived-stale)
-</details>
-
-<details>
-<summary><strong>Case Study 12: Context-Length Threshold — cost per turn is ~2.1x at 250k</strong></summary>
-
-**Problem:** No data on when a long session starts costing noticeably more per turn
-**Fix:** Per-turn cost from raw transcripts (311 sessions), bucketed by context size; `/compact` rule set at the knee
-**Result:** ~2.1x at 250k, ~4–5x at 500k+; about 59% of one model's spend sat above 250k. Rate ratios are assumed, so the percentages are usable and absolute dollars are not
-
-[Read full case study →](examples/context-length-threshold.md) · [Try it](tools/context-threshold) · [Status line](tools/statusline)
-</details>
-
-<details>
-<summary><strong>Case Study 13: Cost Attribution to Tasks — 44% of spend had no task</strong></summary>
-
-**Problem:** `ccusage` groups by project directory, so it cannot say which task a dollar belongs to
-**Fix:** Join transcript cost to task ids from tool calls, scaled to match `ccusage` totals (1590.60 vs 1590.58)
-**Result:** ~$700 of $1,590 sat in 198 sessions with no task id; no single task above ~3.5% of spend. Rule: open each session with `/todos <id>`
-
-[Read full case study →](examples/cost-attribution-to-tasks.md) · [Try it](tools/cost-by-task)
-</details>
-
-<details>
-<summary><strong>Case Study 14: Trimming Always-Loaded CLAUDE.md Context — ~21% less resident context</strong></summary>
-
-**Problem:** ~8K tokens of CLAUDE.md files and imports loaded every session, much of it duplicating skill descriptions and hook-injected rules
-**Fix:** Remove text that is injected elsewhere, stated in two files, or rarely needed; point to an on-demand index instead; batch edits per file
-**Result:** 32,157 → 25,365 bytes (~1.7K tokens/session, chars/4 estimate). Routing checked statically on 8 prompts, not live
-
-[Read full case study →](examples/claude-md-context-trim.md) · [Try it](tools/lint)
-</details>
-
-<details>
-<summary><strong>Case Study 15: Incremental Wiki Refresh — hash gate and diff-first folding</strong></summary>
-
-**Problem:** a scheduled export queued pages on version bumps, and an agent re-read each one in full: ~565K tokens for 27 pages, 13 of them with no material change
-**Fix:** Queue on a content hash of the normalized body, hand the agent a script-computed diff and a pre-computed target wiki, and normalize rendering noise before hashing
-**Result:** one run folded 21 pages in ~121K fresh tokens for the whole session (single run, different queues, fresh tokens only); 14 of the 21 were rendering noise, now filtered
-
-[Read full case study →](examples/incremental-wiki-refresh.md)
-</details>
+| # | Case study | Result | Links |
+|:-:|:---|:---|:---|
+| 1 | **Second Brain** | 87% fewer words (211K → 28K), 66% → 0% stale clones | [Read](examples/second-brain-system.md) |
+| 2 | **RTK & LLMLingua Evaluation** | Found a 1.5M tokens/30d adoption gap; kept RTK, rejected LLMLingua | [Read](examples/rtk-llmlingua-evaluation.md) |
+| 3 | **Config & Memory Audit** | 29% smaller CLAUDE.md, ~3,500 tokens/session | [Read](examples/second-brain-config-audit.md) · [Try it](tools/lint) |
+| 4 | **Wiki Pipeline** | $50 → $15/run, 11 → 2–3 agents | [Read](examples/wiki-pipeline.md) |
+| 5 | **Wiki Lint** | 90 → 13 mechanical findings, ~86% fewer tokens (estimated) | [Read](examples/vault-lint-case-study.md) · [Try it](tools/lint) |
+| 6 | **Document Processing Pipeline** | ~99% fewer tokens via local subprocesses (estimated) | [Read](examples/document-processing.md) |
+| 7 | **Web Scraping Escalation Ladder** | 7-level fallback from API credits to free local tools | [Read](examples/web-scraping-escalation.md) |
+| 8 | **Skill Tooling Pattern** | Skills as versioned contracts; qualitative, not measured | [Read](examples/skill-tooling-pattern.md) |
+| 9 | **Honey/eso CCR Evaluation** | 92% array compression; two reversals | [Read](examples/honey-eso-ccr-evaluation.md) |
+| 10 | **Pixel-Diff Screenshot Validation** | 74–99% fewer tokens on 30 synthetic cases | [Read](examples/visual-validation-pipeline.md) |
+| 11 | **Derived-Document Staleness** | 6 false flags silenced (~516K tokens), 2 lossy refreshes blocked | [Read](examples/derived-doc-staleness.md) · [Try it](tools/derived-stale) |
+| 12 | **Context-Length Threshold** | ~2.1x cost per turn at 250k, ~4–5x at 500k+ | [Read](examples/context-length-threshold.md) · [Try it](tools/context-threshold) · [Status line](tools/statusline) |
+| 13 | **Cost Attribution to Tasks** | 44% of spend had no task id | [Read](examples/cost-attribution-to-tasks.md) · [Try it](tools/cost-by-task) |
+| 14 | **Trimming Always-Loaded Context** | ~21% less resident context (32,157 → 25,365 B) | [Read](examples/claude-md-context-trim.md) · [Try it](tools/lint) |
+| 15 | **Incremental Wiki Refresh** | Hash gate + diff-first folding; 14 of 21 pages were noise | [Read](examples/incremental-wiki-refresh.md) |
 
 ---
 
@@ -327,7 +199,7 @@ Practical applications of tokenminning to specific systems:
 | [RAG Pipelines](examples/rag.md) | Rank → filter → focus; quality over quantity |
 | [Local Document Pipeline](examples/document-processing.md) | Zero-token binary→markdown→structured extraction |
 | [Web Scraping Escalation](examples/web-scraping-escalation.md) | 7-level ladder: credits → cache → free local → browser |
-| [Skill System as DSNP](examples/skill-tooling-pattern.md) | 100+ versioned contracts, thin router, composable |
+| [Skill System as DSNP](examples/skill-tooling-pattern.md) | Versioned contracts, thin router, composable |
 | [All Examples Index](examples/index.md) | Quick reference for all patterns |
 
 > These are *technique guides* — not measured case studies. Case studies in `examples/` (`second-brain-system.md`, etc.) show before/after metrics.

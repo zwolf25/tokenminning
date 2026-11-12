@@ -10,7 +10,7 @@
 |---------|----------------|---------------|-----------|
 | **[Document Processing Pipeline](document-processing.md)** | Compress don't repeat, Retrieve don't preload, Structure don't narrate, Design systems not prompts, Eliminate context debt | **99.3–99.6%** vs LLM-based extraction | `doc-convert`, `vtt-normalizer`, `doc-ingest` (local subprocesses + Haiku extraction) |
 | **[Web Scraping Escalation Ladder](web-scraping-escalation.md)** | Retrieve don't preload, Optimize context not complexity, Escalation ladder, Stub Pattern, Eliminate context debt | **90–100%** credit savings via cache + free local fallbacks | `firecrawl` (40+ sub-skills), `scrapling` (fast + stealth), `webclaw`, `playwright` |
-| **[Skill Tooling Pattern](skill-tooling-pattern.md)** | Design systems not prompts, Structure don't narrate, Thin Routers, Stub Pattern, Compress don't repeat | **Systematic** — eliminates prompt drift, enforces token discipline by contract | 100+ versioned skills across 14 categories, plugin-managed |
+| **[Skill Tooling Pattern](skill-tooling-pattern.md)** | Design systems not prompts, Structure don't narrate, Thin Routers, Stub Pattern, Compress don't repeat | **Systematic** — eliminates prompt drift, enforces token discipline by contract | Versioned skills across 14 categories, plugin-managed |
 | **[Derived-Doc Staleness](derived-doc-staleness.md)** | Eliminate context debt continuously, Design systems not prompts, Retrieve don't preload, Compress don't repeat | **Prevents bulk false refreshes** (about 86K tokens each) and lossy regeneration; 0 tokens when clean | content hash sidecar, size materiality, output lint, peer-median check |
 | **[Context-Length Threshold](context-length-threshold.md)** | Eliminate context debt continuously, Measure don't guess | **~2.1x** per-turn cost at 250k context; 59% of one model's spend above the knee | raw transcripts, `ccusage`, `/compact` rule |
 | **[CLAUDE.md Context Trim](claude-md-context-trim.md)** | Eliminate context debt continuously, Single source of truth, Thin routers | **~21%** less always-loaded context (32,157 → 25,365 bytes) | `claude-md-lint`, `claude-md-audit` skill |
@@ -43,7 +43,7 @@ Five of the tools referenced above are extracted and open-sourced in this repo �
 | **3. RAG** | Better retrieval beats larger retrieval | `firecrawl` search→scrape→map→crawl ladder, `firecrawl-cached` |
 | **4. Agents** | Context matches task | Each skill = one capability, loads on demand via thin router |
 | **5. Memory** | Remember decisions, discard temporary work | `log-it`/`sc-log-it` structured notes, `wiki-cleanup` audit |
-| **6. MCP/Tools** | Enable tools intentionally | 100+ skills, each with `allowed-tools` frontmatter gate |
+| **6. MCP/Tools** | Enable tools intentionally | Many skills, each with `allowed-tools` frontmatter gate |
 | **7. System vs Context** | Optimize surface, not size | Every skill returns stub (file path), never raw content |
 
 ---
@@ -65,7 +65,7 @@ Five of the tools referenced above are extracted and open-sourced in this repo �
 │  │ • Questions  │    │ scrapling    │    │ • Battlecards        │  │
 │  │              │    │ playwright   │    │ • Reports (MR)       │  │
 │  │              │    │ gsd:*        │    │ • PRDs/Roadmaps      │  │
-│  │              │    │ 100+ skills  │    │ • Comms (LI/Med/Slack)│ │
+│  │              │    │ many skills  │    │ • Comms (LI/Med/Slack)│ │
 │  └──────────────┘    └──────────────┘    └──────────────────────┘  │
 │         │                   │                      │                │
 │         ▼                   ▼                      ▼                │
