@@ -2,6 +2,10 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.9.5 — 2026-11-19
+
+- README results tables now match the case-study boxes: the document-processing and competitor-research figures (99%+) are labeled **illustrative** (back-of-envelope, never counted on real files) instead of "estimated". The Evidence legend gains that term, and a stale pointer to backlog item B-002 is replaced by a pointer to the Method / Reproduce boxes.
+
 ## v0.9.4 — 2026-11-19
 
 - Every case study in [`examples/`](examples/index.md) now opens with a **Method / Reproduce** box: data source, sample and date, what is measured versus estimated, and how to re-check it. Case studies 6 (document processing) and 7 (web scraping) are labeled illustrative, because their figures were never counted on real files. Dates are the day each file was written where exact data windows were not recorded.

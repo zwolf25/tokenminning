@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.9.4](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.4) — a Method / Reproduce box on every case study (data source, sample, measured vs estimated). Previously: [v0.9.3](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.3); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.9.5](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.5) — README results tables now match the case-study boxes: figures never counted on real files are labeled illustrative. Previously: [v0.9.4](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.4)(https://github.com/zwolf25/tokenminning/releases/tag/v0.9.3); [full changelog](CHANGELOG.md).
 
 ---
 
@@ -122,7 +122,7 @@ flowchart TD
 
 ## Real-World Results
 
-Evidence column: **measured** = counted from real data; **estimated** = derived with stated assumptions; **single run** = one observation. The data behind these is private; each case study states its method and caveats, and B-002 in the [backlog](BACKLOG.md) tracks making them re-checkable.
+Evidence column: **measured** = counted from real data; **estimated** = derived with stated assumptions; **single run** = one observation; **illustrative** = back-of-envelope, never counted on real files. The data behind these is private, so the numbers cannot be re-checked, but each case study opens with a Method / Reproduce box stating its source, sample and caveats.
 
 | Metric | Before | After | Change | Evidence |
 |:---|:---:|:---:|:---:|:---:|
@@ -143,13 +143,13 @@ Evidence column: **measured** = counted from real data; **estimated** = derived 
 
 ## Tooling Measured Results
 
-*Production skill stack figures (from Case Studies 6–8). Token counts for these are author estimates; the case studies do not state a sample size.*
+*Production skill stack figures (from Case Studies 6–8). These are illustrative: back-of-envelope sizes, not counted on real files (see each case study's Method / Reproduce box).*
 
 | Workflow | Before (Prompt-Based) | After (Skill System) | Improvement | Evidence |
 |:---|:---:|:---:|:---:|:---:|
-| **50-page PDF → Wiki** | ~80K tokens, manual | ~500 tokens, automated | **99.4% ↓** | estimated |
-| **2-hr VTT → Decisions** | ~45K tokens, error-prone | ~300 tokens, schema-enforced | **99.3% ↓** | estimated |
-| **Competitor research (10 sites)** | ~500K tokens, ad-hoc | ~5K tokens, ladder + cache | **99% ↓** | estimated |
+| **50-page PDF → Wiki** | ~80K tokens, manual | ~500 tokens, automated | **99.4% ↓** | illustrative |
+| **2-hr VTT → Decisions** | ~45K tokens, error-prone | ~300 tokens, schema-enforced | **99.3% ↓** | illustrative |
+| **Competitor research (10 sites)** | ~500K tokens, ad-hoc | ~5K tokens, ladder + cache | **99% ↓** | illustrative |
 | **Market research report** | $50+, 11 agents, manual | $15-25, 2-3 agents, pipeline | **~70% cost ↓** | single run |
 | **Context debt (stale clones)** | 66% of files | 0% (fingerprint dedup) | **Eliminated** | measured |
 | **Prompt drift / repeated instructions** | Re-prompt every task | Contract loaded once | **Observed, not measured** | qualitative |
@@ -169,7 +169,7 @@ One row each; the full problem, fix, result and caveats live in the linked file.
 | 3 | **Config & Memory Audit** | 29% smaller CLAUDE.md, ~3,500 tokens/session | [Read](examples/second-brain-config-audit.md) · [Try it](tools/lint) |
 | 4 | **Wiki Pipeline** | $50 → $15/run, 11 → 2–3 agents | [Read](examples/wiki-pipeline.md) |
 | 5 | **Wiki Lint** | 90 → 13 mechanical findings, ~86% fewer tokens (estimated) | [Read](examples/vault-lint-case-study.md) · [Try it](tools/lint) |
-| 6 | **Document Processing Pipeline** | ~99% fewer tokens via local subprocesses (estimated) | [Read](examples/document-processing.md) |
+| 6 | **Document Processing Pipeline** | ~99% fewer tokens via local subprocesses (illustrative) | [Read](examples/document-processing.md) |
 | 7 | **Web Scraping Escalation Ladder** | 7-level fallback from API credits to free local tools | [Read](examples/web-scraping-escalation.md) |
 | 8 | **Skill Tooling Pattern** | Skills as versioned contracts; qualitative, not measured | [Read](examples/skill-tooling-pattern.md) |
 | 9 | **Honey/eso CCR Evaluation** | 92% array compression; two reversals | [Read](examples/honey-eso-ccr-evaluation.md) |
