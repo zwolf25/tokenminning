@@ -4,6 +4,12 @@
 **Result:** Per-turn cost is ~2.1x at 250k tokens of context and ~4–5x at 500k+, versus the cheapest well-populated bucket. About 59% of this model's spend sits at or above 250k.
 **Rule adopted:** `/compact` (or `/clear` between unrelated tasks) at ~250k.
 
+> **Method / Reproduce**
+> - **Data source:** The author's raw Claude Code transcripts (`~/.claude/projects/*/*.jsonl`), one model, sidechains excluded.
+> - **Sample and date:** 311 sessions, ~20k main-thread turns; written 2026-09-20, exact data window not recorded.
+> - **Measured vs estimated:** Measured: turns per bucket and token counts. Assumed: rate ratios (cache-read 0.1x, cache-write 1.25x, output 5x input). Calibration against ccusage ran ~25% low on absolute dollars, so use the ratios and percentages, not the dollars.
+> - **Reproduce:** Run [`tools/context-threshold`](../tools/context-threshold) on your own transcripts. Details in Method below.
+
 ---
 
 ## Method

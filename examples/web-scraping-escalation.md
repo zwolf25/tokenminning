@@ -4,6 +4,12 @@
 
 **Solution:** A 7-level escalation ladder that starts with the cheapest, most targeted tool and escalates only when the current level fails. Each level has a specific, documented failure mode that triggers the next level — no guessing, no overkill.
 
+> **Method / Reproduce**
+> - **Data source:** Design reasoning from the author's own research workflows; no usage log.
+> - **Sample and date:** One setup, 2026. Design arithmetic; no dated sample.
+> - **Measured vs estimated:** Qualitative: the savings are call-count arithmetic from the ladder's design (for example 50 `scrape` calls versus 1 `crawl`), not measured credits. The "~10x faster" Cloudflare claim is observed on a few pages, not timed across a sample.
+> - **Reproduce:** Reproduce by running the same page at each ladder level and recording credits and seconds.
+
 ---
 
 ## The Ladder

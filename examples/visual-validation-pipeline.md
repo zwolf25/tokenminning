@@ -10,6 +10,12 @@ compares the new screenshot against a cached baseline of the same artifact: no m
 change means the model never views the image at all; a real change means the model views only
 a small crop of what changed, not the full frame.
 
+> **Method / Reproduce**
+> - **Data source:** 30 synthetic checks across 10 generated slides at 1920×1080, plus one real PPTX end-to-end run.
+> - **Sample and date:** Single benchmark run; written 2026-09-14, exact dates not recorded.
+> - **Measured vs estimated:** Estimated: token counts use width × height / 750, not billed usage. The skip/crop mix (25 skip, 5 crop) was chosen by the benchmark design, not observed. Real savings depend on your edit rate.
+> - **Reproduce:** Run `node visual-diff.js --self-test` in [`tools/visual-diff`](../tools/visual-diff), then check your own screenshots.
+
 ---
 
 ## The Pipeline

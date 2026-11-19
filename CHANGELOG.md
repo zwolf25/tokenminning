@@ -2,6 +2,11 @@
 
 One entry per release, newest first. Not a log of every commit — see git history for that.
 
+## v0.9.4 — 2026-11-19
+
+- Every case study in [`examples/`](examples/index.md) now opens with a **Method / Reproduce** box: data source, sample and date, what is measured versus estimated, and how to re-check it. Case studies 6 (document processing) and 7 (web scraping) are labeled illustrative, because their figures were never counted on real files. Dates are the day each file was written where exact data windows were not recorded.
+- [`BACKLOG.md`](BACKLOG.md): B-002 shipped.
+
 ## v0.9.3 — 2026-11-12
 
 - README landing page is smaller (27 KB → 21 KB): the 15 case-study `<details>` blocks are now one table row each, with the full write-up in [`examples/`](examples/index.md).

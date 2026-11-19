@@ -28,7 +28,7 @@
   <a href="https://medium.com/@zwolf25">Articles</a>
 </p>
 
-> 🆕 **What's New:** [v0.9.3](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.3) — a smaller README (case studies as one table), an Evidence column on every results table, and a runnable Quick Start. Previously: [v0.9.2](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.2); [full changelog](CHANGELOG.md).
+> 🆕 **What's New:** [v0.9.4](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.4) — a Method / Reproduce box on every case study (data source, sample, measured vs estimated). Previously: [v0.9.3](https://github.com/zwolf25/tokenminning/releases/tag/v0.9.3); [full changelog](CHANGELOG.md).
 
 ---
 

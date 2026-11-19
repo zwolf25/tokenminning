@@ -2,6 +2,12 @@
 
 ![Second Brain token optimization: dormant notes, four retrieved into the model](../resources/SecondBrainCoverImage.svg)
 
+> **Method / Reproduce**
+> - **Data source:** Private team vault (211K words, ~72 wikis); source files not published.
+> - **Sample and date:** Original scale July 2026; stale-clone audit 2026-07-18; 402 → 31 files read per wiki-builder run (counted).
+> - **Measured vs estimated:** Word counts and file reads are counted. Cost per session ($15–25 → $2–4) is estimated from token counts at list prices, not billed usage. The 66% → 0% stale-clone figure is from one audit.
+> - **Reproduce:** The stub pattern and manifest sync are described step by step below. Try the idea on your own vault with [`tools/lint`](../tools/lint).
+
 ## The System
 
 **What**: A shared AI-powered knowledge infrastructure for a product management team of 8-12 people.

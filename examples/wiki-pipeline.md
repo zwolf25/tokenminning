@@ -3,6 +3,12 @@
 **Before:** $50+/run, 11 subagents, full-vault audit by default  
 **After:** ~$15-25/run, 2-3 subagents, recently-touched scope by default
 
+> **Method / Reproduce**
+> - **Data source:** One scheduled run on the shared SC vault (92 wikis; 12 changed by the builder run).
+> - **Sample and date:** Single run; written 2026-08-01, exact dates not recorded.
+> - **Measured vs estimated:** The $50 → $15–25 figure and agent counts (11 → 2–3) are estimated from that one run's scope, not repeated runs. Fix A is a scope tradeoff (fewer files audited), not a pure efficiency gain.
+> - **Reproduce:** Not reproducible from public data. The pattern is the `recently-touched` scope seeded from the prior builder run's changed-file list.
+
 ---
 
 ## Context

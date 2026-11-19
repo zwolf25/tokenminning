@@ -1,5 +1,11 @@
 # Case Study: Eliminating 85% of Mechanical Wiki-Cleanup Overhead
 
+> **Method / Reproduce**
+> - **Data source:** Production run on a 98-file personal vault and a 97-wiki shared vault (private).
+> - **Sample and date:** Single before/after run; written 2026-08-08, exact dates not recorded.
+> - **Measured vs estimated:** Measured: findings counts (90 → 13, 73 → 0 stub issues). Estimated: token and dollar cost ($8.12 → ~$1.15), from per-operation costs observed while building the script. Not a live measurement.
+> - **Reproduce:** Run [`tools/lint/vault-lint.py`](../tools/lint) with `--self-test`, then against your own vault.
+
 ## The Problem
 Four wiki-maintenance skills (`wiki-builder`, `wiki-cleanup`, `sc-wiki-builder`, `sc-wiki-cleanup`) each re-read every wiki file to check 5 mechanical hygiene dimensions. On a 98-file personal vault + 97-wiki shared vault, this meant **~91 model `Read` calls per run**, re-ingested every turn — the single largest token sink in the Second Brain pipeline.
 

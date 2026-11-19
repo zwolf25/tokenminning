@@ -1,5 +1,11 @@
 # Case Study: Trimming Always-Loaded CLAUDE.md Context by 21%
 
+> **Method / Reproduce**
+> - **Data source:** The author's resident context: home and project CLAUDE.md plus two imports (private).
+> - **Sample and date:** One before/after pass; written 2026-10-01, exact dates not recorded.
+> - **Measured vs estimated:** Measured: bytes (32,157 → 25,365). Estimated: tokens (chars/4, ~1.7K/session). Routing was checked statically on 8 prompts, not in live sessions.
+> - **Reproduce:** Run [`tools/lint`](../tools/lint) (`claude-md-lint.py`) before and after your own trim.
+
 ## The Problem
 Every session pays for the same resident context before the first prompt: a home `CLAUDE.md`, a project `CLAUDE.md`, and two tool-instruction imports. In this setup that was **32,157 bytes (~8K tokens)**. Much of it duplicated text the harness already injects: skill trigger descriptions, hook-injected mode rules, and a hierarchy explainer.
 
