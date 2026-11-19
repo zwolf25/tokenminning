@@ -4,6 +4,12 @@
 
 **Solution:** A **skill system** where every reusable capability is a versioned, self-documenting tool with a deterministic contract (SKILL.md) — not a prompt. Skills compose, route by intent, emit file paths (stubs), and enforce token discipline *by design*, not by reminder.
 
+> **Method / Reproduce**
+> - **Data source:** The author's skill library and call log; the usage numbers come from [`tools/skill-usage`](../tools/skill-usage).
+> - **Sample and date:** Usage log: 1,326 calls, 2026-07-19 to 2026-10-22; 129 `SKILL.md` files.
+> - **Measured vs estimated:** Measured: skill usage counts (44 used, 85 never) and listing size (47,957 characters). Observed, not measured: consistency, onboarding time and token waste in the impact table. Characters, not tokens; single machine.
+> - **Reproduce:** Run `tools/skill-usage` on your own skill directory.
+
 ---
 
 ## What a Skill Is

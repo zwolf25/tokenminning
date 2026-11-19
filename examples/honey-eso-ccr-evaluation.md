@@ -4,6 +4,12 @@
 **Result:** Kept only CCR, vendored standalone as `eso`; rejected `honey-usage` (redundant/less accurate than `ccusage`); dropped a planned Windows shared-vault addendum
 **Unexpected discovery:** Two reversals in one investigation, plus a live-confirmed Claude Code bug that changed how the surviving piece gets used
 
+> **Method / Reproduce**
+> - **Data source:** Upstream repo `green-pt/honey-for-devs` read from source; a synthetic 200-row log array; the installed Claude Code build (2.1.236).
+> - **Sample and date:** Evaluated 2026-09; bug reproduced 2026-09-09 and re-checked 2026-09-20.
+> - **Measured vs estimated:** Measured: the 92.1% compression on one synthetic array (13,696 → 1,082 bytes, byte-identical retrieve). Not measured on real traffic. The 47% cost-math gap in `honey-usage` was one comparison on identical token counts. Real-world ratio depends on how uniform your arrays are.
+> - **Reproduce:** Install `eso`, pipe a uniform JSON array through `eso crush`, then `eso retrieve <hash>` and diff. Bug: [anthropics/claude-code#68951](https://github.com/anthropics/claude-code/issues/68951).
+
 ---
 
 ## Context

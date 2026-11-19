@@ -4,6 +4,12 @@
 **Result:** 44% of spend (about $700 of $1,590) sat in 198 sessions that never touched a task ID. Attributed spend was broad: the top task was $55 (about 3.5% of total), with no single expensive task.
 **Rule adopted:** open each work session with `/todos <id>` so the cost has an owner.
 
+> **Method / Reproduce**
+> - **Data source:** The author's raw transcripts joined to task ids from `mcp__aiwork__*` tool calls.
+> - **Sample and date:** 198 unattributed sessions; total $1,590.60 attributed vs $1,590.58 ccusage; written 2026-09-20, exact data window not recorded.
+> - **Measured vs estimated:** Measured: the session split. Dollars are scaled per model to match ccusage totals, with an even split when a session touches several tasks. The 44% measures tracking discipline as much as spend. No saving claimed.
+> - **Reproduce:** Run [`tools/cost-by-task`](../tools/cost-by-task). It needs your own transcripts and a task-id convention.
+
 ---
 
 ## Method

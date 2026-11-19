@@ -4,6 +4,12 @@
 **Result:** Kept RTK for CLI tool-output compression; rejected LLMLingua (wrong use case); skipped 3 repos (license, redundancy, gated skill)  
 **Unexpected discovery:** Only 6% of Bash calls routed through RTK (~1.5M tokens/30 days missed) — hook gap in `&&`/pipe chains  
 
+> **Method / Reproduce**
+> - **Data source:** `rtk discover` output over the author's Claude Code history, last 30 days; upstream repos read from source (RTK, LLMLingua and 2 others).
+> - **Sample and date:** One setup. 16.7K commands analyzed. Evaluation notes dated 2026-07-24 and 2026-07-25.
+> - **Measured vs estimated:** The 6% adoption figure and ~1.5M tokens/30d missed come from `rtk discover`'s own estimate. The keep/reject decisions are judgment, not benchmarked.
+> - **Reproduce:** Run `rtk discover` on your own history. Upstream: [rtk-ai/rtk#2425](https://github.com/rtk-ai/rtk/issues/2425).
+
 ---
 
 ## Context

@@ -4,6 +4,12 @@
 
 **Solution:** Three composable, local-first skills forming a zero-token pipeline that converts, normalizes, and extracts structured knowledge — all without sending document content to the model.
 
+> **Method / Reproduce**
+> - **Data source:** Typical document sizes (a 50-page PDF, a 2-hour VTT, a batch of 20 mixed documents), not a logged sample.
+> - **Sample and date:** Illustrative sizes; no per-file measurement log exists.
+> - **Measured vs estimated:** Illustrative estimate, not measured: the token figures are back-of-envelope for raw-read versus dispatch, and the hallucination rate (~5–10% to near 0%) is an unmeasured claim. The 99%+ reduction holds because conversion happens outside the model, so it is large by construction. No batch was counted on real files; treat every figure as illustrative.
+> - **Reproduce:** Run [`tools/doc-convert`](../tools/doc-convert) on one of your own PDFs, then count tokens of the output versus the raw text.
+
 ---
 
 ## The Pipeline

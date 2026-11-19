@@ -15,7 +15,6 @@ Living list of planned updates and improvements. Newest review first in the log 
 
 | ID | Pri | Item | Notes | Status |
 |----|-----|------|-------|--------|
-| B-002 | P1 | Case studies cite measured numbers (87%, 99.4%, 59% above the knee) that nobody can re-check; the data is private. | Add a `Method / Reproduce` box per case study: data source, sample size, date, what is estimated. Mirror the caveats already used in CS10 and CS12. | todo |
 | B-005 | P2 | `loop-detect` ships with zero measured savings (0 loops in 13,753 calls) and keys state on `transcript_path`. Behavior in headless or subagent sessions is untested. | Test in a non-interactive run (`ask` has no prompt there). Decide: ship, or move it to examples as "not worth it" evidence. | todo |
 | B-006 | P2 | `loop-detect` requires `jq` but exits 0 silently without it. | Print one warning to stderr on first use. | todo |
 | B-007 | P2 | Tools only run on the author's private `~/.claude` data. A reader cannot try `cost-by-task`, `skill-usage`, `retrieval-gaps` or `context-threshold` without their own transcripts, and self-tests use synthetic inline data. | Add a small `fixtures/` set of fake transcripts and a one-line demo command per tool README. Also gives B-002 a public reproducible path. | todo |
@@ -61,6 +60,7 @@ Living list of planned updates and improvements. Newest review first in the log 
 |----|------|---------|
 | B-001 | AnyDoc path: clear `uv run` error and self-test (real conversion still untested) | v0.9.2 |
 | B-010 | CI matrix adds `macos-latest` | v0.9.2 |
+| B-002 | Method / Reproduce box on every case study | v0.9.4 |
 | B-003 | README results tables gain an Evidence column | v0.9.3 |
 | B-004 | unsourced "100+", "100% consistency" and "100x faster" claims reworded | v0.9.3 |
 | B-020 | README case studies cut to one row each (27 KB → 21 KB) | v0.9.3 |

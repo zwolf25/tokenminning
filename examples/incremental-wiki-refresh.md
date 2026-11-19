@@ -1,5 +1,11 @@
 # Case Study: Incremental Wiki Refresh — Hash Gate and Diff-First Folding
 
+> **Method / Reproduce**
+> - **Data source:** Session transcripts of the scheduled Confluence-to-wiki refresh (private, ~200 wikis).
+> - **Sample and date:** Two runs: a 27-page baseline and a 21-page run on the new pipeline; written 2026-10-08, exact dates not recorded.
+> - **Measured vs estimated:** Measured from transcripts: ~565K tokens baseline (main ~85K plus four subagents ~479K) and ~121K fresh tokens for the new run. Not a benchmark: the queues held different pages, and the baseline counted cached and fresh tokens without splitting them.
+> - **Reproduce:** Not reproducible from public data. The pattern: queue on a content hash of the normalized body and hand the agent a script-computed diff.
+
 ## The Problem
 A scheduled export mirrors a documentation site (Confluence) into markdown, and an agent folds changed pages into a shared knowledge base of roughly 200 wikis. The expensive part is not the export (a script, zero tokens) but the fold: every page the export flags gets read in full, matched to a wiki by searching the wiki folder, and merged.
 

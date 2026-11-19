@@ -4,6 +4,12 @@
 **After:** 34.4 KB combined CLAUDE.md (~29% ↓), MEMORY.md at 0 bytes, monthly auto-enforcement active  
 **Recurring savings:** ~3,500 tokens/session (always-loaded content)
 
+> **Method / Reproduce**
+> - **Data source:** The author's CLAUDE.md files and MEMORY.md (private); the collaborator template.
+> - **Sample and date:** One setup, one audit in July 2026, plus a later noise-taxonomy follow-up. Written 2026-08-01; exact dates not recorded.
+> - **Measured vs estimated:** Measured: byte and character counts before and after. Estimated: tokens (chars/4) and the recurring ~3,500 tokens/session saving. Follow-up sizes are characters, not tokens.
+> - **Reproduce:** Run [`tools/lint`](../tools/lint) (`claude-md-lint.py`) on your own files for before/after sizes.
+
 ---
 
 ## Context
